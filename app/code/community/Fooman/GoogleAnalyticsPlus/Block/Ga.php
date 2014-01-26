@@ -39,7 +39,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
     protected function _construct()
     {
         parent::_construct();
-        $this->setTemplate('googleanalyticsplus/ga.phtml');
+        $this->setTemplate('fooman/googleanalyticsplus/ga.phtml');
         $this->_helper = Mage::helper('googleanalyticsplus');
     }
 

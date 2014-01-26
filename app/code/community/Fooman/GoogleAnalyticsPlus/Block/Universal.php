@@ -15,7 +15,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
     protected function _construct()
     {
         parent::_construct();
-        $this->setTemplate('googleanalyticsplus/universal.phtml');
+        $this->setTemplate('fooman/googleanalyticsplus/universal.phtml');
     }
 
     /**

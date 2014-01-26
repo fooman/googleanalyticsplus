@@ -24,8 +24,8 @@
                 "/app/design/frontend/base/default/layout/googleanalyticsplus.xml"
             ],
             [
-                "/app/design/frontend/base/default/template/googleanalyticsplus/",
-                "/app/design/frontend/base/default/template/googleanalyticsplus/"
+                "/app/design/frontend/base/default/template/fooman/googleanalyticsplus/",
+                "/app/design/frontend/base/default/template/fooman/googleanalyticsplus/"
             ],
             [
                 "/app/etc/modules/Fooman_GoogleAnalyticsPlus.xml",

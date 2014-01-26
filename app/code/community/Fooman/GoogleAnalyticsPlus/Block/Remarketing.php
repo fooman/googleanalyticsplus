@@ -26,7 +26,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
     protected function _construct()
     {
         parent::_construct();
-        $this->setTemplate('googleanalyticsplus/remarketing.phtml');
+        $this->setTemplate('fooman/googleanalyticsplus/remarketing.phtml');
     }
 
     /**

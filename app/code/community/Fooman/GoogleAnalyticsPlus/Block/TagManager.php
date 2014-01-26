@@ -15,7 +15,7 @@ class Fooman_GoogleAnalyticsPlus_Block_TagManager extends Fooman_GoogleAnalytics
     protected function _construct()
     {
         parent::_construct();
-        $this->setTemplate('googleanalyticsplus/tagmanager.phtml');
+        $this->setTemplate('fooman/googleanalyticsplus/tagmanager.phtml');
     }
 
     /**

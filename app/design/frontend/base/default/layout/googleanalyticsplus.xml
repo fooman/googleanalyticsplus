@@ -30,13 +30,13 @@
     <checkout_onepage_success>
         <reference name="before_body_end">
             <block type="googleanalyticsplus/gaConversion" name="googleanalyticsplus_conversion"
-                   template="googleanalyticsplus/ga-conversion.phtml"/>
+                   template="fooman/googleanalyticsplus/ga-conversion.phtml"/>
         </reference>
     </checkout_onepage_success>
     <checkout_multishipping_success>
         <reference name="before_body_end">
             <block type="googleanalyticsplus/gaConversion" name="googleanalyticsplus_conversion"
-                   template="googleanalyticsplus/ga-conversion.phtml"/>
+                   template="fooman/googleanalyticsplus/ga-conversion.phtml"/>
         </reference>
     </checkout_multishipping_success>
 </layout>
