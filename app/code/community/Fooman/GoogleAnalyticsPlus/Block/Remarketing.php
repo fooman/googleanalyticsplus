@@ -1,0 +1,166 @@
+<?php
+/**
+ * Fooman GoogleAnalyticsPlus
+ *
+ * @package   Fooman_GoogleAnalyticsPlus
+ * @author    Kristof Ringleff <kristof@fooman.co.nz>
+ * @copyright Copyright (c) 2010 Fooman Limited (http://www.fooman.co.nz)
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalyticsPlus_Block_GaConversion
+{
+
+    const GA_PAGETYPE_HOME = 'home';
+    const GA_PAGETYPE_SEARCHRESULTS = 'searchresults';
+    const GA_PAGETYPE_CATEGORY = 'category';
+    const GA_PAGETYPE_PRODUCT = 'product';
+    const GA_PAGETYPE_CART = 'cart';
+    const GA_PAGETYPE_PURCHASE = 'purchase';
+    const GA_PAGETYPE_OTHER = 'siteview';
+
+    protected $_pageType = null;
+
+    protected function _construct()
+    {
+        parent::_construct();
+        $this->setTemplate('googleanalyticsplus/remarketing.phtml');
+    }
+
+    /**
+     * are we using dynamic remarketing
+     *
+     * @return bool
+     */
+    public function shouldInclude()
+    {
+        if (parent::shouldInclude()) {
+            return Mage::getStoreConfigFlag('google/analyticsplus_dynremarketing/enabled');
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * get value for current page, if order present use it's subtotal
+     * otherwise use current quote
+     *
+     * @return string
+     */
+    public function getPageValue()
+    {
+        if ($this->_getOrder()) {
+            return sprintf("%01.2f", Mage::helper('googleanalyticsplus')->convert($this->_getOrder(), 'subtotal'));
+        }
+        return sprintf(
+            "%01.2f", Mage::helper('googleanalyticsplus')->convert(
+                Mage::getSingleton('checkout/session')->getQuote(), 'subtotal'
+            )
+        );
+    }
+
+    /**
+     * get list of product ids for current page
+     *
+     * @return string
+     */
+    public function getProdId()
+    {
+
+        if (Mage::registry('current_product')) {
+            return '[' . Mage::registry('current_product')->getId() . ']';
+        }
+        $products = array();
+        $quote = Mage::getSingleton('checkout/session')->getQuote();
+        if ($this->_getOrder()) {
+            foreach ($this->_getOrder()->getAllItems() as $item) {
+                $products[] = $item->getProductId();
+            }
+        } elseif ($quote) {
+            foreach ($quote->getAllItems() as $item) {
+                $products[] = $item->getProductId();
+            }
+        }
+
+        if (!empty($products)) {
+            asort($products);
+            return '[' . implode(',', $products) . ']';
+        }
+        return '';
+    }
+
+    /**
+     * determine current page type for dynamic remarketing
+     *
+     * @return null|string
+     */
+    public function getPageType()
+    {
+        if (is_null($this->_pageType)) {
+            if (Mage::registry('current_product')) {
+                $this->_pageType = self::GA_PAGETYPE_PRODUCT;
+                return $this->_pageType;
+            }
+            if (Mage::registry('current_category')) {
+                $this->_pageType = self::GA_PAGETYPE_CATEGORY;
+                return $this->_pageType;
+            }
+            $module = Mage::app()->getRequest()->getModuleName();
+            $controller = Mage::app()->getRequest()->getControllerName();
+            $action = Mage::app()->getRequest()->getActionName();
+
+            switch ($module) {
+                case 'cms':
+                    if ($controller == 'index' && $action == 'index') {
+                        $this->_pageType = self::GA_PAGETYPE_HOME;
+                    } else {
+                        $this->_pageType = self::GA_PAGETYPE_OTHER;
+                    }
+                    break;
+                case 'checkout':
+                    if ($controller == 'cart') {
+                        $this->_pageType = self::GA_PAGETYPE_CART;
+                    } elseif ($action == 'success') {
+                        $this->_pageType = self::GA_PAGETYPE_PURCHASE;
+                    } else {
+                        $this->_pageType = self::GA_PAGETYPE_OTHER;
+                    }
+                    break;
+                case 'catalogsearch':
+                    if ($controller == 'result') {
+                        $this->_pageType = self::GA_PAGETYPE_SEARCHRESULTS;
+                    } else {
+                        $this->_pageType = self::GA_PAGETYPE_OTHER;
+                    }
+                    break;
+                default:
+                    $this->_pageType = self::GA_PAGETYPE_OTHER;
+            }
+        }
+        return $this->_pageType;
+    }
+
+    /**
+     * get Adword's conversion label from settings
+     * can't be chosen freely since assigned from Google
+     *
+     * @return string
+     */
+    public function getConversionLabel()
+    {
+        return Mage::getStoreConfig('google/analyticsplus_dynremarketing/conversionlabel');
+    }
+
+    /**
+     * get Google Adwords conversion id
+     *
+     * @return string
+     */
+    public function getConversionId()
+    {
+        return Mage::getStoreConfig('google/analyticsplus_dynremarketing/conversionid');
+    }
+
+}

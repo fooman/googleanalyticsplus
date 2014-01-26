@@ -1,0 +1,32 @@
+<?php if ($this->shouldInclude()): ?>
+    <?php
+        $pageValue = $this->getPageValue();
+        $prodId = $this->getProdId();
+        $pageType = $this->getPageType();
+        $conversionLabel = $this->getConversionLabel();
+        $conversionId = $this->getConversionId();
+    ?>
+<script type="text/javascript">
+    //<![CDATA[
+    var google_tag_params = {
+        ecomm_prodid: <?php echo $prodId ?>,
+        ecomm_pagetype: '<?php echo $pageType ?>',
+        ecomm_totalvalue: '<?php echo $pageValue ?>'
+    };
+    //]]>
+</script>
+<script type="text/javascript">
+    //<![CDATA[
+    var google_conversion_id = "<?php echo $conversionId ?>";
+    var google_conversion_label = "<?php echo $conversionLabel ?>";
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    //]]>
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+<noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/<?php echo $conversionId ?>/?value=0&amp;label=<?php echo $conversionLabel ?>&amp;guid=ON&amp;script=0"/>
+    </div>
+</noscript>
+<?php endif; ?>

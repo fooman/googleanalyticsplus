@@ -1,0 +1,30 @@
+<?php if ($this->shouldInclude()): ?>
+    <?php echo $this->getUniversalSnippet(); ?>
+    <?php if($this->isSuccessPage()):?>
+        <?php $order = $this->_getOrder();?>
+        <script>
+            //<![CDATA[
+        ga('require', 'ecommerce', 'ecommerce.js');
+
+        ga('ecommerce:addTransaction', {
+        'id': '<?php echo $order->getIncrementId() ?>',
+        'affiliation': '<?php echo Mage::app()->getStore()->getName() ?>',
+        'revenue': '<?php echo $order->getBaseSubtotal() ?>',
+        'shipping': '<?php echo $order->getBaseShippingAmount() ?>',
+        'tax': '<?php echo $order->getBaseTaxAmount() ?>',
+        'currency': '<?php echo $order->getBaseCurrencyCode() ?>'
+        });
+        <?php foreach ($order->getAllVisibleItems() as $item):?>
+            ga('ecommerce:addItem', {
+            'id': '<?php echo $order->getIncrementId() ?>',     // Transaction ID. Required.
+            'name': '<?php echo $item->getName()?>',                 // Product name. Required.
+            'sku': '<?php echo $item->getSku()?>',                   // SKU/code.
+            'price': '<?php echo $item->getBasePrice()?>',           // Unit price.
+            'quantity': '<?php echo $item->getQtyOrdered()?>'        // Quantity.
+            });
+        <?php endforeach;?>
+        ga('ecommerce:send');
+            //]]>
+        </script>
+    <?php endif; ?>
+<?php endif; ?>

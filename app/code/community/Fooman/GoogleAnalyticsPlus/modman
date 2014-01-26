@@ -1,0 +1,4 @@
+../../../../../app/code/community/Fooman/GoogleAnalyticsPlus/                   /app/code/community/Fooman/GoogleAnalyticsPlus/
+../../../../../app/design/frontend/base/default/layout/googleanalyticsplus.xml  /app/design/frontend/base/default/layout/googleanalyticsplus.xml
+../../../../../app/design/frontend/base/default/template/googleanalyticsplus/   /app/design/frontend/base/default/template/googleanalyticsplus/
+../../../../../app/etc/modules/Fooman_GoogleAnalyticsPlus.xml                   /app/etc/modules/Fooman_GoogleAnalyticsPlus.xml

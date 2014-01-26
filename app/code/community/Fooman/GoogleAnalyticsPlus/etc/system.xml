@@ -1,0 +1,238 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <google>
+            <groups>
+                <analyticsplus translate="label">
+                    <label>GoogleAnalyticsPlus by Fooman</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>11</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[<br />
+                    <div class="box">
+                    <p>For detailed instructions please refer to the Google Analytics + User Manual <a href="http://cdn.fooman.co.nz/media/custom/upload/UserManual-FoomanGoogleAnalyticsPlus.pdf">here</a>.</p>
+                    </div>
+                    ]]>
+                    </comment>
+                    <fields>
+                        <domainname translate="label">
+                            <label>DomainName</label>
+                            <comment><![CDATA[Leave empty for standard setups <br/><a href="http://code.google.com/apis/analytics/docs/tracking/gaTrackingSite.html#domainSubDomains">Google Documentation</a>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </domainname>
+                        <accountnumber2 translate="label">
+                            <label>Account Number (alternative Profile)</label>
+                            <comment/>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>googleanalyticsplus/backend_accountnumber</backend_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </accountnumber2>
+                        <domainname2 translate="label">
+                            <label>DomainName (alternative Profile)</label>
+                            <comment><![CDATA[Leave empty for standard setups <br/><a href="http://code.google.com/apis/analytics/docs/tracking/gaTrackingSite.html#domainSubDomains">Google Documentation</a>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </domainname2>
+                        <anonymise translate="label">
+                            <label>Anonymise IP Address</label>
+                            <comment><![CDATA[See <a href="http://code.google.com/intl/de/apis/analytics/docs/gaJS/gaJSApi_gat.html#_gat._anonymizeIp">Google Documentation</a> for details]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </anonymise>
+                        <remarketing translate="label">
+                            <label>Use Google Remarketing Script</label>
+                            <comment><![CDATA[See <a href="http://support.google.com/analytics/bin/answer.py?hl=en-GB&answer=2444872">Google Documentation</a> for details]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </remarketing>
+                        <trackpageloadtime translate="label">
+                            <label>Track Page Load Time</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>300</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </trackpageloadtime>
+                        <conversionenabled translate="label">
+                            <label>Enable Adwords Conversion Tracking</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>500</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </conversionenabled>
+                        <conversionid translate="label">
+                            <label>Conversion ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>520</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><conversionenabled>1</conversionenabled></depends>
+                        </conversionid>
+                        <conversionlanguage translate="label">
+                            <label>Conversion Language</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>googleanalyticsplus/system_language</source_model>
+                            <sort_order>540</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><conversionenabled>1</conversionenabled></depends>
+                        </conversionlanguage>
+                        <conversionlabel translate="label">
+                            <label>Conversion Label</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>550</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><conversionenabled>1</conversionenabled></depends>
+                        </conversionlabel>
+                        <convertcurrencyenabled translate='label'>
+                            <label>Convert Currency</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>560</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </convertcurrencyenabled>
+                        <convertcurrency translate='label'>
+                            <label>Currency</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_currency</source_model>
+                            <sort_order>570</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><convertcurrency>1</convertcurrency></depends>
+                        </convertcurrency>
+                        <categorytrackingattribute translate="label">
+                            <label>Category Tracking Attribute</label>
+                            <comment>If none selected then first category name will be used</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>googleanalyticsplus/source_productattribute</source_model>
+                            <sort_order>580</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </categorytrackingattribute>
+                    </fields>
+                </analyticsplus>
+                <analyticsplus_universal translate="label">
+                    <label>Google Universal Analytics by Fooman</label>
+                    <sort_order>12</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate='label'>
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <snippet translate='label'>
+                            <label>Tracking Code</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enabled>1</enabled></depends>
+                        </snippet>
+                    </fields>
+                </analyticsplus_universal>
+                <analyticsplus_tagmanager translate="label">
+                    <label>Google Tag Manager by Fooman</label>
+                    <sort_order>13</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate='label'>
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <snippet translate='label'>
+                            <label>Container Snippet</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enabled>1</enabled></depends>
+                        </snippet>
+                    </fields>
+                </analyticsplus_tagmanager>
+                <analyticsplus_dynremarketing translate="label">
+                    <label>Google Dynamic Remarketing by Fooman</label>
+                    <sort_order>14</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate='label'>
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <conversionid translate="label">
+                            <label>Conversion ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enabled>1</enabled></depends>
+                        </conversionid>
+                        <conversionlabel translate="label">
+                            <label>Conversion Label</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enabled>1</enabled></depends>
+                        </conversionlabel>
+                    </fields>
+                </analyticsplus_dynremarketing>
+            </groups>
+        </google>
+    </sections>
+</config>

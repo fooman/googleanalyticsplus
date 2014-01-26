@@ -1,0 +1,36 @@
+{
+    "name": "fooman/googleanalyticsplus",
+    "type": "magento-module",
+    "license": "OSL-3.0",
+    "homepage": "https://github.com/fooman/googleanalyticsplus",
+    "description": "Additional features for the default GoogleAnalytics module.",
+    "authors": [
+        {
+            "name": "Kristof Ringleff",
+            "email": "kristof@fooman.co.nz"
+        }
+    ],
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    },
+    "extra": {
+        "map": [
+            [
+                "/app/code/community/Fooman/GoogleAnalyticsPlus/",
+                "/app/code/community/Fooman/GoogleAnalyticsPlus/"
+            ],
+            [
+                "/app/design/frontend/base/default/layout/googleanalyticsplus.xml",
+                "/app/design/frontend/base/default/layout/googleanalyticsplus.xml"
+            ],
+            [
+                "/app/design/frontend/base/default/template/googleanalyticsplus/",
+                "/app/design/frontend/base/default/template/googleanalyticsplus/"
+            ],
+            [
+                "/app/etc/modules/Fooman_GoogleAnalyticsPlus.xml",
+                "/app/etc/modules/Fooman_GoogleAnalyticsPlus.xml"
+            ]
+        ]
+    }
+}

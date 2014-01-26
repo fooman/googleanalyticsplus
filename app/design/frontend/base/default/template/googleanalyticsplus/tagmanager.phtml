@@ -1,0 +1,8 @@
+<?php if ($this->shouldInclude()): ?>
+    <script>
+        //<![CDATA[
+        dataLayer = [];
+        //]]>
+    </script>
+    <?php echo $this->getTagManagerSnippet(); ?>
+<?php endif; ?>
