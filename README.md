@@ -16,3 +16,34 @@ Magento Extension to add extra features to the default GoogleAnalytics module.
 To provide feedback please create an issue on Github.
 
 There is a change in tracking behaviour - instead of passing order grand totals order subtotals are now being tracked (this matches Google's definition but breaks with Magento's default behaviour and previous behaviour of this extension)
+
+### User Manual
+The user manual can be downloaded from [here](http://store.fooman.co.nz/to/GoogleAnalyticsPlus/manual)
+
+### Installation Instructions
+To install the extension, follow the steps in [The Ultimate Guide to Installing Magento Extensions](http://cdn.fooman.co.nz/media/custom/upload/TheUltimateGuidetoInstallingMagentoExtensions.pdf).
+
+### Installation Options
+
+**via composer**  
+Fooman extension are included in the packages.firegento.com repository so you can install them easily via adding the extension to the require section and then running `composer install` or `composer update`
+
+    "require":{
+      "fooman/googleanalyticsplus":"*"
+    },
+
+Please note that packages.firegento.com is not always up-to-date - in this case please add the following in the repositories section
+
+    "repositories":[
+      {
+        "type":"composer",
+        "url":"http://packages.fooman.co.nz"
+      }
+    ],
+
+**via modman**    
+`modman clone https://github.com/fooman/googleanalyticsplus.git`   
+
+**via file transfer (zip download)**  
+    please see the releases tab for https://github.com/fooman/googleanalyticsplus/releases
+    

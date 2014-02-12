@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Fooman_GoogleAnalyticsPlus>
-            <version>0.13.6</version>
+            <version>0.13.7</version>
             <depends>
                 <Mage_GoogleAnalytics/>
             </depends>
@@ -42,7 +42,6 @@
                 <domainname2/>
                 <firstouch>0</firstouch>
                 <anonymise>0</anonymise>
-                <trackpageloadtime>0</trackpageloadtime>
                 <amounttotrack/>
                 <domainname/>
                 <conversionenabled>0</conversionenabled>

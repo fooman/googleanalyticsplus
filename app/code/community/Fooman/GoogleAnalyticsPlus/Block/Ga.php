@@ -265,10 +265,6 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
         //send track page view
         $html .= ", ['_trackPageview','" . $optPageURL . "']";
 
-        //speed tracking
-        if (Mage::getStoreConfigFlag('google/analyticsplus/trackpageloadtime')) {
-            $html .= ", ['_trackPageLoadTime']";
-        }
         $html .= ");";
 
         //track to alternative profile (optional)
@@ -297,9 +293,6 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
         }
         $html .= ", ['t2._trackPageview','" . $optPageURL . "']";
 
-        if (Mage::getStoreConfigFlag('google/analyticsplus/trackpageloadtime')) {
-            $html .= ", ['_trackPageLoadTime']";
-        }
         $html .= ");";
         return $html;
     }
