@@ -7,21 +7,21 @@
         $conversionId = $this->getConversionId();
     ?>
 <script type="text/javascript">
-    //<![CDATA[
+    /* <![CDATA[ */
     var google_tag_params = {
         ecomm_prodid: <?php echo $prodId ?>,
         ecomm_pagetype: '<?php echo $pageType ?>',
         ecomm_totalvalue: '<?php echo $pageValue ?>'
     };
-    //]]>
+    /* ]]> */
 </script>
 <script type="text/javascript">
-    //<![CDATA[
-    var google_conversion_id = "<?php echo $conversionId ?>";
+    /* <![CDATA[ */
+    var google_conversion_id = <?php echo $conversionId ?>;
     var google_conversion_label = "<?php echo $conversionLabel ?>";
     var google_custom_params = window.google_tag_params;
     var google_remarketing_only = true;
-    //]]>
+    /* ]]> */
 </script>
 <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
 <noscript>

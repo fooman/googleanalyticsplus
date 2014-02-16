@@ -37,7 +37,9 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
     public function shouldInclude()
     {
         if (parent::shouldInclude()) {
-            return Mage::getStoreConfigFlag('google/analyticsplus_dynremarketing/enabled');
+            return Mage::getStoreConfigFlag('google/analyticsplus_dynremarketing/enabled')
+                && $this->getConversionLabel()
+                && $this->getConversionId();
         } else {
             return false;
         }

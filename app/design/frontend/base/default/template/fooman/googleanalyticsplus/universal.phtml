@@ -3,7 +3,7 @@
     <?php if($this->isSuccessPage()):?>
         <?php $order = $this->_getOrder();?>
         <script>
-            //<![CDATA[
+            /* <![CDATA[ */
         ga('require', 'ecommerce', 'ecommerce.js');
 
         ga('ecommerce:addTransaction', {
@@ -24,7 +24,7 @@
             });
         <?php endforeach;?>
         ga('ecommerce:send');
-            //]]>
+            /* ]]> */
         </script>
     <?php endif; ?>
 <?php endif; ?>
