@@ -50,7 +50,9 @@ class Fooman_GoogleAnalyticsPlus_Helper_Data extends Mage_Core_Helper_Abstract
         if (!Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('convertcurrencyenabled')) {
             return (is_null($item)) ? $order->getDataUsingMethod($field) : $item->getDataUsingMethod($field);
         }
-        $field = 'base_' . $field;
+        if ($field != 'price') {
+            $field = 'base_' . $field;
+        }
         $basecur = $order->getBaseCurrency();
         if ($basecur) {
             return sprintf(

@@ -46,6 +46,33 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
     }
 
     /**
+     * product category for product page
+     *
+     * @return string
+     */
+    public function getEcommCategory()
+    {
+        if ($this->getPageType() == self::GA_PAGETYPE_PRODUCT) {
+            return parent::getProductCategory(Mage::registry('current_product'));
+        }
+        return false;
+    }
+
+    /**
+     * value of product for product page
+     *
+     * @return string
+     */
+    public function getEcommPValue()
+    {
+        if ($this->getPageType() == self::GA_PAGETYPE_PRODUCT) {
+            return sprintf(
+                "%01.2f", Mage::helper('googleanalyticsplus')->convert(Mage::registry('current_product'), 'price')
+            );
+        }
+    }
+
+    /**
      * get value for current page, if order present use it's subtotal
      * otherwise use current quote
      *

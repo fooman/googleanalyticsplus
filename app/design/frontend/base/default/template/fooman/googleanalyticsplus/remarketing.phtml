@@ -11,6 +11,12 @@
     var google_tag_params = {
         ecomm_prodid: <?php echo $prodId ?>,
         ecomm_pagetype: '<?php echo $pageType ?>',
+        <?php if($this->getEcommPValue()):?>
+        ecomm_pvalue: '<?php echo $this->getEcommPValue() ?>',
+        <?php endif;?>
+        <?php if($this->getEcommCategory()):?>
+        ecomm_category: '<?php echo $this->getEcommCategory() ?>',
+        <?php endif;?>
         ecomm_totalvalue: '<?php echo $pageValue ?>'
     };
     /* ]]> */

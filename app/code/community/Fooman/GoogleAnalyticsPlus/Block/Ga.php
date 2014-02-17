@@ -343,29 +343,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
 
         $product = Mage::getModel('catalog/product')->load($item->getProductId());
         if ($product) {
-            $attributeCode = Mage::getStoreConfig(
-                Fooman_GoogleAnalyticsPlus_Helper_Data::XML_PATH_GOOGLEANALYTICSPLUS_SETTINGS
-                . 'categorytrackingattribute'
-            );
-            if ($attributeCode) {
-                if ($product->getResource()->getAttribute($attributeCode)) {
-                    $attributeValue = $product->getAttributeText($attributeCode);
-                    if (!$attributeValue) {
-                        return $product->getDataUsingMethod($attributeCode);
-                    } else {
-                        return $attributeValue;
-                    }
-                }
-            } else {
-                $catIds = $product->getCategoryIds();
-                foreach ($catIds as $catId) {
-                    $category = Mage::getModel('catalog/category')->load($catId);
-                    if ($category) {
-                        //we use the first category
-                        return $category->getName();
-                    }
-                }
-            }
+            return $this->getProductCategory($product);
         }
         return null;
     }
