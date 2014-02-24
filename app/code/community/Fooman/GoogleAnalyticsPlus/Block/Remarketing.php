@@ -80,14 +80,23 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
      */
     public function getPageValue()
     {
-        if ($this->_getOrder()) {
-            return sprintf("%01.2f", Mage::helper('googleanalyticsplus')->convert($this->_getOrder(), 'subtotal'));
+        if ($this->getPageType() == self::GA_PAGETYPE_PRODUCT) {
+            return $this->getEcommPValue();
         }
-        return sprintf(
-            "%01.2f", Mage::helper('googleanalyticsplus')->convert(
-                Mage::getSingleton('checkout/session')->getQuote(), 'subtotal'
-            )
-        );
+        $values = array();
+        if ($this->_getOrder()) {
+            foreach ($this->_getOrder()->getAllVisibleItems() as $orderItem) {
+                $values[] = sprintf('%01.2f', Mage::helper('googleanalyticsplus')->convert($orderItem, 'row_total'));
+            }
+            return $this->getArrayReturnValue($values, '0.00');
+        }
+        $quote = Mage::getSingleton('checkout/session')->getQuote();
+        if (count($quote->getAllVisibleItems())) {
+            foreach ($quote->getAllVisibleItems() as $basketItem) {
+                $values[] = sprintf('%01.2f', Mage::helper('googleanalyticsplus')->convert($basketItem, 'row_total'));
+            }
+        }
+        return $this->getArrayReturnValue($values, '0.00');
     }
 
     /**
@@ -97,11 +106,12 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
      */
     public function getProdId()
     {
-
-        if (Mage::registry('current_product')) {
-            return '[' . Mage::registry('current_product')->getId() . ']';
-        }
         $products = array();
+        if (Mage::registry('current_product')) {
+            $products[] = Mage::registry('current_product')->getId();
+            return $this->getArrayReturnValue($products, '');
+        }
+
         $quote = Mage::getSingleton('checkout/session')->getQuote();
         if ($this->_getOrder()) {
             foreach ($this->_getOrder()->getAllItems() as $item) {
@@ -112,12 +122,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
                 $products[] = $item->getProductId();
             }
         }
-
-        if (!empty($products)) {
-            asort($products);
-            return '[' . implode(',', $products) . ']';
-        }
-        return '';
+        return $this->getArrayReturnValue($products, '', true);
     }
 
     /**
@@ -192,4 +197,27 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
         return Mage::getStoreConfig('google/analyticsplus_dynremarketing/conversionid');
     }
 
+    /**
+     * utility function to convert array of values as single or multiple value notation
+     *
+     * @param        $values
+     * @param string $default
+     * @param bool   $sort
+     *
+     * @return string
+     */
+    public function getArrayReturnValue($values, $default = '', $sort = false)
+    {
+        if (empty($values)) {
+            return $default;
+        }
+        if ($sort) {
+            asort($values);
+        }
+        if (sizeof($values) == 1) {
+            return current($values);
+        } else {
+            return '[' . implode(',', $values) . ']';
+        }
+    }
 }
