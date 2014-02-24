@@ -80,23 +80,33 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
      */
     public function getPageValue()
     {
-        if ($this->getPageType() == self::GA_PAGETYPE_PRODUCT) {
-            return $this->getEcommPValue();
-        }
         $values = array();
-        if ($this->_getOrder()) {
-            foreach ($this->_getOrder()->getAllVisibleItems() as $orderItem) {
-                $values[] = sprintf('%01.2f', Mage::helper('googleanalyticsplus')->convert($orderItem, 'row_total'));
-            }
-            return $this->getArrayReturnValue($values, '0.00');
+        switch ($this->getPageType()) {
+            case self::GA_PAGETYPE_PRODUCT:
+                return $this->getEcommPValue();
+                break;
+            case self::GA_PAGETYPE_CART:
+                $quote = Mage::getSingleton('checkout/session')->getQuote();
+                if (count($quote->getAllVisibleItems())) {
+                    foreach ($quote->getAllVisibleItems() as $basketItem) {
+                        $values[] = sprintf(
+                            '%01.2f', Mage::helper('googleanalyticsplus')->convert($basketItem, 'row_total')
+                        );
+                    }
+                    return $this->getArrayReturnValue($values, '0.00');
+                }
+                break;
+            case self::GA_PAGETYPE_PURCHASE:
+                if ($this->_getOrder()) {
+                    foreach ($this->_getOrder()->getAllVisibleItems() as $orderItem) {
+                        $values[] = sprintf(
+                            '%01.2f', Mage::helper('googleanalyticsplus')->convert($orderItem, 'row_total')
+                        );
+                    }
+                    return $this->getArrayReturnValue($values, '0.00');
+                }
         }
-        $quote = Mage::getSingleton('checkout/session')->getQuote();
-        if (count($quote->getAllVisibleItems())) {
-            foreach ($quote->getAllVisibleItems() as $basketItem) {
-                $values[] = sprintf('%01.2f', Mage::helper('googleanalyticsplus')->convert($basketItem, 'row_total'));
-            }
-        }
-        return $this->getArrayReturnValue($values, '0.00');
+        return '';
     }
 
     /**
