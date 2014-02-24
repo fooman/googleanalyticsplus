@@ -38,7 +38,6 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
     {
         if (parent::shouldInclude()) {
             return Mage::getStoreConfigFlag('google/analyticsplus_dynremarketing/enabled')
-                && $this->getConversionLabel()
                 && $this->getConversionId();
         } else {
             return false;
@@ -93,8 +92,8 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
                             '%01.2f', Mage::helper('googleanalyticsplus')->convert($basketItem, 'row_total')
                         );
                     }
-                    return $this->getArrayReturnValue($values, '0.00');
                 }
+                return $this->getArrayReturnValue($values, '0.00');
                 break;
             case self::GA_PAGETYPE_PURCHASE:
                 if ($this->_getOrder()) {
@@ -103,10 +102,10 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
                             '%01.2f', Mage::helper('googleanalyticsplus')->convert($orderItem, 'row_total')
                         );
                     }
-                    return $this->getArrayReturnValue($values, '0.00');
                 }
+                return $this->getArrayReturnValue($values, '0.00');
         }
-        return '';
+        return false;
     }
 
     /**
@@ -116,23 +115,30 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
      */
     public function getProdId()
     {
-        $products = array();
-        if (Mage::registry('current_product')) {
-            $products[] = Mage::registry('current_product')->getId();
-            return $this->getArrayReturnValue($products, '');
+        switch ($this->getPageType()) {
+            case self::GA_PAGETYPE_PRODUCT:
+                $products[] = Mage::registry('current_product')->getId();
+                return $this->getArrayReturnValue($products, '');
+                break;
+            case self::GA_PAGETYPE_CART:
+                $quote = Mage::getSingleton('checkout/session')->getQuote();
+                if ($quote) {
+                    foreach ($quote->getAllItems() as $item) {
+                        $products[] = $item->getProductId();
+                    }
+                }
+                return $this->getArrayReturnValue($products, '', true);
+                break;
+            case self::GA_PAGETYPE_PURCHASE:
+                if ($this->_getOrder()) {
+                    foreach ($this->_getOrder()->getAllItems() as $item) {
+                        $products[] = $item->getProductId();
+                    }
+                }
+                return $this->getArrayReturnValue($products, '', true);
+                break;
         }
-
-        $quote = Mage::getSingleton('checkout/session')->getQuote();
-        if ($this->_getOrder()) {
-            foreach ($this->_getOrder()->getAllItems() as $item) {
-                $products[] = $item->getProductId();
-            }
-        } elseif ($quote) {
-            foreach ($quote->getAllItems() as $item) {
-                $products[] = $item->getProductId();
-            }
-        }
-        return $this->getArrayReturnValue($products, '', true);
+        return false;
     }
 
     /**

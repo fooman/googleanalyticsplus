@@ -9,7 +9,9 @@
 <script type="text/javascript">
     /* <![CDATA[ */
     var google_tag_params = {
+        <?php if($prodId !== false):?>
         ecomm_prodid: <?php echo $prodId ?>,
+        <?php endif;?>
         ecomm_pagetype: '<?php echo $pageType ?>',
         <?php if($this->getEcommPValue()):?>
         ecomm_pvalue: <?php echo $this->getEcommPValue() ?>,
@@ -17,14 +19,18 @@
         <?php if($this->getEcommCategory()):?>
         ecomm_category: '<?php echo $this->getEcommCategory() ?>',
         <?php endif;?>
+        <?php if($pageValue !== false):?>
         ecomm_totalvalue: <?php echo $pageValue ?>
+        <?php endif;?>
     };
     /* ]]> */
 </script>
 <script type="text/javascript">
     /* <![CDATA[ */
     var google_conversion_id = <?php echo $conversionId ?>;
+    <?php if($conversionLabel):?>
     var google_conversion_label = "<?php echo $conversionLabel ?>";
+    <?php endif;?>
     var google_custom_params = window.google_tag_params;
     var google_remarketing_only = true;
     /* ]]> */
