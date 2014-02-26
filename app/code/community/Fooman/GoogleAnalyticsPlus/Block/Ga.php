@@ -29,7 +29,7 @@
 class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Block_Common_Abstract
 {
 
-    const URL_GA_STANDARD = 'http://google-analytics.com/ga.js';
+    const URL_GA_STANDARD = 'http://www.google-analytics.com/ga.js';
     const URL_GA_STANDARD_SECURE = 'https://ssl.google-analytics.com/ga.js';
     const URL_DOUBLECLICK = 'http://stats.g.doubleclick.net/dc.js';
     const URL_DOUBLECLICK_SECURE = 'https://stats.g.doubleclick.net/dc.js';
