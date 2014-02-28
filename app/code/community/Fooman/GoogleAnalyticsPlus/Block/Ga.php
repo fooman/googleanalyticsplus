@@ -210,7 +210,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
                     $this->jsQuoteEscape($item->getSku()), $this->jsQuoteEscape($item->getName()),
                     $this->jsQuoteEscape($this->getCategory($item)),
                     Mage::helper('googleanalyticsplus')->convert($order, 'price', $item),
-                    $item->getQtyOrdered()
+                    (int)$item->getQtyOrdered()
                 );
             }
             $result[] = "_gaq.push(['_trackTrans']);";

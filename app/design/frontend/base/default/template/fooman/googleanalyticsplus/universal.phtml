@@ -9,18 +9,18 @@
         ga('ecommerce:addTransaction', {
         'id': '<?php echo $order->getIncrementId() ?>',
         'affiliation': '<?php echo Mage::app()->getStore()->getName() ?>',
-        'revenue': '<?php echo $order->getBaseSubtotal() ?>',
-        'shipping': '<?php echo $order->getBaseShippingAmount() ?>',
-        'tax': '<?php echo $order->getBaseTaxAmount() ?>',
-        'currency': '<?php echo $order->getBaseCurrencyCode() ?>'
+        'revenue': '<?php echo Mage::helper('googleanalyticsplus')->convert($order, 'subtotal') ?>',
+        'shipping': '<?php echo Mage::helper('googleanalyticsplus')->convert($order, 'shipping_amount') ?>',
+        'tax': '<?php echo Mage::helper('googleanalyticsplus')->convert($order, 'tax_amount') ?>',
+        'currency': '<?php echo Mage::helper('googleanalyticsplus')->getTrackingCurrency($order) ?>'
         });
         <?php foreach ($order->getAllVisibleItems() as $item):?>
             ga('ecommerce:addItem', {
             'id': '<?php echo $order->getIncrementId() ?>',     // Transaction ID. Required.
             'name': '<?php echo $item->getName()?>',                 // Product name. Required.
             'sku': '<?php echo $item->getSku()?>',                   // SKU/code.
-            'price': '<?php echo $item->getBasePrice()?>',           // Unit price.
-            'quantity': '<?php echo $item->getQtyOrdered()?>'        // Quantity.
+            'price': '<?php echo Mage::helper('googleanalyticsplus')->convert($item, 'price')?>',  // Unit price.
+            'quantity': '<?php echo (int)$item->getQtyOrdered()?>'        // Quantity.
             });
         <?php endforeach;?>
         ga('ecommerce:send');

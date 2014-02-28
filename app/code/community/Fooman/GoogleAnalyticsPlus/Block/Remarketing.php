@@ -66,7 +66,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
     {
         if ($this->getPageType() == self::GA_PAGETYPE_PRODUCT) {
             return sprintf(
-                "%01.2f", Mage::helper('googleanalyticsplus')->convert(Mage::registry('current_product'), 'price')
+                "%01.2f", Mage::helper('googleanalyticsplus')->convert(Mage::registry('current_product'), 'final_price')
             );
         }
     }
