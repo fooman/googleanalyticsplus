@@ -327,7 +327,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
                             try{
                                 response = eval('(' + transport.transport.responseText + ')');
                                 if(response && response.goto_section){
-                                    goto_section = escape(response.goto_section);
+                                    goto_section = encodeURIComponent(response.goto_section);
                                 }
                             }
                             catch (e) {
