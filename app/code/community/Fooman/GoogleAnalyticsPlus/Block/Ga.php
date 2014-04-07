@@ -54,7 +54,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
     public function getPageName()
     {
         if (!$this->hasData('page_name')) {
-            $pageName = Mage::getSingleton('core/url')->escape($_SERVER['REQUEST_URI']);
+            $pageName = Mage::getSingleton('core/url')->escape(Mage::app()->getRequest()->getRequestUri());
             $pageName = rtrim(str_replace('index/', '', $pageName), '/');
             $this->setPageName($pageName);
         }
@@ -306,22 +306,46 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
      */
     public function getAjaxPageTracking($accountIdAlt = false)
     {
-        $baseUrl = preg_replace('/\/\?.*/', '', $this->getPageName());
-        //$query = preg_replace('/.*\?/', '', $this->getPageName());
+        $baseUrl = $this->getPageName();
+        $parts = parse_url($baseUrl);
+        $query = $parts['query'];
+        if(!empty($query)){
+            $query = '?'.$query;
+        }
+        unset($parts['query']);
+        unset($parts['fragment']);
+        $baseUrl = http_build_url($parts);
+
         return "
 
             if(Ajax.Responders){
                 Ajax.Responders.register({
-                  onComplete: function(response){
-                    if(!response.url.include('progress') && !response.url.include('getAdditional')){
-                        if(response.url.include('saveOrder')){
-                            _gaq.push(['_trackPageview', '".$baseUrl."'+ '/opc-review-placeOrderClicked']);"
-                            .($accountIdAlt?"
-                            _gaq.push(['t2._trackPageview', '".$baseUrl."'+ '/opc-review-placeOrderClicked']);":"")."
+                  onComplete: function(transport){
+                    if(!transport.url.include('progress') && !transport.url.include('getAdditional')){
+                        goto_section = false;
+                        if (transport && transport.transport.responseText){
+                            try{
+                                response = eval('(' + transport.transport.responseText + ')');
+                                if(response && response.goto_section){
+                                    goto_section = escape(response.goto_section);
+                                }
+                            }
+                            catch (e) {
+                                goto_section = false;
+                            }
+                        }
+                        if(transport.url.include('saveOrder')){
+                            _gaq.push(['_trackPageview', '".$baseUrl."'+ 'opc-review-placeOrderClicked".$query."']);"
+        .($accountIdAlt?"
+                            _gaq.push(['t2._trackPageview', '".$baseUrl."'+ 'opc-review-placeOrderClicked".$query."']);":"")."
+                        }else if(goto_section){
+                            _gaq.push(['_trackPageview', '".$baseUrl."'+ goto_section + '".$query."']);"
+        .($accountIdAlt?"
+                            _gaq.push(['t2._trackPageview', '".$baseUrl."'+ goto_section + '".$query."']);":"")."
                         }else if(accordion && accordion.currentSection){
-                            _gaq.push(['_trackPageview', '".$baseUrl."/'+ accordion.currentSection]);"
-                            .($accountIdAlt?"
-                            _gaq.push(['t2._trackPageview', '".$baseUrl."/'+ accordion.currentSection]);":"")."
+                            _gaq.push(['_trackPageview', '".$baseUrl."'+ accordion.currentSection + '".$query."']);"
+        .($accountIdAlt?"
+                            _gaq.push(['t2._trackPageview', '".$baseUrl."'+ accordion.currentSection + '".$query."']);":"")."
                         }
                     }
                   }
