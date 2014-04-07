@@ -54,7 +54,9 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
     public function getPageName()
     {
         if (!$this->hasData('page_name')) {
-            $pageName = Mage::getSingleton('core/url')->escape(Mage::app()->getRequest()->getRequestUri());
+            $pageName = Mage::getSingleton('core/url')->escape(
+                Mage::app()->getRequest()->getServer('REQUEST_URI')
+            );
             $pageName = rtrim(str_replace('index/', '', $pageName), '/');
             $this->setPageName($pageName);
         }
@@ -306,15 +308,17 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
      */
     public function getAjaxPageTracking($accountIdAlt = false)
     {
-        $baseUrl = $this->getPageName();
-        $parts = parse_url($baseUrl);
-        $query = $parts['query'];
-        if(!empty($query)){
-            $query = '?'.$query;
+
+        $parts = parse_url($this->getPageName());
+        $query = '';
+        if (isset($parts['query']) && !empty($parts['query'])) {
+            $query = '?' . $parts['query'];
         }
         unset($parts['query']);
         unset($parts['fragment']);
-        $baseUrl = http_build_url($parts);
+        $baseUrl = Mage::getSingleton('core/url')->escape(
+            Mage::app()->getRequest()->getBaseUrl().Mage::app()->getRequest()->getRequestString()
+        );
 
         return "
 
