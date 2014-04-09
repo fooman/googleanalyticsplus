@@ -317,7 +317,12 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
         unset($parts['query']);
         unset($parts['fragment']);
         $baseUrl = Mage::getSingleton('core/url')->escape(
-            Mage::app()->getRequest()->getBaseUrl().Mage::app()->getRequest()->getRequestString()
+            rtrim(
+                str_replace(
+                    'index/', '',
+                    Mage::app()->getRequest()->getBaseUrl() . Mage::app()->getRequest()->getRequestString()
+                ), '/'
+            )
         );
 
         return "
@@ -331,7 +336,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
                             try{
                                 response = eval('(' + transport.transport.responseText + ')');
                                 if(response && response.goto_section){
-                                    goto_section = encodeURIComponent(response.goto_section);
+                                    goto_section = '/opc-' + encodeURIComponent(response.goto_section);
                                 }
                             }
                             catch (e) {
@@ -339,17 +344,17 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
                             }
                         }
                         if(transport.url.include('saveOrder')){
-                            _gaq.push(['_trackPageview', '".$baseUrl."'+ 'opc-review-placeOrderClicked".$query."']);"
+                            _gaq.push(['_trackPageview', '".$baseUrl."'+ '/opc-review-placeOrderClicked".$query."']);"
         .($accountIdAlt?"
-                            _gaq.push(['t2._trackPageview', '".$baseUrl."'+ 'opc-review-placeOrderClicked".$query."']);":"")."
+                            _gaq.push(['t2._trackPageview', '".$baseUrl."'+ '/opc-review-placeOrderClicked".$query."']);":"")."
                         }else if(goto_section){
                             _gaq.push(['_trackPageview', '".$baseUrl."'+ goto_section + '".$query."']);"
         .($accountIdAlt?"
                             _gaq.push(['t2._trackPageview', '".$baseUrl."'+ goto_section + '".$query."']);":"")."
                         }else if(accordion && accordion.currentSection){
-                            _gaq.push(['_trackPageview', '".$baseUrl."'+ accordion.currentSection + '".$query."']);"
+                            _gaq.push(['_trackPageview', '".$baseUrl."/'+ accordion.currentSection + '".$query."']);"
         .($accountIdAlt?"
-                            _gaq.push(['t2._trackPageview', '".$baseUrl."'+ accordion.currentSection + '".$query."']);":"")."
+                            _gaq.push(['t2._trackPageview', '".$baseUrl."/'+ accordion.currentSection + '".$query."']);":"")."
                         }
                     }
                   }
