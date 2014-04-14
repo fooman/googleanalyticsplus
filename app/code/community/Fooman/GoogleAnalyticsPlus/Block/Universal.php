@@ -26,7 +26,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
     public function shouldInclude()
     {
         if (parent::shouldInclude()) {
-            return $this->isUniversalEnabled() && (bool)$this->getUniversalSnippet();
+            return $this->isUniversalEnabled() && (bool)$this->getUniversalAccount();
         } else {
             return false;
         }
@@ -45,10 +45,29 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
     /**
      * get universal snippet from settings
      *
+     * @deprecated sind 0.14.0
      * @return string
      */
     public function getUniversalSnippet()
     {
-        return Mage::getStoreConfig('google/analyticsplus_universal/snippet');
+        return '';
+    }
+
+    /**
+     * get Google Analytics account id
+     *
+     * @return mixed
+     */
+    public function getUniversalAccount()
+    {
+        return Mage::getStoreConfig('google/analyticsplus_universal/accountnumber');
+    }
+
+    /**
+     * @return bool
+     */
+    public function getUniversalAnonymise()
+    {
+        return Mage::getStoreConfigFlag('google/analyticsplus_universal/anonymise');
     }
 }

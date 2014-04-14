@@ -43,25 +43,6 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
         $this->_helper = Mage::helper('googleanalyticsplus');
     }
 
-    /**
-     * Return REQUEST_URI for current page
-     * Magento default analytics reports can include the same page as
-     * /checkout/onepage/index/ and   /checkout/onepage/
-     * filter out index/ here
-     *
-     * @return string
-     */
-    public function getPageName()
-    {
-        if (!$this->hasData('page_name')) {
-            $pageName = Mage::getSingleton('core/url')->escape(
-                Mage::app()->getRequest()->getServer('REQUEST_URI')
-            );
-            $pageName = rtrim(str_replace('index/', '', $pageName), '/');
-            $this->setPageName($pageName);
-        }
-        return $this->getData('page_name');
-    }
 
     /**
      * get the current url to send to Google Analytics

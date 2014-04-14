@@ -66,4 +66,38 @@ class Fooman_GoogleAnalyticsPlus_Block_Common_Abstract extends Mage_Core_Block_T
         }
         return false;
     }
+
+    /**
+     * Return REQUEST_URI for current page
+     * Magento default analytics reports can include the same page as
+     * /checkout/onepage/index/ and   /checkout/onepage/
+     * filter out index/ here and unify to no trailing /
+     *
+     * @return string
+     */
+    public function getPageName()
+    {
+        if (!$this->hasData('page_name')) {
+            $parts = parse_url(
+                Mage::getSingleton('core/url')->escape(
+                    Mage::app()->getRequest()->getServer('REQUEST_URI')
+                )
+            );
+            $query = '';
+            if (isset($parts['query']) && !empty($parts['query'])) {
+                $query = '?' . $parts['query'];
+            }
+
+            $url = Mage::getSingleton('core/url')->escape(
+                rtrim(
+                    str_replace(
+                        'index/', '',
+                        Mage::app()->getRequest()->getBaseUrl() . Mage::app()->getRequest()->getRequestString()
+                    ), '/'
+                ). $query
+            );
+            $this->setPageName($url);
+        }
+        return $this->getData('page_name');
+    }
 }
