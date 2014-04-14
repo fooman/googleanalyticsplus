@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Fooman GoogleAnalyticsPlus
  *
@@ -9,7 +10,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsPlus_Block_GaConversion
 {
     protected function _construct()
@@ -70,4 +70,20 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
     {
         return Mage::getStoreConfigFlag('google/analyticsplus_universal/anonymise');
     }
+
+    /**
+     * @return string
+     */
+    public function getUniversalParams()
+    {
+        if (Mage::getStoreConfig('google/analyticsplus_universal/domainname')) {
+            return sprintf(
+                "{'cookieDomain': '%s'}",
+                Mage::getStoreConfig('google/analyticsplus_universal/domainname')
+            );
+        } else {
+            return 'auto';
+        }
+    }
+
 }

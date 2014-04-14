@@ -168,6 +168,15 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </anonymise>
+                        <domainname translate="label">
+                            <label>Cookie Domain Name</label>
+                            <comment><![CDATA[Leave empty for standard setups <br/><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#cookieDomain">Google Documentation</a>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </domainname>
                     </fields>
                 </analyticsplus_universal>
                 <analyticsplus_tagmanager translate="label">
