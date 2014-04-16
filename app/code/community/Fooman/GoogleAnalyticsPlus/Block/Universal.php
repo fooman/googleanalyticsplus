@@ -45,7 +45,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
     /**
      * get universal snippet from settings
      *
-     * @deprecated sind 0.14.0
+     * @deprecated since 0.14.0
      * @return string
      */
     public function getUniversalSnippet()
@@ -82,7 +82,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
                 Mage::getStoreConfig('google/analyticsplus_universal/domainname')
             );
         } else {
-            return 'auto';
+            return "'auto'";
         }
     }
 

@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Fooman_GoogleAnalyticsPlus>
-            <version>0.14.1</version>
+            <version>0.14.2</version>
             <depends>
                 <Mage_GoogleAnalytics/>
             </depends>
@@ -25,6 +25,13 @@
                 <class>Fooman_GoogleAnalyticsPlus_Block</class>
             </googleanalyticsplus>
         </blocks>
+        <resources>
+            <googleanalyticsplus_setup>
+                <setup>
+                    <module>Fooman_GoogleAnalyticsPlus</module>
+                </setup>
+            </googleanalyticsplus_setup>
+        </resources>
     </global>
     <frontend>
         <layout>
@@ -37,10 +44,9 @@
     </frontend>
     <default>
         <google>
-            <analyticsplus>
+            <analyticsplus_classic>
                 <accountnumber2/>
                 <domainname2/>
-                <firstouch>0</firstouch>
                 <anonymise>0</anonymise>
                 <amounttotrack/>
                 <domainname/>
@@ -49,7 +55,7 @@
                 <conversionlanguage>en</conversionlanguage>
                 <conversionlabel/>
                 <categorytrackingattribute/>
-            </analyticsplus>
+            </analyticsplus_classic>
         </google>
     </default>
     <phpunit>

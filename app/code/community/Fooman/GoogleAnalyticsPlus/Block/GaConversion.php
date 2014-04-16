@@ -37,7 +37,7 @@ class  Fooman_GoogleAnalyticsPlus_Block_GaConversion extends Fooman_GoogleAnalyt
      */
     public function isEnabled()
     {
-        return Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('conversionenabled', true);
+        return Mage::getStoreConfigFlag('google/analyticsplus_classic/conversionenabled');
     }
 
     /**
@@ -48,7 +48,7 @@ class  Fooman_GoogleAnalyticsPlus_Block_GaConversion extends Fooman_GoogleAnalyt
      */
     public function getLabel()
     {
-        return Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('conversionlabel');
+        return Mage::getStoreConfig('google/analyticsplus_classic/conversionlabel');
     }
 
     /**
@@ -68,7 +68,7 @@ class  Fooman_GoogleAnalyticsPlus_Block_GaConversion extends Fooman_GoogleAnalyt
      */
     public function getLanguage()
     {
-        return Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('conversionlanguage');
+        return Mage::getStoreConfig('google/analyticsplus_classic/conversionlanguage');
     }
 
     /**
@@ -78,7 +78,7 @@ class  Fooman_GoogleAnalyticsPlus_Block_GaConversion extends Fooman_GoogleAnalyt
      */
     public function getConversionId()
     {
-        return Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('conversionid');
+        return Mage::getStoreConfig('google/analyticsplus_classic/conversionid');
     }
 
     /**
@@ -101,20 +101,7 @@ class  Fooman_GoogleAnalyticsPlus_Block_GaConversion extends Fooman_GoogleAnalyt
     {
         $order = $this->_getOrder();
         if ($order) {
-            if (Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('convertcurrencyenabled')) {
-                $curconv = Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('convertcurrency');
-                if ($curconv) {
-                    $basecur = $order->getBaseCurrency();
-                    if ($basecur) {
-                        return sprintf(
-                            "%01.4f", Mage::app()->getStore()->roundPrice(
-                                $basecur->convert($order->getBaseGrandTotal(), $curconv)
-                            )
-                        );
-                    }
-                }
-            }
-            return $order->getBaseGrandTotal();
+            return Mage::helper('googleanalyticsplus')->convert($order, 'subtotal');
         } else {
             return 0;
         }

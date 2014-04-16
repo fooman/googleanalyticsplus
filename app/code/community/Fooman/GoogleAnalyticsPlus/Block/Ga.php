@@ -89,7 +89,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
      */
     public function getAlternativeAccountId()
     {
-        return Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('accountnumber2');
+        return Mage::getStoreConfig('google/analyticsplus_classic/accountnumber2');
     }
 
     /**
@@ -118,13 +118,13 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
     {
         $secure = Mage::app()->getStore()->isCurrentlySecure() ? 'true' : 'false';
         if ($secure == 'true') {
-            if (Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('remarketing')) {
+            if (Mage::getStoreConfig('google/analyticsplus_classic/remarketing')) {
                 return self::URL_DOUBLECLICK_SECURE;
             } else {
                 return self::URL_GA_STANDARD_SECURE;
             }
         } else {
-            if (Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('remarketing')) {
+            if (Mage::getStoreConfig('google/analyticsplus_classic/remarketing')) {
                 return self::URL_DOUBLECLICK;
             } else {
                 return self::URL_GA_STANDARD;
@@ -190,7 +190,8 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
                 $result[] = sprintf(
                     "_gaq.push(['_addItem', '%s', '%s', '%s', '%s', '%s', '%s']);",
                     $order->getIncrementId(),
-                    $this->jsQuoteEscape($item->getSku()), $this->jsQuoteEscape($item->getName()),
+                    $this->jsQuoteEscape($item->getSku()),
+                    $this->jsQuoteEscape($item->getName()),
                     $this->jsQuoteEscape($this->getCategory($item)),
                     Mage::helper('googleanalyticsplus')->convert($order, 'price', $item),
                     (int)$item->getQtyOrdered()
@@ -235,12 +236,12 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
 
         //main profile tracking
         $html= "_gaq.push(['_setAccount', '" . $this->jsQuoteEscape($accountId) . "']";
-        if ($domainName = Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('domainname')) {
+        if ($domainName = Mage::getStoreConfig('google/analyticsplus_classic/domainname')) {
             $html .= " ,['_setDomainName','" . $domainName . "']";
         }
 
         //anonymise
-        $anonymise = Mage::getStoreConfigFlag('google/analyticsplus/anonymise');
+        $anonymise = Mage::getStoreConfigFlag('google/analyticsplus_classic/anonymise');
         if ($anonymise) {
             $html .= ", ['_gat._anonymizeIp']";
         }
@@ -270,7 +271,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
     {
         $html = "
             _gaq.push(['t2._setAccount', '" . $this->jsQuoteEscape($accountIdAlt) . "']";
-        $domainNameAlt = Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('domainname2');
+        $domainNameAlt = Mage::getStoreConfig('google/analyticsplus_classic/domainname2');
         if ($domainNameAlt) {
             $html .= " ,['t2._setDomainName','" . $domainNameAlt . "']";
         }
@@ -325,41 +326,29 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
                             }
                         }
                         if(transport.url.include('saveOrder')){
-                            _gaq.push(['_trackPageview', '".$baseUrl."'+ '/opc-review-placeOrderClicked".$query."']);"
+                            _gaq.push(['_trackPageview', '".$baseUrl."'
+                                + '/opc-review-placeOrderClicked".$query."']);"
         .($accountIdAlt?"
-                            _gaq.push(['t2._trackPageview', '".$baseUrl."'+ '/opc-review-placeOrderClicked".$query."']);":"")."
+                            _gaq.push(['t2._trackPageview', '".$baseUrl."'
+                                + '/opc-review-placeOrderClicked".$query."']);":"")."
                         }else if(goto_section){
-                            _gaq.push(['_trackPageview', '".$baseUrl."'+ goto_section + '".$query."']);"
+                            _gaq.push(['_trackPageview', '".$baseUrl."'
+                                + goto_section + '".$query."']);"
         .($accountIdAlt?"
-                            _gaq.push(['t2._trackPageview', '".$baseUrl."'+ goto_section + '".$query."']);":"")."
+                            _gaq.push(['t2._trackPageview', '".$baseUrl."'
+                                + goto_section + '".$query."']);":"")."
                         }else if(accordion && accordion.currentSection){
-                            _gaq.push(['_trackPageview', '".$baseUrl."/'+ accordion.currentSection + '".$query."']);"
+                            _gaq.push(['_trackPageview', '".$baseUrl."/'
+                                + accordion.currentSection + '".$query."']);"
         .($accountIdAlt?"
-                            _gaq.push(['t2._trackPageview', '".$baseUrl."/'+ accordion.currentSection + '".$query."']);":"")."
+                            _gaq.push(['t2._trackPageview', '".$baseUrl."/'
+                                + accordion.currentSection + '".$query."']);":"")."
                         }
                     }
                   }
                 });
             }
 ";
-    }
-
-    /**
-     * retrieve an item's category
-     * if no product attribute chosen use the product's first category
-     *
-     * @param $item
-     *
-     * @return mixed|null
-     */
-    protected function getCategory($item)
-    {
-
-        $product = Mage::getModel('catalog/product')->load($item->getProductId());
-        if ($product) {
-            return $this->getProductCategory($product);
-        }
-        return null;
     }
 
 }

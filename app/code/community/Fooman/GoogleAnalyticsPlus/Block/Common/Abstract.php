@@ -41,10 +41,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Common_Abstract extends Mage_Core_Block_T
      */
     public function getProductCategory($product)
     {
-        $attributeCode = Mage::getStoreConfig(
-            Fooman_GoogleAnalyticsPlus_Helper_Data::XML_PATH_GOOGLEANALYTICSPLUS_SETTINGS
-            . 'categorytrackingattribute'
-        );
+        $attributeCode = Mage::getStoreConfig('google/analyticsplus/categorytrackingattribute');
         if ($attributeCode) {
             if ($product->getResource()->getAttribute($attributeCode)) {
                 $attributeValue = $product->getAttributeText($attributeCode);
@@ -65,6 +62,24 @@ class Fooman_GoogleAnalyticsPlus_Block_Common_Abstract extends Mage_Core_Block_T
             }
         }
         return false;
+    }
+
+    /**
+     * retrieve an item's category
+     * if no product attribute chosen use the product's first category
+     *
+     * @param $item
+     *
+     * @return mixed|null
+     */
+    protected function getCategory($item)
+    {
+
+        $product = Mage::getModel('catalog/product')->load($item->getProductId());
+        if ($product) {
+            return $this->getProductCategory($product);
+        }
+        return null;
     }
 
     /**

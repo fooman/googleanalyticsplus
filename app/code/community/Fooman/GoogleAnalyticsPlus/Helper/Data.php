@@ -13,27 +13,6 @@
 class Fooman_GoogleAnalyticsPlus_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
-    const XML_PATH_GOOGLEANALYTICSPLUS_SETTINGS = 'google/analyticsplus/';
-
-    /**
-     * Return store config value for key
-     *
-     * @param   string $key
-     *
-     * @param bool     $flag
-     *
-     * @return  string
-     */
-    public function getGoogleanalyticsplusStoreConfig($key, $flag = false)
-    {
-        $path = self::XML_PATH_GOOGLEANALYTICSPLUS_SETTINGS . $key;
-        if ($flag) {
-            return Mage::getStoreConfigFlag($path);
-        } else {
-            return Mage::getStoreConfig($path);
-        }
-    }
-
     /**
      * retrieve requested value from order or item
      * convert from base currency if configured
@@ -46,7 +25,7 @@ class Fooman_GoogleAnalyticsPlus_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function convert($object, $field)
     {
-        if (!Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('convertcurrencyenabled')) {
+        if (!Mage::getStoreConfig('google/analyticsplus/convertcurrencyenabled')) {
             return $object->getDataUsingMethod($field);
         }
         //getPrice and getFinalPrice do not have equivalents
@@ -59,7 +38,7 @@ class Fooman_GoogleAnalyticsPlus_Helper_Data extends Mage_Core_Helper_Abstract
                 "%01.4f", Mage::app()->getStore()->roundPrice(
                     $basecur->convert(
                         $object->getDataUsingMethod($field),
-                        Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('convertcurrency')
+                        Mage::getStoreConfig('google/analyticsplus/convertcurrency')
                     )
                 )
             );
@@ -78,10 +57,10 @@ class Fooman_GoogleAnalyticsPlus_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getTrackingCurrency($object)
     {
-        if (!Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('convertcurrencyenabled')) {
+        if (!Mage::getStoreConfig('google/analyticsplus/convertcurrencyenabled')) {
             return $object->getBaseCurrencyCode();
         } else {
-            return Mage::helper('googleanalyticsplus')->getGoogleanalyticsplusStoreConfig('convertcurrency');
+            return Mage::getStoreConfig('google/analyticsplus/convertcurrency');
         }
     }
 

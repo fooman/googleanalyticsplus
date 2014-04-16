@@ -6,7 +6,7 @@
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-        ga('create', '<?php echo $this->getUniversalAccount(); ?>','<?php echo $this->getUniversalParams(); ?>');
+        ga('create', '<?php echo $this->getUniversalAccount(); ?>',<?php echo $this->getUniversalParams(); ?>);
         <?php if($this->getUniversalAnonymise()):?>
             ga('set', 'anonymizeIp', true);
         <?php endif;?>
@@ -20,8 +20,8 @@
         ga('require', 'ecommerce', 'ecommerce.js');
 
         ga('ecommerce:addTransaction', {
-        'id': '<?php echo $order->getIncrementId() ?>',
-        'affiliation': '<?php echo Mage::app()->getStore()->getName() ?>',
+        'id': '<?php echo $this->jsQuoteEscape($order->getIncrementId()) ?>',
+        'affiliation': '<?php echo $this->jsQuoteEscape(Mage::app()->getStore()->getName()) ?>',
         'revenue': '<?php echo Mage::helper('googleanalyticsplus')->convert($order, 'subtotal') ?>',
         'shipping': '<?php echo Mage::helper('googleanalyticsplus')->convert($order, 'shipping_amount') ?>',
         'tax': '<?php echo Mage::helper('googleanalyticsplus')->convert($order, 'tax_amount') ?>',
@@ -29,11 +29,12 @@
         });
         <?php foreach ($order->getAllVisibleItems() as $item):?>
             ga('ecommerce:addItem', {
-            'id': '<?php echo $order->getIncrementId() ?>',     // Transaction ID. Required.
-            'name': '<?php echo $item->getName()?>',                 // Product name. Required.
-            'sku': '<?php echo $item->getSku()?>',                   // SKU/code.
-            'price': '<?php echo Mage::helper('googleanalyticsplus')->convert($item, 'price')?>',  // Unit price.
-            'quantity': '<?php echo (int)$item->getQtyOrdered()?>'        // Quantity.
+                'id': '<?php echo $this->jsQuoteEscape($order->getIncrementId()) ?>',
+                'name': '<?php echo $this->jsQuoteEscape($item->getName())?>',
+                'sku': '<?php echo $this->jsQuoteEscape($item->getSku())?>',
+                'price': '<?php echo Mage::helper('googleanalyticsplus')->convert($item, 'price')?>',
+                'quantity': '<?php echo (int)$item->getQtyOrdered()?>',
+                'category': '<?php echo $this->jsQuoteEscape($this->getCategory($item))?>'
             });
         <?php endforeach;?>
         ga('ecommerce:send');
