@@ -15,8 +15,6 @@ Magento Extension to add extra features to the default GoogleAnalytics module.
 
 To provide feedback please create an issue on Github.
 
-There is a change in tracking behaviour - instead of passing order grand totals order subtotals are now being tracked (this matches Google's definition but breaks with Magento's default behaviour and previous behaviour of this extension)
-
 ### User Manual
 The user manual can be downloaded from [here](http://store.fooman.co.nz/to/GoogleAnalyticsPlus/manual)
 

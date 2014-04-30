@@ -22,7 +22,7 @@
         ga('ecommerce:addTransaction', {
         'id': '<?php echo $this->jsQuoteEscape($order->getIncrementId()) ?>',
         'affiliation': '<?php echo $this->jsQuoteEscape(Mage::app()->getStore()->getName()) ?>',
-        'revenue': '<?php echo Mage::helper('googleanalyticsplus')->convert($order, 'subtotal') ?>',
+        'revenue': '<?php echo Mage::helper('googleanalyticsplus')->convert($order, 'grand_total') ?>',
         'shipping': '<?php echo Mage::helper('googleanalyticsplus')->convert($order, 'shipping_amount') ?>',
         'tax': '<?php echo Mage::helper('googleanalyticsplus')->convert($order, 'tax_amount') ?>',
         'currency': '<?php echo Mage::helper('googleanalyticsplus')->getTrackingCurrency($order) ?>'

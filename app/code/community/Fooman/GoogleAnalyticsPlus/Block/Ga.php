@@ -178,7 +178,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
                 "_gaq.push(['_addTrans', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s']);",
                 $order->getIncrementId(),
                 $this->jsQuoteEscape(Mage::app()->getStore()->getFrontendName()),
-                Mage::helper('googleanalyticsplus')->convert($order, 'subtotal'),
+                Mage::helper('googleanalyticsplus')->convert($order, 'grand_total'),
                 Mage::helper('googleanalyticsplus')->convert($order, 'tax_amount'),
                 Mage::helper('googleanalyticsplus')->convert($order, 'shipping_amount'),
                 $this->jsQuoteEscape($address->getCity()),
