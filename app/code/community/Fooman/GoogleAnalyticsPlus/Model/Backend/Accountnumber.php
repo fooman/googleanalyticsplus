@@ -17,7 +17,7 @@ class Fooman_GoogleAnalyticsPlus_Model_Backend_Accountnumber extends Mage_Core_M
     {
         $data = $this->getData();
         $analyticsAccount = $data['groups']['analytics']['fields']['account']['value'];
-        $analyticsPlusAccount = $data['groups']['analyticsplus']['fields']['accountnumber2']['value'];
+        $analyticsPlusAccount = $data['groups']['analyticsplus_classic']['fields']['accountnumber2']['value'];
         if (!empty($analyticsPlusAccount) && !empty($analyticsAccount) && $analyticsAccount == $analyticsPlusAccount) {
             throw Mage::exception(
                 'Mage_Core', Mage::helper('adminhtml')->__(
