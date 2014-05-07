@@ -198,12 +198,13 @@
                         </display_advertising>
                         <display_advertising_cookiename translate='label'>
                             <label>Display Advertising Features Cookie Name</label>
-                            <comment><![CDATA[Leave empty for standard setups <br/><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features">Google Documentation</a>]]></comment>
+                            <comment><![CDATA[Leave empty for standard setups <br/><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features#changing-the-cookie-name">Google Documentation</a>]]></comment>
                             <frontend_type>text</frontend_type>
                             <sort_order>401</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends><display_advertising>1</display_advertising></depends>
                         </display_advertising_cookiename>
                     </fields>
                 </analyticsplus_universal>

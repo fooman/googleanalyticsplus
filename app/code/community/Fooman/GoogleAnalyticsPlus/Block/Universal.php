@@ -85,20 +85,20 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
             return "'auto'";
         }
     }
-    
+
     /**
      * Enable the Display Advertising Features.
-     * 
+     *
      * @return bool
      */
     public function getUniversalDisplayAdvertising()
     {
         return Mage::getStoreConfigFlag('google/analyticsplus_universal/display_advertising');
     }
-    
+
     /**
-     * Return cookName for Display Advertising
-     * 
+     * Return cookiename for Display Advertising
+     *
      * @return String
      */
     public function getUniversalDisplayAdvertisingCookieName()
