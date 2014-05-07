@@ -7,6 +7,7 @@
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
         ga('create', '<?php echo $this->getUniversalAccount(); ?>',<?php echo $this->getUniversalParams(); ?>);
+        ga('require', 'displayfeatures');
         <?php if($this->getUniversalAnonymise()):?>
             ga('set', 'anonymizeIp', true);
         <?php endif;?>
