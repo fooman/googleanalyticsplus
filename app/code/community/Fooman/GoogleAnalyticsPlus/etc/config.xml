@@ -2,10 +2,7 @@
 <config>
     <modules>
         <Fooman_GoogleAnalyticsPlus>
-            <version>0.14.5</version>
-            <depends>
-                <Mage_GoogleAnalytics/>
-            </depends>
+            <version>0.14.6</version>
         </Fooman_GoogleAnalyticsPlus>
     </modules>
 

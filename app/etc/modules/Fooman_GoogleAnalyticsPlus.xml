@@ -4,6 +4,9 @@
         <Fooman_GoogleAnalyticsPlus>
             <active>true</active>
             <codePool>community</codePool>
-        </Fooman_GoogleAnalyticsPlus>        
+            <depends>
+                <Mage_GoogleAnalytics/>
+            </depends>
+        </Fooman_GoogleAnalyticsPlus>
     </modules>
 </config>
