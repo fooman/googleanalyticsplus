@@ -186,6 +186,25 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </domainname>
+                        <display_advertising translate='label'>
+                            <label>Enable Display Advertising Features</label>
+                            <comment><![CDATA[See <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features">Google Documentation</a> for details]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </display_advertising>
+                        <display_advertising_cookiename translate='label'>
+                            <label>Display Advertising Features Cookie Name</label>
+                            <comment><![CDATA[Leave empty for standard setups <br/><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features">Google Documentation</a>]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>401</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </display_advertising_cookiename>
                     </fields>
                 </analyticsplus_universal>
                 <analyticsplus_tagmanager translate="label">
