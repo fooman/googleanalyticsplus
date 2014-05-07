@@ -10,6 +10,9 @@
         <?php if($this->getUniversalAnonymise()):?>
             ga('set', 'anonymizeIp', true);
         <?php endif;?>
+        <?php if($this->getUniversalDisplayAdvertising()):?>
+            ga('require', 'displayfeatures'<?php if($this->getUniversalDisplayAdvertisingCookieName()):?>, undefined, { cookieName: '<?php echo $this->getUniversalDisplayAdvertisingCookieName(); ?>' }<?php endif; ?>);
+        <?php endif;?>    
         ga('send', 'pageview', '<?php echo $this->getPageName(); ?>');
 
     </script>
