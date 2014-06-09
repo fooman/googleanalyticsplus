@@ -9,12 +9,12 @@
         </reference>
         <reference name="before_head_end">
             <block type="googleanalyticsplus/ga" name="google_analytics" as="google_analytics"/>
-        </reference>
-        <reference name="after_body_start">
             <block type="googleanalyticsplus/tagManager" name="googleanalyticsplus_tagmanager"
                    as="googleanalyticsplus_tagmanager"/>
             <block type="googleanalyticsplus/universal" name="googleanalyticsplus_universal"
                    as="googleanalyticsplus_universal"/>
+        </reference>
+        <reference name="after_body_start">
             <action method="unsetChild">
                 <name>google_analytics</name>
             </action>
