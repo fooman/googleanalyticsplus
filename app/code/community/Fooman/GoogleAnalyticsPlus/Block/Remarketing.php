@@ -117,14 +117,14 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
     {
         switch ($this->getPageType()) {
             case self::GA_PAGETYPE_PRODUCT:
-                $products[] = Mage::registry('current_product')->getId();
+                $products[] = $this->getConfiguredFeedId(Mage::registry('current_product'));
                 return $this->getArrayReturnValue($products, '');
                 break;
             case self::GA_PAGETYPE_CART:
                 $quote = Mage::getSingleton('checkout/session')->getQuote();
                 if ($quote) {
                     foreach ($quote->getAllItems() as $item) {
-                        $products[] = $item->getProductId();
+                        $products[] = $this->getConfiguredFeedId($item);
                     }
                 }
                 return $this->getArrayReturnValue($products, '', true);
@@ -132,13 +132,27 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
             case self::GA_PAGETYPE_PURCHASE:
                 if ($this->_getOrder()) {
                     foreach ($this->_getOrder()->getAllItems() as $item) {
-                        $products[] = $item->getProductId();
+                        $products[] = $this->getConfiguredFeedId($item);
                     }
                 }
                 return $this->getArrayReturnValue($products, '', true);
                 break;
         }
         return false;
+    }
+    
+    /**
+     * @param Mage_Catalog_Model_Product $product
+     * @return string|integer
+     */
+    public function getConfiguredFeedId ($product) {
+        $idAttr = Mage::getStoreConfig('google/analyticsplus_dynremarketing/feed_product_id');
+        $id = $product->getData($idAttr);
+        // quote if id is not numeric
+        if (!ctype_digit($id)) {
+            $id = "'$id'";
+        }
+        return $id;
     }
 
     /**

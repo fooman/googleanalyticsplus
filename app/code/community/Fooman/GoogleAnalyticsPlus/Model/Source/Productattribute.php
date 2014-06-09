@@ -21,6 +21,10 @@ class Fooman_GoogleAnalyticsPlus_Model_Source_Productattribute
             'value' => '',
             'label' => ''
         );
+        $options[] = array(
+                'value' => 'entity_id',
+                'label' => 'Entity Id'
+        );
         foreach ($collection as $attribute) {
             $options[] = array(
                 'value' => $attribute->getAttributeCode(),
