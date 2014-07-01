@@ -309,7 +309,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
 
         return "
 
-            if(Ajax.Responders){
+            if(typeof Ajax !== \"undefined\" && Ajax.Responders){
                 Ajax.Responders.register({
                   onComplete: function(transport){
                     if(!transport.url.include('progress') && !transport.url.include('getAdditional')){
