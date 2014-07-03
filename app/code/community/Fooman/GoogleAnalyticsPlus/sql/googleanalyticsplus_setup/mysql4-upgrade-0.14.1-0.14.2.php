@@ -17,7 +17,7 @@ $oldToNewMap = array(
 
 foreach ($oldToNewMap as $old => $new) {
     $installer->run(
-        "UPDATE {$this->getTable('core_config_data')}
+        "UPDATE IGNORE {$this->getTable('core_config_data')}
         SET `path`='google/analyticsplus_classic/{$new}' WHERE `path`='google/analyticsplus/{$old}';"
     );
 }
