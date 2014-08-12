@@ -41,6 +41,12 @@
     </frontend>
     <default>
         <google>
+            <analyticsplus_abstract>
+                <success_page_handles>
+                    <checkout_multishipping_success/>
+                    <checkout_onepage_success/>
+                </success_page_handles>
+            </analyticsplus_abstract>
             <analyticsplus_classic>
                 <accountnumber2/>
                 <domainname2/>

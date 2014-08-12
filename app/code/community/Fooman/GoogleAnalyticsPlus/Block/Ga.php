@@ -139,11 +139,8 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
      */
     public function isSuccessPage()
     {
-        $handles = $this->getLayout()->getUpdate()->getHandles();
         $orderIds = $this->getOrderIds();
-        return in_array('checkout_onepage_success', $handles)
-        || in_array('checkout_multishipping_success', $handles)
-        || (!empty($orderIds) && is_array($orderIds));
+        return parent::isSuccessPage() || (!empty($orderIds) && is_array($orderIds));
     }
 
 
