@@ -2,6 +2,8 @@
 
 class Fooman_GoogleAnalyticsPlus_Block_Common_Abstract extends Mage_Core_Block_Template
 {
+    const XML_PATH_SUCCESS_PAGE_BLOCK_HANDLES = 'google/analyticsplus_abstract/success_page_handles';
+    
     /**
      * where cookie opt in is present and not yet accepted do not track
      *
@@ -26,8 +28,13 @@ class Fooman_GoogleAnalyticsPlus_Block_Common_Abstract extends Mage_Core_Block_T
     public function isSuccessPage()
     {
         $handles = $this->getLayout()->getUpdate()->getHandles();
-        return in_array('checkout_onepage_success', $handles)
-        || in_array('checkout_multishipping_success', $handles);
+        foreach (array_keys(Mage::getStoreConfig(self::XML_PATH_SUCCESS_PAGE_BLOCK_HANDLES)) as $handle) {
+            if (in_array($handle, $handles)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
