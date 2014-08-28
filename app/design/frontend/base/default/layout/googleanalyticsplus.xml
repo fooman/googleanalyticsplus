@@ -1,42 +1,45 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
-    <default>
-        <reference name="head">
-            <block type="core/text_list" name="before_head_end" as="before_head_end"/>
-            <action method="unsetChild">
-                <name>google_analytics</name>
-            </action>
-        </reference>
-        <reference name="before_head_end">
-            <block type="googleanalyticsplus/ga" name="google_analytics" as="google_analytics"/>
-        </reference>
-        <reference name="after_body_start">
-            <block type="googleanalyticsplus/tagManager" name="googleanalyticsplus_tagmanager"
-                   as="googleanalyticsplus_tagmanager"/>
-            <block type="googleanalyticsplus/universal" name="googleanalyticsplus_universal"
-                   as="googleanalyticsplus_universal"/>
-            <action method="unsetChild">
-                <name>google_analytics</name>
-            </action>
-        </reference>
-        <reference name="before_body_end">
-            <block type="googleanalyticsplus/remarketing" name="googleanalyticsplus_remarketing"
-                   as="googleanalyticsplus_remarketing"/>
-            <action method="unsetChild">
-                <name>google_analytics</name>
-            </action>
-        </reference>
-    </default>
-    <checkout_onepage_success>
-        <reference name="before_body_end">
-            <block type="googleanalyticsplus/gaConversion" name="googleanalyticsplus_conversion"
-                   template="fooman/googleanalyticsplus/ga-conversion.phtml"/>
-        </reference>
-    </checkout_onepage_success>
-    <checkout_multishipping_success>
-        <reference name="before_body_end">
-            <block type="googleanalyticsplus/gaConversion" name="googleanalyticsplus_conversion"
-                   template="fooman/googleanalyticsplus/ga-conversion.phtml"/>
-        </reference>
-    </checkout_multishipping_success>
+	<default>
+		<reference name="head">
+			<block type="core/text_list" name="before_head_end" as="before_head_end"/>
+			<action method="unsetChild">
+				<name>google_analytics</name>
+			</action>
+		</reference>
+		<reference name="before_head_end">
+			<block type="googleanalyticsplus/ga" name="google_analytics" as="google_analytics"/>
+			<block type="googleanalyticsplus/tagManager" name="googleanalyticsplus_tagmanager"
+				   as="googleanalyticsplus_tagmanager"/>
+			<block type="googleanalyticsplus/universal" name="googleanalyticsplus_universal"
+				   as="googleanalyticsplus_universal"/>
+		</reference>
+		<reference name="after_body_start">
+			<action method="unsetChild">
+				<name>google_analytics</name>
+			</action>
+		</reference>
+		<reference name="before_body_end">
+			<block type="googleanalyticsplus/remarketing" name="googleanalyticsplus_remarketing"
+				   as="googleanalyticsplus_remarketing"/>
+			<block type="googleanalyticsplus/userTracking" name="googleanalyticsplus_usertracking"
+				   template="fooman/googleanalyticsplus/usertracking.phtml"/>
+				   <action method="unsetChild">
+					   <name>google_analytics</name>
+				   </action>
+
+		</reference>
+	</default>
+	<checkout_onepage_success>
+		<reference name="before_body_end">
+			<block type="googleanalyticsplus/gaConversion" name="googleanalyticsplus_conversion"
+				   template="fooman/googleanalyticsplus/ga-conversion.phtml"/>
+		</reference>
+	</checkout_onepage_success>
+	<checkout_multishipping_success>
+		<reference name="before_body_end">
+			<block type="googleanalyticsplus/gaConversion" name="googleanalyticsplus_conversion"
+				   template="fooman/googleanalyticsplus/ga-conversion.phtml"/>
+		</reference>
+	</checkout_multishipping_success>
 </layout>
