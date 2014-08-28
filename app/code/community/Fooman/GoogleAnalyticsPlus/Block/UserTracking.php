@@ -19,7 +19,7 @@ class Fooman_GoogleAnalyticsPlus_Block_UserTracking extends Fooman_GoogleAnalyti
 	}
 
 	/**
-	 * should we include the universal snippet
+	 * Do we include the User Tracking snippet?
 	 *
 	 * @return bool
 	 */
@@ -40,7 +40,7 @@ class Fooman_GoogleAnalyticsPlus_Block_UserTracking extends Fooman_GoogleAnalyti
 	}
 
 	/**
-	 * are we using universal
+	 * is this feature enabled?
 	 *
 	 * @return bool
 	 */
