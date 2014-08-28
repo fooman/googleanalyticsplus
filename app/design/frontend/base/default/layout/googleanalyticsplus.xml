@@ -21,7 +21,9 @@
         </reference>
         <reference name="before_body_end">
             <block type="googleanalyticsplus/remarketing" name="googleanalyticsplus_remarketing"
-                   as="googleanalyticsplus_remarketing"/>
+				   as="googleanalyticsplus_remarketing"/>
+			<block type="googleanalyticsplus/userTracking" name="googleanalyticsplus_usertracking"
+				   template="fooman/googleanalyticsplus/usertracking.phtml"/>
             <action method="unsetChild">
                 <name>google_analytics</name>
             </action>

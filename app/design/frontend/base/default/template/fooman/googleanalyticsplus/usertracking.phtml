@@ -1,0 +1,7 @@
+<?php if ($this->shouldInclude()): ?>
+		<!-- Google Analytics User Tracking-->
+	<script>
+		ga('set', '&uid',<?php echo $this->getCustomerId(); ?>);
+	</script>
+	<!-- End Google Analytics User Tracking-->
+<?php endif; ?>
