@@ -204,18 +204,17 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                            <depends><display_advertising>1</display_advertising></depends>
-						</display_advertising_cookiename>
-						<userid_tracking translate='label'>
-							<label>Enable User ID Feature</label>
-							<comment><![CDATA[See <a href="https://support.google.com/analytics/answer/3123662?hl=en&utm_id=ad">Google Documentation</a> for details]]></comment>
-							<frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<sort_order>500</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</userid_tracking>
+                        </display_advertising_cookiename>
+                        <userid_tracking translate='label'>
+			    <label>Enable User ID Feature</label>
+			    <comment><![CDATA[See <a href="https://support.google.com/analytics/answer/3123662?hl=en&utm_id=ad">Google Documentation</a> for details]]></comment>
+			    <frontend_type>select</frontend_type>
+			    <source_model>adminhtml/system_config_source_yesno</source_model>
+			    <sort_order>500</sort_order>
+			    <show_in_default>1</show_in_default>
+			    <show_in_website>1</show_in_website>
+			    <show_in_store>1</show_in_store>
+			</userid_tracking>
                     </fields>
                 </analyticsplus_universal>
                 <analyticsplus_tagmanager translate="label">
