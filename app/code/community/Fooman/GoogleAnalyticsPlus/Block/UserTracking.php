@@ -11,11 +11,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-class Fooman_GoogleAnalyticsPlus_Block_UserTracking extends Fooman_GoogleAnalyticsPlus_Block_Universal {
+class Fooman_GoogleAnalyticsPlus_Block_UserTracking extends Fooman_GoogleAnalyticsPlus_Block_Common_Abstract {
 
 	protected function _construct() {
 		parent::_construct();
-		$this->setTemplate('ooman/googleanalyticsplus/usertracking.phtml');
+		$this->setTemplate('fooman/googleanalyticsplus/usertracking.phtml');
 	}
 
 	/**
