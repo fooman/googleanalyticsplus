@@ -14,7 +14,10 @@
             ga('require', 'displayfeatures'<?php if($this->getUniversalDisplayAdvertisingCookieName()):?>, undefined, { cookieName: '<?php echo $this->getUniversalDisplayAdvertisingCookieName(); ?>' }<?php endif; ?>);
         <?php endif;?>
         ga('send', 'pageview', '<?php echo $this->getPageName(); ?>');
-
+		<?php if ($this->getUniversalUserTracking()): ?>
+            <!-- Google Universal Analytics User Tracking-->
+			ga('set', '&uid',<?php echo $this->getCustomerId(); ?>);
+        <?php endif; ?>
     </script>
     <?php if($this->isSuccessPage()):?>
         <?php $order = $this->_getOrder();?>
