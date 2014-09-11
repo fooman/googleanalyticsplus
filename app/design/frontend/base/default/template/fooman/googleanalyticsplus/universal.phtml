@@ -14,7 +14,6 @@
             ga('require', 'displayfeatures'<?php if($this->getUniversalDisplayAdvertisingCookieName()):?>, undefined, { cookieName: '<?php echo $this->getUniversalDisplayAdvertisingCookieName(); ?>' }<?php endif; ?>);
         <?php endif;?>
         ga('send', 'pageview', '<?php echo $this->getPageName(); ?>');
-
     </script>
     <?php if($this->isSuccessPage()):?>
         <?php $order = $this->_getOrder();?>
