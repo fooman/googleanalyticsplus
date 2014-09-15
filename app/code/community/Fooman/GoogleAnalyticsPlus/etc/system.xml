@@ -17,6 +17,38 @@
                     ]]>
                     </comment>
                     <fields>
+                        <respectcookierestrict translate='label'>
+                            <label>Respect cookie restrict mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>500</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[<br />
+                            <div class="box">
+                            <p>Do not track users if <a href="http://www.magentocommerce.com/knowledge-base/entry/using-cookies-with-expressed-consent">cookie restrict mode</a> is enabled
+                            and the user did not accept the store cookies. Note: Using a FPC will require hole punching for the tracking code.
+                            </p>
+                            </div>
+                            ]]></comment>
+                        </respectcookierestrict>
+                        <enableoptoutcookie translate='label'>
+                            <label>Enable opt out cookie</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>510</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[<br />
+                            <div class="box">
+                            <p>Add support for <a href="https://developers.google.com/analytics/devguides/collection/gajs/?hl=de#disable">google opt out cookie</a>.
+                            Add a link like "&lt;a href=&quot;javascript:gaOptout()&quot;&gt;Click here to opt-out of Google Analytics&lt;/a&gt;" to pages of your choice.
+                            </p>
+                            </div>
+                            ]]></comment>
+                        </enableoptoutcookie>
                         <convertcurrencyenabled translate='label'>
                             <label>Convert Currency</label>
                             <frontend_type>select</frontend_type>

@@ -13,7 +13,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Common_Abstract extends Mage_Core_Block_T
     {
         $coreHelperDir = Mage::getConfig()->getModuleDir('', 'Mage_Core') . DS . 'Helper' . DS;
         if (file_exists($coreHelperDir . 'Cookie.php')) {
-            if (Mage::helper('core/cookie')->isUserNotAllowSaveCookie()) {
+            if (Mage::getStoreConfigFlag('google/analyticsplus/respectcookierestrict') && Mage::helper('core/cookie')->isUserNotAllowSaveCookie()) {
                 return false;
             }
         }
