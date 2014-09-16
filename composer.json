@@ -16,20 +16,20 @@
     "extra": {
         "map": [
             [
-                "/app/code/community/Fooman/GoogleAnalyticsPlus/",
-                "/app/code/community/Fooman/GoogleAnalyticsPlus/"
+                "app/code/community/Fooman/GoogleAnalyticsPlus/",
+                "app/code/community/Fooman/GoogleAnalyticsPlus/"
             ],
             [
-                "/app/design/frontend/base/default/layout/googleanalyticsplus.xml",
-                "/app/design/frontend/base/default/layout/googleanalyticsplus.xml"
+                "app/design/frontend/base/default/layout/googleanalyticsplus.xml",
+                "app/design/frontend/base/default/layout/googleanalyticsplus.xml"
             ],
             [
-                "/app/design/frontend/base/default/template/fooman/googleanalyticsplus/",
-                "/app/design/frontend/base/default/template/fooman/googleanalyticsplus/"
+                "app/design/frontend/base/default/template/fooman/googleanalyticsplus/",
+                "app/design/frontend/base/default/template/fooman/googleanalyticsplus/"
             ],
             [
-                "/app/etc/modules/Fooman_GoogleAnalyticsPlus.xml",
-                "/app/etc/modules/Fooman_GoogleAnalyticsPlus.xml"
+                "app/etc/modules/Fooman_GoogleAnalyticsPlus.xml",
+                "app/etc/modules/Fooman_GoogleAnalyticsPlus.xml"
             ]
         ]
     }

@@ -53,15 +53,6 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
         return '';
     }
 
-    /**
-     * get Google Analytics account id
-     *
-     * @return mixed
-     */
-    public function getUniversalAccount()
-    {
-        return Mage::getStoreConfig('google/analyticsplus_universal/accountnumber');
-    }
 
     /**
      * @return bool
@@ -72,23 +63,23 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
     }
 
     /**
-	 * Build any params that is passed on create of analytics object
-	 * 
+     * Build any params that is passed on create of analytics object
+     *
      * @return string
      */
     public function getUniversalParams()
     {
         $params = array();
-		if (Mage::getStoreConfig('google/analyticsplus_universal/domainname')) {
+        if (Mage::getStoreConfig('google/analyticsplus_universal/domainname')) {
             $params['cookieDomain'] = Mage::getStoreConfig('google/analyticsplus_universal/domainname');
         }
-		if ($this->canUseUniversalUserTracking()) {
+        if ($this->canUseUniversalUserTracking()) {
             $params['userId'] = $this->getCustomerId();
         }
-		if(count($params) == 0) {
-			return "'auto'";
-		}
-		return json_encode($params);
+        if (count($params) == 0) {
+            return "'auto'";
+        }
+        return json_encode($params);
     }
 
     /**
@@ -110,30 +101,38 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
     {
         return Mage::getStoreConfig('google/analyticsplus_universal/display_advertising_cookiename');
     }
-	
-	/**
+
+    /**
      * Is universal user tracking available.
-	 * Must be enabled in admin and a user must be logged in
-	 * TODO: Use persistent login data!
+     * Must be enabled in admin and a user must be logged in
+     * TODO: Use persistent login data!
      *
      * @return bool
      */
     public function canUseUniversalUserTracking()
     {
-        return (Mage::getStoreConfigFlag('google/analyticsplus_universal/userid_tracking') && Mage::getSingleton('customer/session')->isLoggedIn()) ? true : false;
+        return (Mage::getStoreConfigFlag('google/analyticsplus_universal/userid_tracking')
+            && Mage::getSingleton(
+                'customer/session'
+            )->isLoggedIn()) ? true : false;
     }
-	
-	/**
-	 * Get the current logged in customer id
-	 *
-	 * @return mixed bool | integer
-	 */
-	public function getCustomerId() {
-		if (Mage::getSingleton('customer/session')->isLoggedIn() && is_object(Mage::getSingleton('customer/session')->getCustomer())) {
-			return Mage::getSingleton('customer/session')->getCustomer()->getId();
-		}
-		return false;
-	}
+
+    /**
+     * Get the current logged in customer id
+     *
+     * @return mixed bool | integer
+     */
+    public function getCustomerId()
+    {
+        if (Mage::getSingleton('customer/session')->isLoggedIn()
+            && is_object(
+                Mage::getSingleton('customer/session')->getCustomer()
+            )
+        ) {
+            return Mage::getSingleton('customer/session')->getCustomer()->getId();
+        }
+        return false;
+    }
 
 
 }

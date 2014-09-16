@@ -69,28 +69,6 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
         return method_exists(Mage::helper('googleanalytics'), 'isGoogleAnalyticsAvailable');
     }
 
-    /**
-     * get Google Analytics profile id
-     *
-     * @return mixed|string
-     */
-    public function getMainAccountId()
-    {
-        if (!Mage::helper('googleanalytics')->isGoogleAnalyticsAvailable()) {
-            return '';
-        }
-        return Mage::getStoreConfig(Mage_GoogleAnalytics_Helper_Data::XML_PATH_ACCOUNT);
-    }
-
-    /**
-     * get alternative Google Analytics profile id
-     *
-     * @return mixed
-     */
-    public function getAlternativeAccountId()
-    {
-        return Mage::getStoreConfig('google/analyticsplus_classic/accountnumber2');
-    }
 
     /**
      * should we include tracking code

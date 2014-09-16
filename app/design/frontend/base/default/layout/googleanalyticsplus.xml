@@ -21,7 +21,7 @@
         </reference>
         <reference name="before_body_end">
             <block type="googleanalyticsplus/remarketing" name="googleanalyticsplus_remarketing"
-				   as="googleanalyticsplus_remarketing"/>
+                   as="googleanalyticsplus_remarketing"/>
             <action method="unsetChild">
                 <name>google_analytics</name>
             </action>

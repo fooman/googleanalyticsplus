@@ -1,6 +1,6 @@
 <?php if($this->isEnabled()):?>
 <!-- Google Code for <?php echo $this->getLabel() ?> Conversion Page -->
-<script type="text/javascript">
+<script>
 /* <![CDATA[ */
 var google_conversion_id = <?php echo $this->getConversionId() ?>;
 var google_conversion_language = "<?php echo $this->getLanguage() ?>";
@@ -12,7 +12,7 @@ var google_conversion_label = "<?php echo $this->getLabel() ?>";
 <?php endif; ?>
 /* ]]> */
 </script>
-<script type="text/javascript" src="<?php echo $this->getConversionUrl() ?>"></script>
+<script src="<?php echo $this->getConversionUrl() ?>"></script>
 <noscript>
     <div style="display:inline;">
         <img height="1" width="1" border="0" alt="" src="//www.googleadservices.com/pagead/conversion/<?php echo $this->getConversionId() ?>/?value=<?php echo $this->getValue() ?>&label=<?php echo $this->getLabel() ?>&script=0">

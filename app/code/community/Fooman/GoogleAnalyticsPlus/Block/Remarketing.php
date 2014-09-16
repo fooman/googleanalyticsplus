@@ -105,7 +105,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
                 }
                 return $this->getArrayReturnValue($values, '0.00');
         }
-        return false;
+        return '';
     }
 
     /**
@@ -115,6 +115,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
      */
     public function getProdId()
     {
+        $products = array();
         switch ($this->getPageType()) {
             case self::GA_PAGETYPE_PRODUCT:
                 $products[] = $this->getConfiguredFeedId(Mage::registry('current_product'));
@@ -138,7 +139,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
                 return $this->getArrayReturnValue($products, '', true);
                 break;
         }
-        return false;
+        return '';
     }
     
     /**
