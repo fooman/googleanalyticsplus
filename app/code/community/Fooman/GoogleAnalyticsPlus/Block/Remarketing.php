@@ -125,7 +125,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
                 $quote = Mage::getSingleton('checkout/session')->getQuote();
                 if ($quote) {
                     foreach ($quote->getAllItems() as $item) {
-                        $products[] = $this->getConfiguredFeedId($item);
+                        $products[] = $this->getConfiguredFeedId($item->getProduct());
                     }
                 }
                 return $this->getArrayReturnValue($products, '', true);
@@ -133,7 +133,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
             case self::GA_PAGETYPE_PURCHASE:
                 if ($this->_getOrder()) {
                     foreach ($this->_getOrder()->getAllItems() as $item) {
-                        $products[] = $this->getConfiguredFeedId($item);
+                        $products[] = $this->getConfiguredFeedId($item->getProduct());
                     }
                 }
                 return $this->getArrayReturnValue($products, '', true);
@@ -148,7 +148,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
      */
     public function getConfiguredFeedId ($product) {
         $idAttr = Mage::getStoreConfig('google/analyticsplus_dynremarketing/feed_product_id');
-        $id = $product->getData($idAttr);
+        $id = $product->getDataUsingMethod($idAttr);
         // quote if id is not numeric
         if (!ctype_digit($id)) {
             $id = "'$id'";
