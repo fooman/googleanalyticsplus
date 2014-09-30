@@ -19,7 +19,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
     const GA_PAGETYPE_PRODUCT = 'product';
     const GA_PAGETYPE_CART = 'cart';
     const GA_PAGETYPE_PURCHASE = 'purchase';
-    const GA_PAGETYPE_OTHER = 'siteview';
+    const GA_PAGETYPE_OTHER = 'other';
 
     protected $_pageType = null;
 
