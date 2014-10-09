@@ -178,4 +178,14 @@ class Fooman_GoogleAnalyticsPlus_Block_Common_Abstract extends Mage_Core_Block_T
     {
         return Mage::getStoreConfig('google/analyticsplus_universal/accountnumber');
     }
+
+    /**
+     * are we using universal
+     *
+     * @return bool
+     */
+    public function isUniversalEnabled()
+    {
+        return Mage::getStoreConfigFlag('google/analyticsplus_universal/enabled');
+    }
 }

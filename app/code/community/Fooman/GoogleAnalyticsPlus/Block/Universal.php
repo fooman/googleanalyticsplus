@@ -33,16 +33,6 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
     }
 
     /**
-     * are we using universal
-     *
-     * @return bool
-     */
-    public function isUniversalEnabled()
-    {
-        return Mage::getStoreConfigFlag('google/analyticsplus_universal/enabled');
-    }
-
-    /**
      * get universal snippet from settings
      *
      * @deprecated since 0.14.0

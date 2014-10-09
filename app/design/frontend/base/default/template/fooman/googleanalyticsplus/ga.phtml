@@ -19,7 +19,7 @@
         })();
         var _gaq = _gaq || [];
         <?php echo $this->getPageTrackingCode($accountId, $alternativeAccountId)?>
-        <?php echo $this->getAjaxPageTracking($alternativeAccountId)?>
+        <?php //echo $this->getAjaxPageTracking($alternativeAccountId)?>
         <?php echo $this->getOrdersTrackingCode($alternativeAccountId)?>
 
         <?php if($isSuccess):?>

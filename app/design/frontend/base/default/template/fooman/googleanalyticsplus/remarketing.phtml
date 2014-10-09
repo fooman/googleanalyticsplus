@@ -10,7 +10,7 @@
     /* <![CDATA[ */
     var google_tag_params = {
         <?php if($prodId !== false):?>
-        ecomm_prodid: <?php echo $prodId ?>,
+        ecomm_prodid: '<?php echo $prodId ?>',
         <?php endif;?>
         ecomm_pagetype: '<?php echo $pageType ?>',
         <?php if($this->getEcommPValue()):?>
@@ -20,7 +20,7 @@
         ecomm_category: '<?php echo $this->getEcommCategory() ?>',
         <?php endif;?>
         <?php if($pageValue !== false):?>
-        ecomm_totalvalue: <?php echo $pageValue ?>
+        ecomm_totalvalue: '<?php echo $pageValue ?>'
         <?php endif;?>
     };
     /* ]]> */

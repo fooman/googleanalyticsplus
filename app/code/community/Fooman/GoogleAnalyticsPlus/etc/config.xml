@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Fooman_GoogleAnalyticsPlus>
-            <version>0.14.12</version>
+            <version>0.15.0</version>
         </Fooman_GoogleAnalyticsPlus>
     </modules>
 
@@ -38,6 +38,16 @@
                 </googleanalyticsplus>
             </updates>
         </layout>
+        <events>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <googleanalyticsplus_core_block_abstract_to_html_after>
+                        <class>googleanalyticsplus/observer</class>
+                        <method>addCheckoutStepTracking</method>
+                    </googleanalyticsplus_core_block_abstract_to_html_after>
+                </observers>
+            </core_block_abstract_to_html_after>
+        </events>
     </frontend>
     <default>
         <google>
