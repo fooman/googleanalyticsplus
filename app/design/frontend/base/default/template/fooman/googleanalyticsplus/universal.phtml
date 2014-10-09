@@ -1,4 +1,5 @@
 <?php if ($this->shouldInclude()): ?>
+    <?php $altUniversal = $this->getAlternativeUniversalAccount(); ?>
     <!-- Google Analytics -->
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -7,13 +8,26 @@
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
         ga('create', '<?php echo $this->getUniversalAccount(); ?>',<?php echo $this->getUniversalParams(); ?>);
+        <?php if ($altUniversal):?>
+            ga('create', '<?php echo $altUniversal; ?>',<?php echo $this->getUniversalParams(true); ?>);
+        <?php endif;?>
+
         <?php if($this->getUniversalAnonymise()):?>
             ga('set', 'anonymizeIp', true);
+            <?php if ($altUniversal):?>
+                ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.set', 'anonymizeIp', true);
+            <?php endif;?>
         <?php endif;?>
         <?php if($this->getUniversalDisplayAdvertising()):?>
             ga('require', 'displayfeatures'<?php if($this->getUniversalDisplayAdvertisingCookieName()):?>, undefined, { cookieName: '<?php echo $this->getUniversalDisplayAdvertisingCookieName(); ?>' }<?php endif; ?>);
+            <?php if ($altUniversal):?>
+                ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.require', 'displayfeatures'<?php if($this->getUniversalDisplayAdvertisingCookieName()):?>, undefined, { cookieName: '<?php echo $this->getUniversalDisplayAdvertisingCookieName(); ?>' }<?php endif; ?>);
+            <?php endif;?>
         <?php endif;?>
         ga('send', 'pageview', '<?php echo $this->getPageName(); ?>');
+        <?php if ($altUniversal):?>
+            ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.send', 'pageview', '<?php echo $this->getPageName(); ?>');
+        <?php endif;?>
 
     </script>
     <?php if($this->isSuccessPage()):?>
@@ -21,26 +35,48 @@
         <script>
             /* <![CDATA[ */
         ga('require', 'ecommerce', 'ecommerce.js');
+        <?php if ($altUniversal):?>
+            ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.require', 'ecommerce', 'ecommerce.js');
+        <?php endif;?>
 
-        ga('ecommerce:addTransaction', {
-        'id': '<?php echo $this->jsQuoteEscape($order->getIncrementId()) ?>',
-        'affiliation': '<?php echo $this->jsQuoteEscape(Mage::app()->getStore()->getName()) ?>',
-        'revenue': '<?php echo Mage::helper('googleanalyticsplus')->convert($order, 'grand_total') ?>',
-        'shipping': '<?php echo Mage::helper('googleanalyticsplus')->convert($order, 'shipping_amount') ?>',
-        'tax': '<?php echo Mage::helper('googleanalyticsplus')->convert($order, 'tax_amount') ?>',
-        'currency': '<?php echo Mage::helper('googleanalyticsplus')->getTrackingCurrency($order) ?>'
-        });
+            <?php $transactionDetails = "{
+            'id': '".$this->jsQuoteEscape($order->getIncrementId()) ."',
+            'affiliation': '". $this->jsQuoteEscape(Mage::app()->getStore()->getName()) ."',
+            'revenue': '". Mage::helper('googleanalyticsplus')->convert($order, 'grand_total') ."',
+            'shipping': '". Mage::helper('googleanalyticsplus')->convert($order, 'shipping_amount') ."',
+            'tax': '". Mage::helper('googleanalyticsplus')->convert($order, 'tax_amount') ."',
+            'currency': '". Mage::helper('googleanalyticsplus')->getTrackingCurrency($order) ."'
+            }";
+            ?>
+
+        ga('ecommerce:addTransaction', <?php echo $transactionDetails?>);
+        <?php if ($altUniversal):?>
+            ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.ecommerce:addTransaction', <?php echo $transactionDetails?>);
+        <?php endif;?>
+
+
         <?php foreach ($order->getAllVisibleItems() as $item):?>
-            ga('ecommerce:addItem', {
-                'id': '<?php echo $this->jsQuoteEscape($order->getIncrementId()) ?>',
-                'name': '<?php echo $this->jsQuoteEscape($item->getName())?>',
-                'sku': '<?php echo $this->jsQuoteEscape($item->getSku())?>',
-                'price': '<?php echo Mage::helper('googleanalyticsplus')->convert($item, 'price')?>',
-                'quantity': '<?php echo (int)$item->getQtyOrdered()?>',
-                'category': '<?php echo $this->jsQuoteEscape($this->getCategory($item))?>'
-            });
+
+            <?php $itemDetails = "{
+                'id': '".$this->jsQuoteEscape($order->getIncrementId()) ."',
+                'name': '". $this->jsQuoteEscape($item->getName()) ."',
+                'sku': '". $this->jsQuoteEscape($item->getSku()) ."',
+                'price': '". Mage::helper('googleanalyticsplus')->convert($item, 'price') ."',
+                'quantity': '". (int)$item->getQtyOrdered() ."',
+                'category': '". $this->jsQuoteEscape($this->getCategory($item)) ."'
+                }";
+                ?>
+
+
+            ga('ecommerce:addItem', <?php echo $itemDetails?>);
+            <?php if ($altUniversal):?>
+                ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.ecommerce:addItem', <?php echo $itemDetails?>);
+            <?php endif;?>
         <?php endforeach;?>
         ga('ecommerce:send');
+        <?php if ($altUniversal):?>
+            ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.ecommerce:send');
+        <?php endif;?>
             /* ]]> */
         </script>
     <?php endif; ?>

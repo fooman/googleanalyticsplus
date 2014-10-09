@@ -167,6 +167,15 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </accountnumber>
+                        <altaccountnumber translate="label">
+                            <label>Account Number (alternative Profile)</label>
+                            <comment/>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </altaccountnumber>
                         <anonymise translate="label">
                             <label>Anonymise IP Address</label>
                             <comment><![CDATA[See <a href="https://support.google.com/analytics/answer/2763052?hl=en">Google Documentation</a> for details]]></comment>

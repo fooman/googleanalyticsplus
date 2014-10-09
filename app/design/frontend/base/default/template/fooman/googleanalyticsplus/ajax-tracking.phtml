@@ -9,6 +9,7 @@
             this.classic = settings.classic;
             this.altClassic = settings.altClassic;
             this.universal = settings.universal;
+            this.altUniversal = settings.altUniversal;
         },
         trackEvent: function(section){
 
@@ -22,6 +23,9 @@
             if (this.universal) {
                 ga('send', 'pageview', urlToTrack);
             }
+            if (this.altUniversal) {
+                ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.send', 'pageview', urlToTrack);
+            }
         }
     }
 
@@ -30,7 +34,8 @@
             pageQuery: '<?php echo $this->getPageQuery() ?>',
             classic: '<?php echo $this->getMainAccountId() ?>',
             altClassic: '<?php echo $this->getAlternativeAccountId() ?>',
-            universal: '<?php echo $this->isUniversalEnabled() ? $this->getUniversalAccount():'' ?>'
+            universal: '<?php echo $this->isUniversalEnabled() ? $this->getUniversalAccount():'' ?>',
+            altUniversal: '<?php echo $this->isUniversalEnabled() ? $this->getAlternativeUniversalAccount():'' ?>'
         }
     );
 

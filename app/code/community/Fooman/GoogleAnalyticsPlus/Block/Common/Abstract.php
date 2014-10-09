@@ -170,13 +170,23 @@ class Fooman_GoogleAnalyticsPlus_Block_Common_Abstract extends Mage_Core_Block_T
     }
 
     /**
-     * get Google Analytics account id
+     * get Google Analytics universal account id
      *
      * @return mixed
      */
     public function getUniversalAccount()
     {
         return Mage::getStoreConfig('google/analyticsplus_universal/accountnumber');
+    }
+
+    /**
+     * get Google Analytics universal account id for alternative profile
+     *
+     * @return mixed
+     */
+    public function getAlternativeUniversalAccount()
+    {
+        return Mage::getStoreConfig('google/analyticsplus_universal/altaccountnumber');
     }
 
     /**

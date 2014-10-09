@@ -12,6 +12,8 @@
  */
 class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsPlus_Block_GaConversion
 {
+    const TRACKER_TWO_NAME = 'tracker2';
+
     protected function _construct()
     {
         parent::_construct();
@@ -55,9 +57,11 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
     /**
      * Build any params that is passed on create of analytics object
      *
+     * @param bool $createTrackerTwo
+     *
      * @return string
      */
-    public function getUniversalParams()
+    public function getUniversalParams($createTrackerTwo = false)
     {
         $params = array();
         if (Mage::getStoreConfig('google/analyticsplus_universal/domainname')) {
@@ -65,6 +69,9 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
         }
         if ($this->canUseUniversalUserTracking()) {
             $params['userId'] = $this->getCustomerId();
+        }
+        if ($createTrackerTwo) {
+            $params['name'] = self::TRACKER_TWO_NAME;
         }
         if (count($params) == 0) {
             return "'auto'";
