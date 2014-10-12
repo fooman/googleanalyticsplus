@@ -1,1 +1,4 @@
-@import app/code/community/Fooman/GoogleAnalyticsPlus/
+app/code/community/Fooman/GoogleAnalyticsPlus
+app/etc/modules/Fooman_GoogleAnalyticsPlus.xml
+app/design/frontend/base/default/layout/googleanalyticsplus.xml
+app/design/frontend/base/default/template/fooman/googleanalyticsplus
