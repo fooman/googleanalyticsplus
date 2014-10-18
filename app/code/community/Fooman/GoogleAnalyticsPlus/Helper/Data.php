@@ -18,34 +18,49 @@ class Fooman_GoogleAnalyticsPlus_Helper_Data extends Mage_Core_Helper_Abstract
      * convert from base currency if configured
      * else return order currency
      *
-     * @param      $object
-     * @param      $field
+     * @param $object
+     * @param $field
+     *
+     * @param $currentCurrency
      *
      * @return string
      */
-    public function convert($object, $field)
+    public function convert($object, $field, $currentCurrency = null)
     {
-        if (!Mage::getStoreConfig('google/analyticsplus/convertcurrencyenabled')) {
-            return $object->getDataUsingMethod($field);
-        }
-        //getPrice and getFinalPrice do not have equivalents
+        $baseCur = Mage::app()->getStore($object->getStoreId())->getBaseCurrency();
+
+        //getPrice and getFinalPrice do not have base equivalents
         if ($field != 'price' && $field != 'final_price') {
             $field = 'base_' . $field;
-        }
-        $basecur = Mage::app()->getStore($object->getStoreId())->getBaseCurrency();
-        if ($basecur) {
-            return sprintf(
-                "%01.4f", Mage::app()->getStore()->roundPrice(
-                    $basecur->convert(
-                        $object->getDataUsingMethod($field),
-                        Mage::getStoreConfig('google/analyticsplus/convertcurrency')
-                    )
-                )
-            );
+            $baseValue = $object->getDataUsingMethod($field);
         } else {
-            //unable to load base currency return zero
-            return '0.0000';
+            if (null === $currentCurrency) {
+                Mage::throwException('Currency needs to be defined');
+            }
+            $value = $object->getDataUsingMethod($field);
+            if ($currentCurrency == $baseCur->getCode()) {
+                $baseValue = $value;
+            } else {
+                $rate = Mage::getModel('directory/currency')
+                    ->load($baseCur->getCode())
+                    ->getRate($currentCurrency);
+                $baseValue = Mage::app()->getStore()->roundPrice($value / $rate);
+            }
         }
+
+        if (!Mage::getStoreConfig('google/analyticsplus/convertcurrencyenabled')) {
+            return $baseValue;
+        }
+
+        return sprintf(
+            "%01.4f", Mage::app()->getStore()->roundPrice(
+                $baseCur->convert(
+                    $baseValue,
+                    Mage::getStoreConfig('google/analyticsplus/convertcurrency')
+                )
+            )
+        );
+
     }
 
     /**

@@ -168,7 +168,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
                     $this->jsQuoteEscape($item->getSku()),
                     $this->jsQuoteEscape($item->getName()),
                     $this->jsQuoteEscape($this->getCategory($item)),
-                    Mage::helper('googleanalyticsplus')->convert($item, 'price'),
+                    Mage::helper('googleanalyticsplus')->convert($item, 'price', $order->getOrderCurrencyCode()),
                     (int)$item->getQtyOrdered()
                 );
             }

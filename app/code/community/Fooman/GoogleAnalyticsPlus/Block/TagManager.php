@@ -33,16 +33,6 @@ class Fooman_GoogleAnalyticsPlus_Block_TagManager extends Fooman_GoogleAnalytics
     }
 
     /**
-     * are we using tag manager
-     *
-     * @return bool
-     */
-    public function isTagManagerEnabled()
-    {
-        return Mage::getStoreConfigFlag('google/analyticsplus_tagmanager/enabled');
-    }
-
-    /**
      * get tag manager snippet from settings
      *
      * @return string
