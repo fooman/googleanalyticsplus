@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Fooman_GoogleAnalyticsPlus>
-            <version>0.15.6</version>
+            <version>0.15.7</version>
         </Fooman_GoogleAnalyticsPlus>
     </modules>
 
