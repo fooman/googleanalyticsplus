@@ -7,7 +7,7 @@ Magento Extension to add extra features to the default GoogleAnalytics module.
 
 - Works on Magento 1.8.1
 - Dropped Support for Magento pre 1.4.2
-- Google Universal Support with Ecommerce Tracking (we recommend using this as an additional profile while still using Classic Analytics)
+- Google Universal Support with Ecommerce Tracking
 - Dynamic Remarketing (add your conversion id and label as provided from Google, products are identified by their product id)
 - Tag Manager (this provides an input field for the tag manager script snippet - please note that the population of the data layer would be up to you)
 - Category for transaction items is now populated (based on custom attribute, otherwise defaults to first encountered product category)
