@@ -45,7 +45,12 @@
     );
 
     Accordion.prototype.openSection  = Accordion.prototype.openSection.wrap(function(originalOpenSection, section){
-        foomanGoogleAnalytics.trackEvent(section);
+        if (typeof section === 'string') {
+            var trackelement = section;
+        } else {
+            var trackelement = section.id;
+        }
+        foomanGoogleAnalytics.trackEvent(trackelement);
         originalOpenSection(section);
     });
 
