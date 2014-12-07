@@ -212,7 +212,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
         //main profile tracking
         $html= "_gaq.push(['_setAccount', '" . $this->jsQuoteEscape($accountId) . "']";
         if ($domainName = Mage::getStoreConfig('google/analyticsplus_classic/domainname')) {
-            $html .= " ,['_setDomainName','" . $domainName . "']";
+            $html .= ", ['_setDomainName','" . $domainName . "']";
         }
 
         //anonymise
@@ -248,7 +248,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
             _gaq.push(['t2._setAccount', '" . $this->jsQuoteEscape($accountIdAlt) . "']";
         $domainNameAlt = Mage::getStoreConfig('google/analyticsplus_classic/domainname2');
         if ($domainNameAlt) {
-            $html .= " ,['t2._setDomainName','" . $domainNameAlt . "']";
+            $html .= ", ['t2._setDomainName','" . $domainNameAlt . "']";
         }
         $html .= ", ['t2._trackPageview','" . $optPageURL . "']";
 
