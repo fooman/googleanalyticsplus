@@ -40,8 +40,10 @@ Please note that packages.firegento.com is not always up-to-date - in this case 
     ],
 
 **via modman**    
+`modman clone https://github.com/fooman/common.git`   
 `modman clone https://github.com/fooman/googleanalyticsplus.git`   
 
 **via file transfer (zip download)**  
-    please see the releases tab for https://github.com/fooman/googleanalyticsplus/releases
+    please see the releases tab for https://github.com/fooman/googleanalyticsplus/releases  
+    and https://github.com/fooman/common/releases
     

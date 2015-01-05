@@ -6,6 +6,7 @@
             <codePool>community</codePool>
             <depends>
                 <Mage_GoogleAnalytics/>
+                <Fooman_Common/>
             </depends>
         </Fooman_GoogleAnalyticsPlus>
     </modules>
