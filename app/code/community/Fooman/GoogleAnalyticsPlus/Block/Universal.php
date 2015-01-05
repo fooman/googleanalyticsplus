@@ -13,6 +13,8 @@
 class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsPlus_Block_GaConversion
 {
     const TRACKER_TWO_NAME = 'tracker2';
+    CONST URL_ANALYTICS = '//www.google-analytics.com/analytics.js';
+    CONST URL_ANALYTICS_DEBUG = '//www.google-analytics.com/analytics_debug.js';
 
     protected function _construct()
     {
@@ -131,5 +133,20 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
         return false;
     }
 
+    /**
+     * Get the right analytics.js
+     *
+     * @return string
+     */
+    public function getAnalyticsLocation()
+    {
+        $debug = Mage::getStoreConfigFlag('google/analyticsplus_universal/debug');
+
+        if ($debug) {
+            return self::URL_ANALYTICS_DEBUG;
+        }
+
+        return self::URL_ANALYTICS;
+    }
 
 }

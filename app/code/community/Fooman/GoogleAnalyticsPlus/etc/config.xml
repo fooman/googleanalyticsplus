@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Fooman_GoogleAnalyticsPlus>
-            <version>0.15.13</version>
+            <version>0.15.14</version>
         </Fooman_GoogleAnalyticsPlus>
     </modules>
 
@@ -68,10 +68,14 @@
                 <conversionlanguage>en</conversionlanguage>
                 <conversionlabel/>
                 <categorytrackingattribute/>
+                <debug>0</debug>
             </analyticsplus_classic>
             <analyticsplus_dynremarketing>
                 <feed_product_id>entity_id</feed_product_id>
             </analyticsplus_dynremarketing>
+            <analyticsplus_universal>
+                <debug>0</debug>
+            </analyticsplus_universal>
         </google>
     </default>
     <phpunit>

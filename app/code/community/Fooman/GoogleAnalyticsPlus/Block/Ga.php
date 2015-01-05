@@ -31,8 +31,12 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
 
     const URL_GA_STANDARD = 'http://www.google-analytics.com/ga.js';
     const URL_GA_STANDARD_SECURE = 'https://ssl.google-analytics.com/ga.js';
+    const URL_GA_STANDARD_DEBUG = 'http://www.google-analytics.com/u/ga_debug.js';
+    const URL_GA_STANDARD_DEBUG_SECURE = 'https://ssl.google-analytics.com/u/ga_debug.js';
     const URL_DOUBLECLICK = 'http://stats.g.doubleclick.net/dc.js';
     const URL_DOUBLECLICK_SECURE = 'https://stats.g.doubleclick.net/dc.js';
+    const URL_DOUBLECLICK_DEBUG = 'http://stats.g.doubleclick.net/dc_debug.js';
+    const URL_DOUBLECLICK_DEBUG_SECURE = 'https://stats.g.doubleclick.net/dc_debug.js';
 
     protected $_helper;
 
@@ -94,17 +98,31 @@ class Fooman_GoogleAnalyticsPlus_Block_Ga extends Fooman_GoogleAnalyticsPlus_Blo
      */
     public function getGaLocation()
     {
+        $debug = Mage::getStoreConfigFlag('google/analyticsplus_classic/debug');
         $secure = Mage::app()->getStore()->isCurrentlySecure() ? 'true' : 'false';
+
         if ($secure == 'true') {
             if (Mage::getStoreConfig('google/analyticsplus_classic/remarketing')) {
+                if ($debug) {
+                    return self::URL_DOUBLECLICK_DEBUG_SECURE;
+                }
                 return self::URL_DOUBLECLICK_SECURE;
             } else {
+                if ($debug) {
+                    return self::URL_GA_STANDARD_DEBUG_SECURE;
+                }
                 return self::URL_GA_STANDARD_SECURE;
             }
         } else {
             if (Mage::getStoreConfig('google/analyticsplus_classic/remarketing')) {
+                if ($debug) {
+                    return self::URL_DOUBLECLICK_DEBUG;
+                }
                 return self::URL_DOUBLECLICK;
             } else {
+                if ($debug) {
+                    return self::URL_GA_STANDARD_DEBUG;
+                }
                 return self::URL_GA_STANDARD;
             }
         }

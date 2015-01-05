@@ -11,7 +11,8 @@
         }
     ],
     "require": {
-        "magento-hackathon/magento-composer-installer": "*"
+        "magento-hackathon/magento-composer-installer": "*",
+        "fooman/common": "*"
     },
     "extra": {
         "map": [
