@@ -208,4 +208,14 @@ class Fooman_GoogleAnalyticsPlus_Block_Common_Abstract extends Mage_Core_Block_T
     {
         return Mage::getStoreConfigFlag('google/analyticsplus_tagmanager/enabled');
     }
+    
+    public function excludeShipping()
+    {
+        return Mage::getStoreConfigFlag('google/analyticsplus_universal/exclude_shipping');
+    }
+    
+    public function excludeTax()
+    {
+        return Mage::getStoreConfigFlag('google/analyticsplus_universal/exclude_tax');
+    }
 }
