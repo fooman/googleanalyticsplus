@@ -267,7 +267,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                        </enabled>
+                        </exclude_shipping>
                         <exclude_tax translate='label'>
                             <label>Exclude Tax from Conversion Total</label>
                             <frontend_type>select</frontend_type>
@@ -276,7 +276,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                        </enabled>
+                        </exclude_tax>
                         <debug translate="label">
                             <label>Debug</label>
                             <frontend_type>select</frontend_type>
