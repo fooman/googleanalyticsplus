@@ -1,3 +1,4 @@
+<?php /* @var $this Fooman_GoogleAnalyticsPlus_Block_GaConversion */?>
 <?php if($this->isEnabled()):?>
 <!-- Google Code for <?php echo $this->getLabel() ?> Conversion Page -->
 <script>
@@ -15,7 +16,7 @@ var google_conversion_label = "<?php echo $this->getLabel() ?>";
 <script src="<?php echo $this->getConversionUrl() ?>"></script>
 <noscript>
     <div style="display:inline;">
-        <img height="1" width="1" border="0" alt="" src="//www.googleadservices.com/pagead/conversion/<?php echo $this->getConversionId() ?>/?value=<?php echo $this->getValue() ?>&label=<?php echo $this->getLabel() ?>&script=0">
+        <img height="1" width="1" border="0" alt="" src="<?php echo $this->getNoScriptConversionUrl()?>">
     </div>
 </noscript>
 <?php endif; ?>

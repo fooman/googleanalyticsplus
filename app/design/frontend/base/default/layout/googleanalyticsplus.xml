@@ -8,7 +8,6 @@
             </action>
         </reference>
         <reference name="before_head_end">
-            <block type="googleanalyticsplus/ga" name="google_analytics" as="google_analytics"/>
             <block type="googleanalyticsplus/tagManager" name="googleanalyticsplus_tagmanager"
                    as="googleanalyticsplus_tagmanager"/>
             <block type="googleanalyticsplus/universal" name="googleanalyticsplus_universal"

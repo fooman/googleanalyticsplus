@@ -1,3 +1,4 @@
+<?php /* @var $this Fooman_GoogleAnalyticsPlus_Block_Ajax */?>
 <script>
     /* <![CDATA[ */
 
@@ -6,8 +7,6 @@
         initialize: function(settings){
             this.baseUrl = settings.baseUrl;
             this.pageQuery = settings.pageQuery;
-            this.classic = settings.classic;
-            this.altClassic = settings.altClassic;
             this.universal = settings.universal;
             this.altUniversal = settings.altUniversal;
             this.useDataLayer = settings.useDataLayer;
@@ -15,12 +14,6 @@
         trackEvent: function(section){
 
             var urlToTrack = this.baseUrl + '/' + section + this.pageQuery;
-            if (this.classic) {
-                _gaq.push(['_trackPageview', urlToTrack]);
-            }
-            if (this.altClassic) {
-                _gaq.push(['t2._trackPageview', urlToTrack]);
-            }
             if (this.universal) {
                 ga('send', 'pageview', urlToTrack);
             }
@@ -36,8 +29,6 @@
     var foomanGoogleAnalytics = new FoomanGoogleAnalytics({
             baseUrl: '<?php echo $this->getBasePageName() ?>',
             pageQuery: '<?php echo $this->getPageQuery() ?>',
-            classic: '<?php echo $this->getMainAccountId() ?>',
-            altClassic: '<?php echo $this->getAlternativeAccountId() ?>',
             universal: '<?php echo $this->isUniversalEnabled() ? $this->getUniversalAccount():'' ?>',
             altUniversal: '<?php echo $this->isUniversalEnabled() ? $this->getAlternativeUniversalAccount():'' ?>',
             useDataLayer: '<?php echo $this->isTagManagerEnabled()?>'

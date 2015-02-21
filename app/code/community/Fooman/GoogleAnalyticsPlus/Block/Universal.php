@@ -37,18 +37,6 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
     }
 
     /**
-     * get universal snippet from settings
-     *
-     * @deprecated since 0.14.0
-     * @return string
-     */
-    public function getUniversalSnippet()
-    {
-        return '';
-    }
-
-
-    /**
      * @return bool
      */
     public function getUniversalAnonymise()
