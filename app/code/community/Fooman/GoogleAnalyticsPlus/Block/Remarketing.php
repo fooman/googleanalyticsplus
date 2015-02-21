@@ -45,6 +45,28 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
     }
 
     /**
+     * get no script url for remarketing tracking
+     *
+     * @return string
+     */
+    public function getNoScriptConversionUrl()
+    {
+        if ($this->getLabel()) {
+            $url = sprintf(
+                "//googleads.g.doubleclick.net/pagead/viewthroughconversion/%s/?value=0&label=%s&guid=ON&script=0",
+                $this->getConversionId(),
+                $this->getLabel()
+            );
+        } else {
+            $url = sprintf(
+                "//googleads.g.doubleclick.net/pagead/viewthroughconversion/%s/?value=0&guid=ON&script=0",
+                $this->getConversionId()
+            );
+        }
+        return $url;
+    }
+
+    /**
      * product category for product page
      *
      * @return string
@@ -251,8 +273,9 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
             asort($values);
         }
         if (sizeof($values) == 1) {
-            return current($values);
+            return $this->jsQuoteEscape(current($values));
         } else {
+            array_walk($values, array($this,'jsQuoteEscape'));
             return '[' . implode(',', $values) . ']';
         }
     }
