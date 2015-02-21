@@ -51,11 +51,11 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
      */
     public function getNoScriptConversionUrl()
     {
-        if ($this->getLabel()) {
+        if ($this->getConversionLabel()) {
             $url = sprintf(
                 "//googleads.g.doubleclick.net/pagead/viewthroughconversion/%s/?value=0&label=%s&guid=ON&script=0",
                 $this->getConversionId(),
-                $this->getLabel()
+                $this->getConversionLabel()
             );
         } else {
             $url = sprintf(
@@ -132,7 +132,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
                 }
                 return $this->getArrayReturnValue($values, '0.00');
         }
-        return '';
+        return "''";
     }
 
     /**
@@ -146,7 +146,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
         switch ($this->getPageType()) {
             case self::GA_PAGETYPE_PRODUCT:
                 $products[] = $this->getConfiguredFeedId(Mage::registry('current_product'));
-                return $this->getArrayReturnValue($products, '');
+                return $this->getArrayReturnValue($products, "''");
                 break;
             case self::GA_PAGETYPE_CART:
                 $quote = Mage::getSingleton('checkout/session')->getQuote();
@@ -155,7 +155,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
                         $products[] = $this->getConfiguredFeedId($item->getProduct());
                     }
                 }
-                return $this->getArrayReturnValue($products, '', true);
+                return $this->getArrayReturnValue($products, "''", true);
                 break;
             case self::GA_PAGETYPE_PURCHASE:
                 if ($this->_getOrder()) {
@@ -163,10 +163,10 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
                         $products[] = $this->getConfiguredFeedId($item->getProduct());
                     }
                 }
-                return $this->getArrayReturnValue($products, '', true);
+                return $this->getArrayReturnValue($products, "''", true);
                 break;
         }
-        return '';
+        return "''";
     }
     
     /**

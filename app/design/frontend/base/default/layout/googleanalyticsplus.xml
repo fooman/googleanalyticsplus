@@ -3,7 +3,7 @@
     <default>
         <reference name="head">
             <block type="core/text_list" name="before_head_end" as="before_head_end"/>
-            <action method="unsetChild">
+            <action method="unsetChild" ifconfig="google/analyticsplus_universal/enabled">
                 <name>google_analytics</name>
             </action>
         </reference>
@@ -14,14 +14,14 @@
                    as="googleanalyticsplus_universal"/>
         </reference>
         <reference name="after_body_start">
-            <action method="unsetChild">
+            <action method="unsetChild" ifconfig="google/analyticsplus_universal/enabled">
                 <name>google_analytics</name>
             </action>
         </reference>
         <reference name="before_body_end">
             <block type="googleanalyticsplus/remarketing" name="googleanalyticsplus_remarketing"
                    as="googleanalyticsplus_remarketing"/>
-            <action method="unsetChild">
+            <action method="unsetChild" ifconfig="google/analyticsplus_universal/enabled">
                 <name>google_analytics</name>
             </action>
         </reference>
