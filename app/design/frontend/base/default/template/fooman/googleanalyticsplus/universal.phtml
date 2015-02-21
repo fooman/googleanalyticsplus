@@ -40,12 +40,19 @@
             ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.require', 'ecommerce', 'ecommerce.js');
         <?php endif;?>
 
-            <?php $transactionDetails = "{
-            'id': '".$this->jsQuoteEscape($order->getIncrementId()) ."',
+            <?php 
+            $shipping = Mage::helper('googleanalyticsplus')->convert($order, 'shipping_amount');
+            $tax = Mage::helper('googleanalyticsplus')->convert($order, 'tax_amount');
+            $revenue =  Mage::helper('googleanalyticsplus')->convert($order, 'grand_total');
+            $revenue -= (($this->excludeShipping())? $shipping : 0);
+            $revenue -= (($this->excludeTax())? $tax : 0);
+            
+            $transactionDetails = "{
+            'id': '". $this->jsQuoteEscape($order->getIncrementId()) ."',
             'affiliation': '". $this->jsQuoteEscape(Mage::app()->getStore()->getName()) ."',
-            'revenue': '". Mage::helper('googleanalyticsplus')->convert($order, 'grand_total') ."',
-            'shipping': '". Mage::helper('googleanalyticsplus')->convert($order, 'shipping_amount') ."',
-            'tax': '". Mage::helper('googleanalyticsplus')->convert($order, 'tax_amount') ."',
+            'revenue': '". $revenue ."',
+            'shipping': '". $shipping ."',
+            'tax': '". $tax ."',
             'currency': '". Mage::helper('googleanalyticsplus')->getTrackingCurrency($order) ."'
             }";
             ?>

@@ -208,4 +208,6 @@ class Fooman_GoogleAnalyticsPlus_Block_Common_Abstract extends Mage_Core_Block_T
     {
         return Mage::getStoreConfigFlag('google/analyticsplus_tagmanager/enabled');
     }
+    
+  
 }

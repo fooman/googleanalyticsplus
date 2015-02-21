@@ -35,20 +35,24 @@
         }
     );
 
-    Accordion.prototype.openSection  = Accordion.prototype.openSection.wrap(function(originalOpenSection, section){
-        if (typeof section === 'string') {
-            var trackelement = section;
-        } else {
-            var trackelement = section.id;
-        }
-        foomanGoogleAnalytics.trackEvent(trackelement);
-        originalOpenSection(section);
-    });
+    if (typeof(Accordion) != "undefined") {
+        Accordion.prototype.openSection  = Accordion.prototype.openSection.wrap(function(originalOpenSection, section){
+            if (typeof section === 'string') {
+                var trackelement = section;
+            } else {
+                var trackelement = section.id;
+            }
+            foomanGoogleAnalytics.trackEvent(trackelement);
+            originalOpenSection(section);
+        });
+    }
 
-    Review.prototype.save  = Review.prototype.save.wrap(function(originalSave){
-        foomanGoogleAnalytics.trackEvent('opc-review-placeOrderClicked');
-        originalSave();
-    });
+    if (typeof(Review) != "undefined") {
+        Review.prototype.save  = Review.prototype.save.wrap(function(originalSave){
+            foomanGoogleAnalytics.trackEvent('opc-review-placeOrderClicked');
+            originalSave();
+        });
+    }
 
     /* ]]> */
 </script>
