@@ -44,8 +44,8 @@
             $shipping = Mage::helper('googleanalyticsplus')->convert($order, 'shipping_amount');
             $tax = Mage::helper('googleanalyticsplus')->convert($order, 'tax_amount');
             $revenue =  Mage::helper('googleanalyticsplus')->convert($order, 'grand_total');
-            $revenue -= (($this->excludeShipping())? $shipping : 0);
-            $revenue -= (($this->excludeTax())? $tax : 0);
+            $revenue -= (($this->shouldExcludeShipping())? $shipping : 0);
+            $revenue -= (($this->shouldExcludeTax())? $tax : 0);
             
             $transactionDetails = "{
             'id': '". $this->jsQuoteEscape($order->getIncrementId()) ."',
