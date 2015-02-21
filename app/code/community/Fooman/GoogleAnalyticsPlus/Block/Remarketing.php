@@ -176,10 +176,6 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
     public function getConfiguredFeedId ($product) {
         $idAttr = Mage::getStoreConfig('google/analyticsplus_dynremarketing/feed_product_id');
         $id = $product->getDataUsingMethod($idAttr);
-        // quote if id is not numeric
-        if (!ctype_digit($id)) {
-            $id = "'$id'";
-        }
         return $id;
     }
 
@@ -273,10 +269,26 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
             asort($values);
         }
         if (sizeof($values) == 1) {
-            return $this->jsQuoteEscape(current($values));
+            return $this->prepareValue(current($values));
         } else {
-            array_walk($values, array($this,'jsQuoteEscape'));
+            array_walk($values, array($this, 'prepareValue'));
             return '[' . implode(',', $values) . ']';
         }
+    }
+
+    /**
+     * escape all quotes and additionally quote all strings
+     * @param $value
+     *
+     * @return mixed|string
+     */
+    public function prepareValue(&$value)
+    {
+        $value = $this->jsQuoteEscape($value);
+        // quote if value is not numeric
+        if (!ctype_digit($value)) {
+            $value = "'$value'";
+        }
+        return $value;
     }
 }
