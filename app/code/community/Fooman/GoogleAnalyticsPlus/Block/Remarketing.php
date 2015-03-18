@@ -53,13 +53,13 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
     {
         if ($this->getConversionLabel()) {
             $url = sprintf(
-                "//googleads.g.doubleclick.net/pagead/viewthroughconversion/%s/?value=0&label=%s&guid=ON&script=0",
+                "//googleads.g.doubleclick.net/pagead/viewthroughconversion/%s/?value=0&amp;label=%s&amp;guid=ON&amp;script=0",
                 $this->getConversionId(),
                 $this->getConversionLabel()
             );
         } else {
             $url = sprintf(
-                "//googleads.g.doubleclick.net/pagead/viewthroughconversion/%s/?value=0&guid=ON&script=0",
+                "//googleads.g.doubleclick.net/pagead/viewthroughconversion/%s/?value=0&amp;guid=ON&amp;script=0",
                 $this->getConversionId()
             );
         }

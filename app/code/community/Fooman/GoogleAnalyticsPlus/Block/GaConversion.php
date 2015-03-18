@@ -101,14 +101,14 @@ class  Fooman_GoogleAnalyticsPlus_Block_GaConversion extends Fooman_GoogleAnalyt
     {
         if ($this->getLabel()) {
             $url = sprintf(
-                "//www.googleadservices.com/pagead/conversion/%s/?value=%s&label=%s&script=0",
+                "//www.googleadservices.com/pagead/conversion/%s/?value=%s&amp;label=%s&amp;script=0",
                 $this->getConversionId(),
                 $this->getValue(),
                 $this->getLabel()
             );
         } else {
             $url = sprintf(
-                "//www.googleadservices.com/pagead/conversion/%s/?value=%s&script=0",
+                "//www.googleadservices.com/pagead/conversion/%s/?value=%s&amp;script=0",
                 $this->getConversionId(),
                 $this->getValue()
             );

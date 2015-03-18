@@ -8,14 +8,14 @@
             </action>
         </reference>
         <reference name="before_head_end">
-            <block type="googleanalyticsplus/tagManager" name="googleanalyticsplus_tagmanager"
-                   as="googleanalyticsplus_tagmanager"/>
             <block type="googleanalyticsplus/universal" name="googleanalyticsplus_universal"
                    as="googleanalyticsplus_universal"/>
         </reference>
         <reference name="after_body_start">
             <action method="unsetChild" ifconfig="google/analyticsplus_universal/enabled">
                 <name>google_analytics</name>
+                <block type="googleanalyticsplus/tagManager" name="googleanalyticsplus_tagmanager"
+                       as="googleanalyticsplus_tagmanager"/>
             </action>
         </reference>
         <reference name="before_body_end">
