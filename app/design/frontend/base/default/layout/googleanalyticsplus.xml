@@ -14,9 +14,9 @@
         <reference name="after_body_start">
             <action method="unsetChild" ifconfig="google/analyticsplus_universal/enabled">
                 <name>google_analytics</name>
-                <block type="googleanalyticsplus/tagManager" name="googleanalyticsplus_tagmanager"
-                       as="googleanalyticsplus_tagmanager"/>
             </action>
+            <block type="googleanalyticsplus/tagManager" name="googleanalyticsplus_tagmanager"
+                   as="googleanalyticsplus_tagmanager"/>
         </reference>
         <reference name="before_body_end">
             <block type="googleanalyticsplus/remarketing" name="googleanalyticsplus_remarketing"

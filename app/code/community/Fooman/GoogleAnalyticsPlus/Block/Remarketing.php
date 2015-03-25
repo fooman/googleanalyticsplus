@@ -268,10 +268,11 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
         if ($sort) {
             asort($values);
         }
+
+        array_walk($values, array($this, 'prepareValue'));
         if (sizeof($values) == 1) {
-            return $this->prepareValue(current($values));
+            return current($values);
         } else {
-            array_walk($values, array($this, 'prepareValue'));
             return '[' . implode(',', $values) . ']';
         }
     }
