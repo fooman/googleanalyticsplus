@@ -1,7 +1,28 @@
 <?php if ($this->shouldInclude()): ?>
+   
+   <?php $dataLayerDetails = "{'test_version':'2'}";
+   	if($this->isSuccessPage()) {
+   			$order = $this->_getOrder();
+   			$shipping = Mage::helper('googleanalyticsplus')->convert($order, 'shipping_amount');
+            $tax = Mage::helper('googleanalyticsplus')->convert($order, 'tax_amount');
+            $total_revenue =  Mage::helper('googleanalyticsplus')->convert($order, 'grand_total');
+            $revenue = $total_revenue - $shipping - $tax;
+            
+            $dataLayerDetails = "{
+            'id': '". $this->jsQuoteEscape($order->getIncrementId()) ."',
+            'affiliation': '". $this->jsQuoteEscape(Mage::app()->getStore()->getName()) ."',
+            'revenue': '". $revenue ."',
+            'shipping': '". $shipping ."',
+            'tax': '". $tax ."',
+            'total_revenue': '". $total_revenue ."',
+            'currency': '". Mage::helper('googleanalyticsplus')->getTrackingCurrency($order) ."'
+            }";
+    }?>
+
+   
     <script>
         /* <![CDATA[ */
-        dataLayer = [];
+        dataLayer = [<?php echo $dataLayerDetails?>];
         /* ]]> */
     </script>
     <?php echo $this->getTagManagerSnippet(); ?>
