@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Fooman_GoogleAnalyticsPlus>
-            <version>0.15.15</version>
+            <version>0.16.5</version>
         </Fooman_GoogleAnalyticsPlus>
     </modules>
 
@@ -58,11 +58,6 @@
                 </success_page_handles>
             </analyticsplus_abstract>
             <analyticsplus_classic>
-                <accountnumber2/>
-                <domainname2/>
-                <anonymise>0</anonymise>
-                <amounttotrack/>
-                <domainname/>
                 <conversionenabled>0</conversionenabled>
                 <conversionid/>
                 <conversionlanguage>en</conversionlanguage>

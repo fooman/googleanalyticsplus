@@ -1,3 +1,4 @@
+<?php /* @var $this Fooman_GoogleAnalyticsPlus_Block_Remarketing */?>
 <?php if ($this->shouldInclude()): ?>
     <?php
         $pageValue = $this->getPageValue();
@@ -17,7 +18,7 @@
         ecomm_pvalue: <?php echo $this->getEcommPValue() ?>,
         <?php endif;?>
         <?php if($this->getEcommCategory()):?>
-        ecomm_category: '<?php echo $this->getEcommCategory() ?>',
+        ecomm_category: '<?php echo $this->jsQuoteEscape($this->getEcommCategory()) ?>',
         <?php endif;?>
         <?php if($pageValue !== false):?>
         ecomm_totalvalue: <?php echo $pageValue ?>
@@ -38,7 +39,7 @@
 <script src="//www.googleadservices.com/pagead/conversion.js"></script>
 <noscript>
     <div style="display:inline;">
-        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/<?php echo $conversionId ?>/?value=0&amp;label=<?php echo $conversionLabel ?>&amp;guid=ON&amp;script=0"/>
+        <img height="1" width="1" style="border-style:none;" alt="" src="<?php echo $this->getNoScriptConversionUrl()?>"/>
     </div>
 </noscript>
 <?php endif; ?>

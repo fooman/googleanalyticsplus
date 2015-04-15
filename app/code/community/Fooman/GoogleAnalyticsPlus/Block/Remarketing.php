@@ -45,6 +45,28 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
     }
 
     /**
+     * get no script url for remarketing tracking
+     *
+     * @return string
+     */
+    public function getNoScriptConversionUrl()
+    {
+        if ($this->getConversionLabel()) {
+            $url = sprintf(
+                "//googleads.g.doubleclick.net/pagead/viewthroughconversion/%s/?value=0&amp;label=%s&amp;guid=ON&amp;script=0",
+                $this->getConversionId(),
+                $this->getConversionLabel()
+            );
+        } else {
+            $url = sprintf(
+                "//googleads.g.doubleclick.net/pagead/viewthroughconversion/%s/?value=0&amp;guid=ON&amp;script=0",
+                $this->getConversionId()
+            );
+        }
+        return $url;
+    }
+
+    /**
      * product category for product page
      *
      * @return string
@@ -110,7 +132,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
                 }
                 return $this->getArrayReturnValue($values, '0.00');
         }
-        return '';
+        return "''";
     }
 
     /**
@@ -124,7 +146,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
         switch ($this->getPageType()) {
             case self::GA_PAGETYPE_PRODUCT:
                 $products[] = $this->getConfiguredFeedId(Mage::registry('current_product'));
-                return $this->getArrayReturnValue($products, '');
+                return $this->getArrayReturnValue($products, "''");
                 break;
             case self::GA_PAGETYPE_CART:
                 $quote = Mage::getSingleton('checkout/session')->getQuote();
@@ -133,7 +155,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
                         $products[] = $this->getConfiguredFeedId($item->getProduct());
                     }
                 }
-                return $this->getArrayReturnValue($products, '', true);
+                return $this->getArrayReturnValue($products, "''", true);
                 break;
             case self::GA_PAGETYPE_PURCHASE:
                 if ($this->_getOrder()) {
@@ -141,10 +163,10 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
                         $products[] = $this->getConfiguredFeedId($item->getProduct());
                     }
                 }
-                return $this->getArrayReturnValue($products, '', true);
+                return $this->getArrayReturnValue($products, "''", true);
                 break;
         }
-        return '';
+        return "''";
     }
     
     /**
@@ -154,10 +176,6 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
     public function getConfiguredFeedId ($product) {
         $idAttr = Mage::getStoreConfig('google/analyticsplus_dynremarketing/feed_product_id');
         $id = $product->getDataUsingMethod($idAttr);
-        // quote if id is not numeric
-        if (!ctype_digit($id)) {
-            $id = "'$id'";
-        }
         return $id;
     }
 
@@ -251,9 +269,26 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
             asort($values);
         }
         if (sizeof($values) == 1) {
-            return current($values);
+            return $this->prepareValue(current($values));
         } else {
+            array_walk($values, array($this, 'prepareValue'));
             return '[' . implode(',', $values) . ']';
         }
+    }
+
+    /**
+     * escape all quotes and additionally quote all strings
+     * @param $value
+     *
+     * @return mixed|string
+     */
+    public function prepareValue(&$value)
+    {
+        $value = $this->jsQuoteEscape($value);
+        // quote if value is not numeric
+        if (!ctype_digit($value)) {
+            $value = "'$value'";
+        }
+        return $value;
     }
 }

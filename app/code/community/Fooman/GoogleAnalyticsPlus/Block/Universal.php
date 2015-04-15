@@ -37,18 +37,6 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
     }
 
     /**
-     * get universal snippet from settings
-     *
-     * @deprecated since 0.14.0
-     * @return string
-     */
-    public function getUniversalSnippet()
-    {
-        return '';
-    }
-
-
-    /**
      * @return bool
      */
     public function getUniversalAnonymise()
@@ -148,14 +136,23 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
 
         return self::URL_ANALYTICS;
     }
-    // Get the exclude shipping settings
-    public function excludeShipping()
+
+    /**
+     * Get the exclude shipping settings
+     *
+     * @return bool
+     */
+    public function shouldExcludeShipping()
     {
         return Mage::getStoreConfigFlag('google/analyticsplus_universal/exclude_shipping');
     }
-    
-    // Get the exclude Tax Settings....
-    public function excludeTax()
+
+    /**
+     * Get the exclude Tax Settings....
+     *
+     * @return bool
+     */
+    public function shouldExcludeTax()
     {
         return Mage::getStoreConfigFlag('google/analyticsplus_universal/exclude_tax');
     }

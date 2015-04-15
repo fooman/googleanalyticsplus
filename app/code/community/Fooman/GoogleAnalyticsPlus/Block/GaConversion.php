@@ -93,6 +93,30 @@ class  Fooman_GoogleAnalyticsPlus_Block_GaConversion extends Fooman_GoogleAnalyt
     }
 
     /**
+     * get no script url for adwords conversion tracking secure/unsecure
+     *
+     * @return string
+     */
+    public function getNoScriptConversionUrl()
+    {
+        if ($this->getLabel()) {
+            $url = sprintf(
+                "//www.googleadservices.com/pagead/conversion/%s/?value=%s&amp;label=%s&amp;script=0",
+                $this->getConversionId(),
+                $this->getValue(),
+                $this->getLabel()
+            );
+        } else {
+            $url = sprintf(
+                "//www.googleadservices.com/pagead/conversion/%s/?value=%s&amp;script=0",
+                $this->getConversionId(),
+                $this->getValue()
+            );
+        }
+        return $url;
+    }
+
+    /**
      * get conversion value, convert if chosen to a differnt currency
      *
      * @return int|string
