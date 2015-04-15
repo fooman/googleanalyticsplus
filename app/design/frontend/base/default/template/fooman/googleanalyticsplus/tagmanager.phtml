@@ -1,7 +1,7 @@
 <?php /* @var $this Fooman_GoogleAnalyticsPlus_Block_TagManager */?>
 <?php if ($this->shouldInclude()): ?>
    
-   <?php $dataLayerDetails = "{'test_version':'2'}";
+   <?php $dataLayerDetails = "";
    	if($this->isSuccessPage()) {
    			$order = $this->_getOrder();
    			$shipping = Mage::helper('googleanalyticsplus')->convert($order, 'shipping_amount');
@@ -10,13 +10,13 @@
             $revenue = $total_revenue - $shipping - $tax;
             
             $dataLayerDetails = "{
-            'id': '". $this->jsQuoteEscape($order->getIncrementId()) ."',
-            'affiliation': '". $this->jsQuoteEscape(Mage::app()->getStore()->getName()) ."',
-            'revenue': '". $revenue ."',
-            'shipping': '". $shipping ."',
-            'tax': '". $tax ."',
-            'total_revenue': '". $total_revenue ."',
-            'currency': '". Mage::helper('googleanalyticsplus')->getTrackingCurrency($order) ."'
+            'conversion_order_id': '". $this->jsQuoteEscape($order->getIncrementId()) ."',
+            'conversion_store': '". $this->jsQuoteEscape(Mage::app()->getStore()->getName()) ."',
+            'conversion_revenue_excl_taxship': '". $revenue ."',
+            'conversion_revenue_shipping': '". $shipping ."',
+            'conversion_revenue_tax': '". $tax ."',
+            'conversion_revenue_revenue': '". $total_revenue ."',
+            'conversion_currency': '". Mage::helper('googleanalyticsplus')->getTrackingCurrency($order) ."'
             }";
     }?>
 
