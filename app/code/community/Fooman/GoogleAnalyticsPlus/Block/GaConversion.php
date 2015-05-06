@@ -139,9 +139,11 @@ class  Fooman_GoogleAnalyticsPlus_Block_GaConversion extends Fooman_GoogleAnalyt
     protected function _getOrder()
     {
         if (!$this->_quote) {
-            $quoteId = Mage::getSingleton('checkout/session')->getLastQuoteId();
-            if ($quoteId) {
-                $this->_order = Mage::getModel('sales/order')->loadByAttribute('quote_id', $quoteId);
+            $ids = Mage::registry('googleanalyticsplus_order_ids');
+            $orderId = (is_array($ids) ? reset($ids) : null);
+
+            if ($orderId) {
+                $this->_order = Mage::getModel('sales/order')->load($orderId);
             } else {
                 $this->_order = false;
             }

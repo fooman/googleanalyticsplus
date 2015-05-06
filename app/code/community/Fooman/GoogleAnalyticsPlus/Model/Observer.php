@@ -12,4 +12,9 @@ class Fooman_GoogleAnalyticsPlus_Model_Observer
             $transport->setHtml($trackingJs . $origBlockContent);
         }
     }
+
+    public function setOrder($observer)
+    {
+        Mage::register('googleanalyticsplus_order_ids', $observer->getEvent()->getOrderIds(), true);
+    }
 }

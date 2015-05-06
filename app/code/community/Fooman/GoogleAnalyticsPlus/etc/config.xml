@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Fooman_GoogleAnalyticsPlus>
-            <version>0.16.7</version>
+            <version>0.16.8</version>
         </Fooman_GoogleAnalyticsPlus>
     </modules>
 
@@ -47,6 +47,22 @@
                     </googleanalyticsplus_core_block_abstract_to_html_after>
                 </observers>
             </core_block_abstract_to_html_after>
+            <checkout_onepage_controller_success_action>
+                <observers>
+                    <googleanalyticsplus_success_set_order>
+                        <class>googleanalyticsplus/observer</class>
+                        <method>setOrder</method>
+                    </googleanalyticsplus_success_set_order>
+                </observers>
+            </checkout_onepage_controller_success_action>
+            <checkout_multishipping_controller_success_action>
+                <observers>
+                    <googleanalyticsplus_success_set_order>
+                        <class>googleanalyticsplus/observer</class>
+                        <method>setOrder</method>
+                    </googleanalyticsplus_success_set_order>
+                </observers>
+            </checkout_multishipping_controller_success_action>
         </events>
     </frontend>
     <default>
