@@ -10,7 +10,7 @@
 <script>
     /* <![CDATA[ */
     var google_tag_params = {
-        <?php if($prodId !== false):?>
+        <?php if($prodId !== ''):?>
         ecomm_prodid: <?php echo $prodId ?>,
         <?php endif;?>
         ecomm_pagetype: '<?php echo $pageType ?>',
@@ -20,7 +20,7 @@
         <?php if($this->getEcommCategory()):?>
         ecomm_category: '<?php echo $this->jsQuoteEscape($this->getEcommCategory()) ?>',
         <?php endif;?>
-        <?php if($pageValue !== false):?>
+        <?php if($pageValue !== ''):?>
         ecomm_totalvalue: <?php echo $pageValue ?>
         <?php endif;?>
     };
