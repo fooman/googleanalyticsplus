@@ -12,6 +12,8 @@
 
 class Fooman_GoogleAnalyticsPlus_Block_TagManager extends Fooman_GoogleAnalyticsPlus_Block_Common_Abstract
 {
+    protected  $_order;
+    
     protected function _construct()
     {
         parent::_construct();
@@ -40,5 +42,24 @@ class Fooman_GoogleAnalyticsPlus_Block_TagManager extends Fooman_GoogleAnalytics
     public function getTagManagerSnippet()
     {
         return Mage::getStoreConfig('google/analyticsplus_tagmanager/snippet');
+    }
+    
+
+    /**
+     * get order from the last quote id
+     *
+     * @return mixed
+     */
+    protected function _getOrder()
+    {
+        
+		$quoteId = Mage::getSingleton('checkout/session')->getLastQuoteId();
+		if ($quoteId) {
+			$this->_order = Mage::getModel('sales/order')->loadByAttribute('quote_id', $quoteId);
+		} else {
+			$this->_order = false;
+		}
+        
+        return $this->_order;
     }
 }
