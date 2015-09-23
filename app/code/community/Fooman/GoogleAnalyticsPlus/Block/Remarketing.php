@@ -273,7 +273,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
         reset($values);
 
         if (sizeof($values) == 1) {
-            return current($values);
+            return $values[0];
         } else {
             return '[' . implode(',', $values) . ']';
         }
