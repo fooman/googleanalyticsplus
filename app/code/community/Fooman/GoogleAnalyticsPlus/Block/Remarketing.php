@@ -289,7 +289,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
     {
         $value = $this->jsQuoteEscape($value);
         // quote if value is not numeric
-        if (!ctype_digit($value)) {
+        if (!is_numeric($value)) {
             $value = "'$value'";
         }
         return $value;
