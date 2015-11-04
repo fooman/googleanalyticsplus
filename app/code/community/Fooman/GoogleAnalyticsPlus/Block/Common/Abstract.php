@@ -3,7 +3,7 @@
 class Fooman_GoogleAnalyticsPlus_Block_Common_Abstract extends Mage_Core_Block_Template
 {
     const XML_PATH_SUCCESS_PAGE_BLOCK_HANDLES = 'google/analyticsplus_abstract/success_page_handles';
-    
+
     /**
      * where cookie opt in is present and not yet accepted do not track
      *
@@ -89,14 +89,6 @@ class Fooman_GoogleAnalyticsPlus_Block_Common_Abstract extends Mage_Core_Block_T
         return null;
     }
 
-    /**
-     * Return REQUEST_URI for current page
-     * Magento default analytics reports can include the same page as
-     * /checkout/onepage/index/ and   /checkout/onepage/
-     * filter out index/ here and unify to no trailing /
-     *
-     * @return string
-     */
     public function getPageName()
     {
         if (!$this->hasData('page_name')) {
@@ -110,14 +102,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Common_Abstract extends Mage_Core_Block_T
                 $query = '?' . $parts['query'];
             }
 
-            $url = Mage::getSingleton('core/url')->escape(
-                rtrim(
-                    str_replace(
-                        'index/', '',
-                        Mage::app()->getRequest()->getBaseUrl() . Mage::app()->getRequest()->getRequestString()
-                    ), '/'
-                ). $query
-            );
+            $url = Mage::getSingleton('core/url')->escape($this->getCleanPageName() . $query);
             $this->setPageName($url);
         }
         return $this->getData('page_name');
@@ -125,14 +110,25 @@ class Fooman_GoogleAnalyticsPlus_Block_Common_Abstract extends Mage_Core_Block_T
 
     public function getBasePageName()
     {
-        return Mage::getSingleton('core/url')->escape(
-            rtrim(
-                str_replace(
-                    'index/', '',
-                    Mage::app()->getRequest()->getBaseUrl() . Mage::app()->getRequest()->getRequestString()
-                ), '/'
-            )
-        );
+        return Mage::getSingleton('core/url')->escape($this->getCleanPageName());
+    }
+
+    /**
+     * Return REQUEST_URI for current page
+     * Magento default analytics reports can include the same page as
+     * /checkout/onepage/index/ and   /checkout/onepage/
+     * filter out index/ here and unify to no trailing /
+     *
+     * @return string
+     */
+    protected function getCleanPageName()
+    {
+        $pageUrl = Mage::app()->getRequest()->getBaseUrl() .
+                   (Mage::getStoreConfigFlag('web/url/use_store') ? '/' . Mage::app()->getStore()->getCode() : '') .
+                   Mage::app()->getRequest()->getRequestString()
+        ;
+
+        return rtrim(str_replace('index/', '', $pageUrl), '/');
     }
 
     public function getPageQuery()
