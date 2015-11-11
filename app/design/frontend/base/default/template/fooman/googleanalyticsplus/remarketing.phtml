@@ -20,7 +20,7 @@
         <?php if($this->getEcommCategory()):?>
         ecomm_category: '<?php echo $this->jsQuoteEscape($this->getEcommCategory()) ?>',
         <?php endif;?>
-        <?php if($pageValue !== ''):?>
+        <?php if($pageValue !== false):?>
         ecomm_totalvalue: <?php echo $pageValue ?>
         <?php endif;?>
     };
