@@ -25,6 +25,12 @@
                 ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.require', 'displayfeatures'<?php if($this->getUniversalDisplayAdvertisingCookieName()):?>, undefined, { cookieName: '<?php echo $this->getUniversalDisplayAdvertisingCookieName(); ?>' }<?php endif; ?>);
             <?php endif;?>
         <?php endif;?>
+        <?php if($this->isEnhancedLinkAttrEnabled()):?>
+            ga('require', 'linkid');
+            <?php if ($altUniversal):?>
+                ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.require', 'linkid');
+            <?php endif;?>
+        <?php endif;?>
         ga('send', 'pageview', '<?php echo $this->getPageName(); ?>');
         <?php if ($altUniversal):?>
             ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.send', 'pageview', '<?php echo $this->getPageName(); ?>');
