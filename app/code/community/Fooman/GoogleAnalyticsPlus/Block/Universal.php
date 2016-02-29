@@ -157,4 +157,15 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
         return Mage::getStoreConfigFlag('google/analyticsplus_universal/exclude_tax');
     }
 
+    /**
+     * Get the "enhanced link attribution" setting.
+     * See https://support.google.com/analytics/answer/2558867?hl=en
+     *
+     * @return bool
+     */
+    public function isEnhancedLinkAttrEnabled()
+    {
+        return Mage::getStoreConfigFlag('google/analyticsplus_universal/enhanced_link_attribution');
+    }
+
 }

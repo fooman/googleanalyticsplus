@@ -29,7 +29,7 @@
                     <show_in_store>1</show_in_store>
                     <comment><![CDATA[<br />
                     <div class="box">
-                    <p>For detailed instructions please refer to the Google Analytics + User Manual <a href="http://cdn.fooman.co.nz/media/custom/upload/UserManual-FoomanGoogleAnalyticsPlus.pdf">here</a>.</p>
+                    <p>For detailed instructions please refer to the Google Analytics + User Manual <a href="http://cdn.fooman.co.nz/media/custom/upload/UserManual-FoomanGoogleAnalyticsPlus.pdf" target="_blank">here</a>.</p>
                     </div>
                     ]]>
                     </comment>
@@ -156,7 +156,7 @@
                         </altaccountnumber>
                         <anonymise translate="label">
                             <label>Anonymise IP Address</label>
-                            <comment><![CDATA[See <a href="https://support.google.com/analytics/answer/2763052?hl=en">Google Documentation</a> for details]]></comment>
+                            <comment><![CDATA[See <a href="https://support.google.com/analytics/answer/2763052?hl=en" target="_blank">Google Documentation</a> for details]]></comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>200</sort_order>
@@ -166,7 +166,7 @@
                         </anonymise>
                         <domainname translate="label">
                             <label>Cookie Domain Name</label>
-                            <comment><![CDATA[Leave empty for standard setups <br/><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#cookieDomain">Google Documentation</a>]]></comment>
+                            <comment><![CDATA[Leave empty for standard setups <br/><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#cookieDomain" target="_blank">Google Documentation</a>]]></comment>
                             <frontend_type>text</frontend_type>
                             <sort_order>300</sort_order>
                             <show_in_default>1</show_in_default>
@@ -175,7 +175,7 @@
                         </domainname>
                         <display_advertising translate='label'>
                             <label>Enable Display Advertising Features</label>
-                            <comment><![CDATA[See <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features">Google Documentation</a> for details]]></comment>
+                            <comment><![CDATA[See <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features" target="_blank">Google Documentation</a> for details]]></comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>400</sort_order>
@@ -185,7 +185,7 @@
                         </display_advertising>
                         <display_advertising_cookiename translate='label'>
                             <label>Display Advertising Features Cookie Name</label>
-                            <comment><![CDATA[Leave empty for standard setups <br/><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features">Google Documentation</a>]]></comment>
+                            <comment><![CDATA[Leave empty for standard setups <br/><a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features" target="_blank">Google Documentation</a>]]></comment>
                             <frontend_type>text</frontend_type>
                             <sort_order>401</sort_order>
                             <show_in_default>1</show_in_default>
@@ -197,7 +197,7 @@
                         </display_advertising_cookiename>
                         <userid_tracking translate='label'>
                             <label>Enable User ID Feature</label>
-                            <comment><![CDATA[See <a href="https://support.google.com/analytics/answer/3123662?hl=en&utm_id=ad">Google Documentation</a> for details]]></comment>
+                            <comment><![CDATA[See <a href="https://support.google.com/analytics/answer/3123662?hl=en&utm_id=ad" target="_blank">Google Documentation</a> for details]]></comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>500</sort_order>
@@ -205,6 +205,16 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </userid_tracking>
+                        <enhanced_link_attribution translate='label'>
+                            <label>Enable enhanced link attribution</label>
+                            <comment><![CDATA[See <a href="https://support.google.com/analytics/answer/2558867?hl=en" target="_blank">Google Documentation</a> for details]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>501</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enhanced_link_attribution>
                         <exclude_shipping translate='label'>
                             <label>Exclude Shipping from Conversion Total</label>
                             <frontend_type>select</frontend_type>
