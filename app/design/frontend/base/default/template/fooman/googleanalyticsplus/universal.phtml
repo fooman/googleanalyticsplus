@@ -19,6 +19,12 @@
                 ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.set', 'anonymizeIp', true);
             <?php endif;?>
         <?php endif;?>
+        <?php if($this->getUniversalForceSSL()):?>
+            ga('set', 'forceSSL', true);
+            <?php if ($altUniversal):?>
+                ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.set', 'forceSSL', true);
+            <?php endif;?>
+        <?php endif;?>
         <?php if($this->getUniversalDisplayAdvertising()):?>
             ga('require', 'displayfeatures'<?php if($this->getUniversalDisplayAdvertisingCookieName()):?>, undefined, { cookieName: '<?php echo $this->getUniversalDisplayAdvertisingCookieName(); ?>' }<?php endif; ?>);
             <?php if ($altUniversal):?>
