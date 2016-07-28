@@ -45,6 +45,14 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
     }
 
     /**
+     * @return bool
+     */
+    public function getUniversalForceSSL()
+    {
+        return Mage::getStoreConfigFlag('google/analyticsplus_universal/force_ssl');
+    }
+
+    /**
      * Build any params that is passed on create of analytics object
      *
      * @param bool $createTrackerTwo
