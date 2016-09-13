@@ -1,58 +1,60 @@
 <?php /* @var $this Fooman_GoogleAnalyticsPlus_Block_Ajax */?>
-<script>
-    /* <![CDATA[ */
+<?php if ($this->shouldInclude()): ?>
+    <script>
+        /* <![CDATA[ */
 
-    var FoomanGoogleAnalytics = Class.create();
-    FoomanGoogleAnalytics.prototype = {
-        initialize: function(settings){
-            this.baseUrl = settings.baseUrl;
-            this.pageQuery = settings.pageQuery;
-            this.universal = settings.universal;
-            this.altUniversal = settings.altUniversal;
-            this.useDataLayer = settings.useDataLayer;
-        },
-        trackEvent: function(section){
+        var FoomanGoogleAnalytics = Class.create();
+        FoomanGoogleAnalytics.prototype = {
+            initialize: function(settings){
+                this.baseUrl = settings.baseUrl;
+                this.pageQuery = settings.pageQuery;
+                this.universal = settings.universal;
+                this.altUniversal = settings.altUniversal;
+                this.useDataLayer = settings.useDataLayer;
+            },
+            trackEvent: function(section){
 
-            var urlToTrack = this.baseUrl + '/' + section + this.pageQuery;
-            if (this.universal) {
-                ga('send', 'pageview', urlToTrack);
-            }
-            if (this.altUniversal) {
-                ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.send', 'pageview', urlToTrack);
-            }
-            if (this.useDataLayer && typeof dataLayer != 'undefined') {
-                dataLayer.push({'event': section});
+                var urlToTrack = this.baseUrl + '/' + section + this.pageQuery;
+                if (this.universal && typeof ga != 'undefined') {
+                    ga('send', 'pageview', urlToTrack);
+                }
+                if (this.altUniversal && typeof ga != 'undefined') {
+                    ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.send', 'pageview', urlToTrack);
+                }
+                if (this.useDataLayer && typeof dataLayer != 'undefined') {
+                    dataLayer.push({'event': section});
+                }
             }
         }
-    }
 
-    var foomanGoogleAnalytics = new FoomanGoogleAnalytics({
-            baseUrl: '<?php echo $this->getBasePageName() ?>',
-            pageQuery: '<?php echo $this->getPageQuery() ?>',
-            universal: '<?php echo $this->isUniversalEnabled() ? $this->getUniversalAccount():'' ?>',
-            altUniversal: '<?php echo $this->isUniversalEnabled() ? $this->getAlternativeUniversalAccount():'' ?>',
-            useDataLayer: '<?php echo $this->isTagManagerEnabled()?>'
-        }
-    );
-
-    if (typeof(Accordion) != "undefined") {
-        Accordion.prototype.openSection  = Accordion.prototype.openSection.wrap(function(originalOpenSection, section){
-            if (typeof section === 'string') {
-                var trackelement = section;
-            } else {
-                var trackelement = section.id;
+        var foomanGoogleAnalytics = new FoomanGoogleAnalytics({
+                baseUrl: '<?php echo $this->getBasePageName() ?>',
+                pageQuery: '<?php echo $this->getPageQuery() ?>',
+                universal: '<?php echo $this->isUniversalEnabled() ? $this->getUniversalAccount():'' ?>',
+                altUniversal: '<?php echo $this->isUniversalEnabled() ? $this->getAlternativeUniversalAccount():'' ?>',
+                useDataLayer: '<?php echo $this->isTagManagerEnabled()?>'
             }
-            foomanGoogleAnalytics.trackEvent(trackelement);
-            originalOpenSection(section);
-        });
-    }
+        );
 
-    if (typeof(Review) != "undefined") {
-        Review.prototype.save  = Review.prototype.save.wrap(function(originalSave){
-            foomanGoogleAnalytics.trackEvent('opc-review-placeOrderClicked');
-            originalSave();
-        });
-    }
+        if (typeof(Accordion) != "undefined") {
+            Accordion.prototype.openSection  = Accordion.prototype.openSection.wrap(function(originalOpenSection, section){
+                if (typeof section === 'string') {
+                    var trackelement = section;
+                } else {
+                    var trackelement = section.id;
+                }
+                foomanGoogleAnalytics.trackEvent(trackelement);
+                originalOpenSection(section);
+            });
+        }
 
-    /* ]]> */
-</script>
+        if (typeof(Review) != "undefined") {
+            Review.prototype.save  = Review.prototype.save.wrap(function(originalSave){
+                foomanGoogleAnalytics.trackEvent('opc-review-placeOrderClicked');
+                originalSave();
+            });
+        }
+
+        /* ]]> */
+    </script>
+<?php endif;?>

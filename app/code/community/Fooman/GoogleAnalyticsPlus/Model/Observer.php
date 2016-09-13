@@ -8,8 +8,11 @@ class Fooman_GoogleAnalyticsPlus_Model_Observer
         $transport = $observer->getEvent()->getTransport();
         if ($block instanceof Mage_Checkout_Block_Onepage_Billing) {
             $origBlockContent = $transport->getHtml();
-            $trackingJs = $block->getLayout()->createBlock('googleanalyticsplus/ajax')->toHtml();
-            $transport->setHtml($trackingJs . $origBlockContent);
+            if (strpos($origBlockContent, 'FoomanGoogleAnalytics') === false) {
+                $trackingJs = $block->getLayout()->createBlock('googleanalyticsplus/ajax')->toHtml();
+                $transport->setHtml($trackingJs . $origBlockContent);
+            }
+
         }
     }
 

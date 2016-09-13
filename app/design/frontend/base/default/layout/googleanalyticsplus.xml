@@ -24,6 +24,9 @@
             <action method="unsetChild" ifconfig="google/analyticsplus_universal/enabled">
                 <name>google_analytics</name>
             </action>
+            <block type="googleanalyticsplus/universal" name="googleanalyticsplus_universal_send"
+                   as="googleanalyticsplus_universal_send"
+                   template="fooman/googleanalyticsplus/universal-send.phtml"/>
         </reference>
     </default>
     <!--unfortunately not available across all versions - @see event observer core_block_abstract_to_html_after

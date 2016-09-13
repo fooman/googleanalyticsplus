@@ -37,6 +37,7 @@ class Fooman_GoogleAnalyticsPlus_Model_Selftester extends Fooman_Common_Model_Se
             'app/design/frontend/base/default/template/fooman/googleanalyticsplus/ajax-tracking.phtml',
             'app/design/frontend/base/default/template/fooman/googleanalyticsplus/ga-conversion.phtml',
             'app/design/frontend/base/default/template/fooman/googleanalyticsplus/remarketing.phtml',
+            'app/design/frontend/base/default/template/fooman/googleanalyticsplus/universal-send.phtml',
             'app/design/frontend/base/default/template/fooman/googleanalyticsplus/tagmanager.phtml',
         );
         //REPLACE_END

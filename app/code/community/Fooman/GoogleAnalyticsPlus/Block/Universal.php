@@ -13,7 +13,7 @@
 class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsPlus_Block_GaConversion
 {
     const TRACKER_TWO_NAME = 'tracker2';
-    CONST URL_ANALYTICS = '//www.google-analytics.com/analytics.js';
+    CONST URL_ANALYTICS = 'https://www.google-analytics.com/analytics.js';
     CONST URL_ANALYTICS_DEBUG = '//www.google-analytics.com/analytics_debug.js';
 
     protected function _construct()
@@ -174,6 +174,19 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
     public function isEnhancedLinkAttrEnabled()
     {
         return Mage::getStoreConfigFlag('google/analyticsplus_universal/enhanced_link_attribution');
+    }
+
+    /**
+     * We don't want to send ecommerce transactions if enhanced ecommerce transactions are being sent
+     *
+     * @return bool
+     */
+    public function sendEcommerceTracking()
+    {
+        if (Mage::helper('core')->isModuleEnabled('Mediotype_GoogleEnhancedEcommerce')) {
+            return !Mage::helper('mediotype_ee')->getEnabled();
+        }
+        return true;
     }
 
 }
