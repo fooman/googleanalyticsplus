@@ -183,6 +183,15 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </domainname>
+                        <sitespeedsamplerate translate="label">
+                            <label>Site Speed Sample Rate</label>
+                            <comment><![CDATA[By default, 1% of users will be automatically be tracked, you can increase this setting here.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>350</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sitespeedsamplerate>
                         <display_advertising translate='label'>
                             <label>Enable Display Advertising Features</label>
                             <comment><![CDATA[See <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features" target="_blank">Google Documentation</a> for details]]></comment>
