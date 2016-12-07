@@ -185,7 +185,7 @@
                         </domainname>
                         <sitespeedsamplerate translate="label">
                             <label>Site Speed Sample Rate</label>
-                            <comment><![CDATA[By default, 1% of users will be automatically be tracked, you can increase this setting here.]]></comment>
+                            <comment><![CDATA[By default, 1% of users will be automatically tracked, you can increase this setting here.]]></comment>
                             <frontend_type>text</frontend_type>
                             <sort_order>350</sort_order>
                             <show_in_default>1</show_in_default>
