@@ -71,6 +71,9 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
         if ($createTrackerTwo) {
             $params['name'] = self::TRACKER_TWO_NAME;
         }
+        if (Mage::getStoreConfig('google/analyticsplus_universal/sitespeedsamplerate')) {
+            $params['siteSpeedSampleRate'] = Mage::getStoreConfig('google/analyticsplus_universal/sitespeedsamplerate');
+        }
         if (count($params) == 0) {
             return "'auto'";
         }
