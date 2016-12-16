@@ -76,6 +76,9 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
                 Mage::getStoreConfig('google/analyticsplus_universal/sitespeedsamplerate')
             );
         }
+        if (Mage::getStoreConfig('google/analyticsplus_universal/allowlinker')) {
+            $params['allowLinker'] = boolval(Mage::getStoreConfig('google/analyticsplus_universal/allowlinker'));
+        }
         if (count($params) == 0) {
             return "'auto'";
         }
