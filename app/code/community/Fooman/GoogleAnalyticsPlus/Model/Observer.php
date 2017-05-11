@@ -20,4 +20,35 @@ class Fooman_GoogleAnalyticsPlus_Model_Observer
     {
         Mage::register('googleanalyticsplus_order_ids', $observer->getEvent()->getOrderIds(), true);
     }
+
+    public function checkoutCartAdd($observer)
+    {
+        $product = Mage::getModel('catalog/product')
+                            ->load(Mage::app()->getRequest()->getParam('product', 0));
+
+        if (!$product->getId())
+        {
+            return false;
+        }
+
+        Mage::getModel('core/session')->setProductIdAddedToCart( $product->getId() );
+    }
+
+    public function customerLogin($observer)
+    {
+        $customer = $observer->getCustomer();
+
+        if ($customer) {
+            Mage::getModel('core/session')->setCustomerIdLoggedIn( $customer->getId() );
+        }
+    }
+
+    public function customerRegistration($observer)
+    {
+        $customer = $observer->getCustomer();
+
+        if ($customer) {
+            Mage::getModel('core/session')->setCustomerIdRegistered( $customer->getId() );
+        }
+    }
 }

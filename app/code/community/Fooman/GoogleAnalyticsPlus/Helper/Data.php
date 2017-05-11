@@ -79,4 +79,54 @@ class Fooman_GoogleAnalyticsPlus_Helper_Data extends Mage_Core_Helper_Abstract
         }
     }
 
+    /**
+     * The product ID was last added to the cart
+     *
+     * @return int
+     */
+    public function pullProductIdAddedToCart()
+    {
+        $productId = Mage::getModel('core/session')->getProductIdAddedToCart();
+
+        if ($productId) {
+            Mage::getModel('core/session')->unsProductIdAddedToCart();
+            return $productId;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * The customer ID just logged in
+     *
+     * @return int
+     */
+    public function pullCustomerIdLoggedIn()
+    {
+        $customerId = Mage::getModel('core/session')->getCustomerIdLoggedIn();
+
+        if ($customerId) {
+            Mage::getModel('core/session')->unsCustomerIdLoggedIn();
+            return $customerId;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * The customer ID just registered
+     *
+     * @return int
+     */
+    public function pullCustomerIdRegistered()
+    {
+        $customerId = Mage::getModel('core/session')->getCustomerIdRegistered();
+
+        if ($customerId) {
+            Mage::getModel('core/session')->unsCustomerIdRegistered();
+            return $customerId;
+        } else {
+            return null;
+        }
+    }
 }
