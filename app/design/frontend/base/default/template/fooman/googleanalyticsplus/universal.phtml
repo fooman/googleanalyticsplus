@@ -37,21 +37,6 @@
                 ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.require', 'linkid');
             <?php endif;?>
         <?php endif;?>
-
-        <?php $_productIdAddedToCart = Mage::helper('googleanalyticsplus')->pullProductIdAddedToCart();?>
-        <?php if($_productIdAddedToCart): ?>
-            ga('send', 'event', 'catalog', 'add-to-cart', '<?php echo $_productIdAddedToCart; ?>', '0');
-        <?php endif; ?>
-
-        <?php $_customerIdLoggedIn = Mage::helper('googleanalyticsplus')->pullCustomerIdLoggedIn();?>
-        <?php if($_customerIdLoggedIn): ?>
-            ga('send', 'event', 'customer', 'login', '<?php echo $_customerIdLoggedIn; ?>', '0');
-        <?php endif; ?>
-
-        <?php $_customerIdRegistered = Mage::helper('googleanalyticsplus')->pullCustomerIdRegistered();?>
-        <?php if($_customerIdRegistered): ?>
-            ga('send', 'event', 'customer', 'registration', '<?php echo $_customerIdRegistered; ?>', '0');
-        <?php endif; ?>
     </script>
     <!-- End Google Analytics Part 1/2 -->
 <?php endif; ?>
