@@ -63,6 +63,30 @@
                     </googleanalyticsplus_success_set_order>
                 </observers>
             </checkout_multishipping_controller_success_action>
+            <controller_action_predispatch_checkout_cart_add>
+                <observers>
+                    <googleanalyticsplus_checkout_cart_add>
+                        <class>googleanalyticsplus/observer</class>
+                        <method>checkoutCartAdd</method>
+                    </googleanalyticsplus_checkout_cart_add>
+                </observers>
+            </controller_action_predispatch_checkout_cart_add>
+            <customer_login>
+                <observers>
+                    <googleanalyticsplus_checkout_cart_add>
+                        <class>googleanalyticsplus/observer</class>
+                        <method>customerLogin</method>
+                    </googleanalyticsplus_checkout_cart_add>
+                </observers>
+            </customer_login>
+            <customer_register_success>
+                <observers>
+                    <googleanalyticsplus_checkout_cart_add>
+                        <class>googleanalyticsplus/observer</class>
+                        <method>customerRegistration</method>
+                    </googleanalyticsplus_checkout_cart_add>
+                </observers>
+            </customer_register_success>
         </events>
     </frontend>
     <default>
