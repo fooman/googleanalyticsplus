@@ -226,4 +226,38 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
 
         return 'NOT LOGGED IN';
     }
+  
+     /**
+     * Check to see if Google Optimize is Enabled
+     *
+     * @return bool
+     */
+    public function isGoogleOptimizeEnabled()
+    {
+        return (
+            Mage::getStoreConfigFlag('google/analyticsplus_optimize/enabled')
+            && !empty($this->getGoogleOptimizeContainerId())
+        );
+    }
+
+    /**
+     * @return bool
+     */
+    public function isGoogleOptimizePageHidingEnabled()
+    {
+        return (
+            Mage::getStoreConfigFlag('google/analyticsplus_optimize/enable_page_hiding')
+            && $this->isGoogleOptimizeEnabled()
+        );
+    }
+
+    /**
+     * Returns the Container ID for use with Google Optimize
+     *
+     * @return string|null
+     */
+    public function getGoogleOptimizeContainerId()
+    {
+        return Mage::getStoreConfig('google/analyticsplus_optimize/container_id');
+    }
 }
