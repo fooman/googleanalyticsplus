@@ -7,6 +7,9 @@
         <?php if ($altUniversal):?>
             ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.send', 'pageview', '<?php echo $this->getPageName(); ?>');
         <?php endif;?>
+        <?php if ($this->getCustomerGroupDimension()): ?>
+            ga('set', '<?php echo $this->getCustomerGroupDimension() ?>', '<?php echo $this->getCustomerGroup() ?>');
+        <?php endif; ?>
     </script>
 
     <?php if($this->isSuccessPage() && $this->sendEcommerceTracking()):?>

@@ -198,6 +198,36 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
     }
 
     /**
+     * Returns the custom dimension if this is enabled
+     *
+     * @return string|null
+     */
+    public function getCustomerGroupDimension()
+    {
+        return Mage::getStoreConfig('google/analyticsplus_universal_dimensions/customer_group');
+    }
+
+    /**
+     * Returns the customer group name for the current customer
+     *
+     * @return string
+     */
+    public function getCustomerGroup()
+    {
+        $isLoggedIn = Mage::getSingleton('customer/session')->isLoggedIn();
+        if ($isLoggedIn) {
+            $customerId      = Mage::getSingleton('customer/session')->getId();
+            $customer        = Mage::getModel('customer/customer')->load($customerId);
+            $customerGroupId = $customer->getGroupId();
+            $groupName       = Mage::getModel('customer/group')->load($customerGroupId)->getCustomerGroupCode();
+
+            return $groupName;
+        }
+
+        return 'NOT LOGGED IN';
+    }
+  
+     /**
      * Check to see if Google Optimize is Enabled
      *
      * @return bool
