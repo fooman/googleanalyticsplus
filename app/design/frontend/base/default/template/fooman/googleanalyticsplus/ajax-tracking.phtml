@@ -15,17 +15,17 @@
             trackEvent: function(section){
 
                 var urlToTrack = this.baseUrl + '/' + section + this.pageQuery;
-                if (this.universal && typeof ga != 'undefined') {
+                if (this.universal && typeof ga !== 'undefined') {
                     ga('send', 'pageview', urlToTrack);
                 }
-                if (this.altUniversal && typeof ga != 'undefined') {
+                if (this.altUniversal && typeof ga !== 'undefined') {
                     ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.send', 'pageview', urlToTrack);
                 }
-                if (this.useDataLayer && typeof dataLayer != 'undefined') {
+                if (this.useDataLayer && typeof dataLayer !== 'undefined') {
                     dataLayer.push({'event': section});
                 }
             }
-        }
+        };
 
         var foomanGoogleAnalytics = new FoomanGoogleAnalytics({
                 baseUrl: '<?php echo $this->getBasePageName() ?>',
@@ -36,19 +36,20 @@
             }
         );
 
-        if (typeof(Accordion) != "undefined") {
+        if (typeof(Accordion) !== "undefined") {
             Accordion.prototype.openSection  = Accordion.prototype.openSection.wrap(function(originalOpenSection, section){
+                var trackelement;
                 if (typeof section === 'string') {
-                    var trackelement = section;
+                    trackelement = section;
                 } else {
-                    var trackelement = section.id;
+                    trackelement = section.id;
                 }
                 foomanGoogleAnalytics.trackEvent(trackelement);
                 originalOpenSection(section);
             });
         }
 
-        if (typeof(Review) != "undefined") {
+        if (typeof(Review) !== "undefined") {
             Review.prototype.save  = Review.prototype.save.wrap(function(originalSave){
                 foomanGoogleAnalytics.trackEvent('opc-review-placeOrderClicked');
                 originalSave();
