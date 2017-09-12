@@ -12,8 +12,8 @@
 
 class Fooman_GoogleAnalyticsPlus_Block_TagManager extends Fooman_GoogleAnalyticsPlus_Block_Common_Abstract
 {
-    protected  $_order;
-    
+    protected $_order;
+
     protected function _construct()
     {
         parent::_construct();
@@ -28,7 +28,7 @@ class Fooman_GoogleAnalyticsPlus_Block_TagManager extends Fooman_GoogleAnalytics
     public function shouldInclude()
     {
         if (parent::shouldInclude()) {
-            return $this->isTagManagerEnabled() && (bool)$this->getTagManagerSnippet();
+            return $this->isTagManagerEnabled() && (bool)$this->getTagManagerSnippet() && (bool)$this->getTagManagerId();
         } else {
             return false;
         }
