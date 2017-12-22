@@ -1,11 +1,5 @@
 <?php
-/**
- * CopeX GmbH https://copex.io
- * Created by PhpStorm.
- * User: roman
- * Date: 12.09.17
- * Time: 14:27
- */
+
 
 class Fooman_GoogleAnalyticsPlus_Block_TagManagerHead extends Fooman_GoogleAnalyticsPlus_Block_TagManager
 {
