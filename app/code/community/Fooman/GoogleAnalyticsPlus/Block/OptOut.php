@@ -4,7 +4,7 @@
  *
  * @package   Fooman_GoogleAnalyticsPlus
  * @author    Kristof Ringleff <kristof@fooman.co.nz>
- * @author    Niklas Wolf <wolf@mothership.de>
+ * @author    Niklas Wolf <wolf[ät]mothership.de>
  * @copyright Copyright (c) 2010 Fooman Limited (http://www.fooman.co.nz)
  *
  * For the full copyright and license information, please view the LICENSE
