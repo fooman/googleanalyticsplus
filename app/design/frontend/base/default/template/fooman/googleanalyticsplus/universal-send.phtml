@@ -34,8 +34,11 @@
             'revenue': '". $revenue ."',
             'shipping': '". $shipping ."',
             'tax': '". $tax ."',
-            'currency': '". Mage::helper('googleanalyticsplus')->getTrackingCurrency($order) ."'
-            }";
+            'currency': '". Mage::helper('googleanalyticsplus')->getTrackingCurrency($order) ."'";
+            if($order->getCouponCode()){
+                $transactionDetails .= ",'coupon': '".$order->getCouponCode()."'";
+            }
+            $transactionDetails .= "}";
             ?>
 
         ga('ecommerce:addTransaction', <?php echo $transactionDetails?>);
