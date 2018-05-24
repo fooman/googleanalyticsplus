@@ -1,0 +1,35 @@
+<?php
+/**
+ * @var $this Fooman_GoogleAnalyticsPlus_Block_OptOut
+ */
+$altUniversal = $this->getAlternativeUniversalAccount();
+?>
+<?php if ($this->shouldIncludeOptOut()): ?>
+    <!-- Google Analytics OptOut -->
+    <script>
+        var gaProperty = '<?php echo $this->getUniversalAccount(); ?>';
+        <?php if ($altUniversal): ?>
+        var altGaProperty = '<?php echo $altUniversal; ?>';
+        <?php endif; ?>
+
+        var disableStr = 'ga-disable-' + gaProperty;
+        if (document.cookie.indexOf(disableStr + '=true') > -1) {
+            window[disableStr] = true;
+        }
+        <?php if($altUniversal): ?>
+        var altDisableStr = 'ga-disable-' + altGaProperty;
+        if (document.cookie.indexOf(altDisableStr + '=true') > -1) {
+            window[altDisableStr] = true;
+        }
+        <?php endif; ?>
+        function gaOptout() {
+            document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+            window[disableStr] = true;
+            <?php if($altUniversal): ?>
+            document.cookie = altDisableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+            window[altDisableStr] = true;
+            <?php endif; ?>
+        }
+    </script>
+    <!-- End Google Analytics OptOut -->
+<?php endif; ?>
