@@ -8,8 +8,12 @@
             </action>
         </reference>
         <reference name="before_head_end">
+            <block type="googleanalyticsplus/optOut" name="googleanalyticsplus_optout"
+                   as="googleanalyticsplus_optOut"/>
             <block type="googleanalyticsplus/universal" name="googleanalyticsplus_universal"
                    as="googleanalyticsplus_universal"/>
+            <block type="googleanalyticsplus/tagManagerHead" name="googleanalyticsplus_tagmanager_head"
+                   as="googleanalyticsplus_tagmanager_head"/>
         </reference>
         <reference name="after_body_start">
             <action method="unsetChild" ifconfig="google/analyticsplus_universal/enabled">

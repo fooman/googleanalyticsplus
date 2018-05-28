@@ -71,10 +71,18 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
         if ($createTrackerTwo) {
             $params['name'] = self::TRACKER_TWO_NAME;
         }
+        if (Mage::getStoreConfig('google/analyticsplus_universal/sitespeedsamplerate')) {
+            $params['siteSpeedSampleRate'] = intval(
+                Mage::getStoreConfig('google/analyticsplus_universal/sitespeedsamplerate')
+            );
+        }
+        if (Mage::getStoreConfig('google/analyticsplus_universal/allowlinker')) {
+            $params['allowLinker'] = boolval(Mage::getStoreConfig('google/analyticsplus_universal/allowlinker'));
+        }
         if (count($params) == 0) {
             return "'auto'";
         }
-        return json_encode($params);
+        return str_replace('"', "'", json_encode($params));
     }
 
     /**
@@ -189,4 +197,67 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
         return true;
     }
 
+    /**
+     * Returns the custom dimension if this is enabled
+     *
+     * @return string|null
+     */
+    public function getCustomerGroupDimension()
+    {
+        return Mage::getStoreConfig('google/analyticsplus_universal_dimensions/customer_group');
+    }
+
+    /**
+     * Returns the customer group name for the current customer
+     *
+     * @return string
+     */
+    public function getCustomerGroup()
+    {
+        $isLoggedIn = Mage::getSingleton('customer/session')->isLoggedIn();
+        if ($isLoggedIn) {
+            $customerId      = Mage::getSingleton('customer/session')->getId();
+            $customer        = Mage::getModel('customer/customer')->load($customerId);
+            $customerGroupId = $customer->getGroupId();
+            $groupName       = Mage::getModel('customer/group')->load($customerGroupId)->getCustomerGroupCode();
+
+            return $groupName;
+        }
+
+        return 'NOT LOGGED IN';
+    }
+  
+     /**
+     * Check to see if Google Optimize is Enabled
+     *
+     * @return bool
+     */
+    public function isGoogleOptimizeEnabled()
+    {
+        return (
+            Mage::getStoreConfigFlag('google/analyticsplus_optimize/enabled')
+            && !empty($this->getGoogleOptimizeContainerId())
+        );
+    }
+
+    /**
+     * @return bool
+     */
+    public function isGoogleOptimizePageHidingEnabled()
+    {
+        return (
+            Mage::getStoreConfigFlag('google/analyticsplus_optimize/enable_page_hiding')
+            && $this->isGoogleOptimizeEnabled()
+        );
+    }
+
+    /**
+     * Returns the Container ID for use with Google Optimize
+     *
+     * @return string|null
+     */
+    public function getGoogleOptimizeContainerId()
+    {
+        return Mage::getStoreConfig('google/analyticsplus_optimize/container_id');
+    }
 }

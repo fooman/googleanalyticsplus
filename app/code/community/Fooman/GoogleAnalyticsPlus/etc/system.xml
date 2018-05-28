@@ -34,6 +34,22 @@
                     ]]>
                     </comment>
                     <fields>
+                        <enableoptoutcookie translate='label'>
+                            <label>Enable opt out cookie</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>510</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[<br />
+                            <div class="box">
+                            <p>Add support for <a href="https://developers.google.com/analytics/devguides/collection/gajs/?hl=de#disable">google opt out cookie</a>.
+                            Add a link like "&lt;a href=&quot;javascript:gaOptout()&quot;&gt;Click here to opt-out of Google Analytics&lt;/a&gt;" to pages of your choice.
+                            </p>
+                            </div>
+                            ]]></comment>
+                        </enableoptoutcookie>
                         <convertcurrencyenabled translate='label'>
                             <label>Convert Currency</label>
                             <frontend_type>select</frontend_type>
@@ -183,6 +199,25 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </domainname>
+                        <sitespeedsamplerate translate="label">
+                            <label>Site Speed Sample Rate</label>
+                            <comment><![CDATA[By default, 1% of users will be automatically tracked, you can increase this setting here.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>350</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sitespeedsamplerate>
+                        <allowlinker translate="label">
+                            <label>Cross-domain Tracking with Linker</label>
+                            <comment><![CDATA[Setting this field to true will enables the parsing of cross-domain linker parmeters used to transfer state across domains.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>360</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowlinker>
                         <display_advertising translate='label'>
                             <label>Enable Display Advertising Features</label>
                             <comment><![CDATA[See <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/display-features" target="_blank">Google Documentation</a> for details]]></comment>
@@ -254,9 +289,28 @@
                         </debug>
                     </fields>
                 </analyticsplus_universal>
+                <analyticsplus_universal_dimensions translate="label">
+                    <label>Google Universal Analytics Custom Dimensions by Fooman</label>
+                    <sort_order>14</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <customer_group translate='label'>
+                            <label>Customer Group</label>
+                            <comment><![CDATA[Customer Group Name]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>googleanalyticsplus/system_dimension</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customer_group>
+                    </fields>
+                </analyticsplus_universal_dimensions>
                 <analyticsplus_tagmanager translate="label">
                     <label>Google Tag Manager by Fooman</label>
-                    <sort_order>14</sort_order>
+                    <sort_order>15</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
@@ -270,6 +324,15 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </enabled>
+                        <tagmanagerid>
+                            <label>Google Tag Manager ID</label>
+                            <comment>the complete GMT-XXXX</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </tagmanagerid>
                         <snippet translate='label'>
                             <label>Container Snippet</label>
                             <frontend_type>textarea</frontend_type>
@@ -283,7 +346,7 @@
                 </analyticsplus_tagmanager>
                 <analyticsplus_dynremarketing translate="label">
                     <label>Google Dynamic Remarketing by Fooman</label>
-                    <sort_order>15</sort_order>
+                    <sort_order>16</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
@@ -330,6 +393,48 @@
                         </feed_product_id>
                     </fields>
                 </analyticsplus_dynremarketing>
+                <analyticsplus_optimize translate="label">
+                    <label>Google Optimize by Fooman</label>
+                    <sort_order>16</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[<br />
+                    <div class="box">
+                        <p>NOTE: You MUST have Universal Analytics Enabled for this to work correctly</p>
+                    </div>
+                    ]]>
+                    </comment>
+                    <fields>
+                        <enabled translate='label'>
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <enable_page_hiding translate='label'>
+                            <label>Enable Page Hiding</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_page_hiding>
+                        <container_id translate="label">
+                            <label>Container ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enabled>1</enabled></depends>
+                        </container_id>
+                    </fields>
+                </analyticsplus_optimize>
             </groups>
         </google>
     </sections>
