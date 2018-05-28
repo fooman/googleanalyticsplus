@@ -72,12 +72,12 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
             $params['name'] = self::TRACKER_TWO_NAME;
         }
         if (Mage::getStoreConfig('google/analyticsplus_universal/sitespeedsamplerate')) {
-            $params['siteSpeedSampleRate'] = intval(
-                Mage::getStoreConfig('google/analyticsplus_universal/sitespeedsamplerate')
+            $params['siteSpeedSampleRate'] = (int)Mage::getStoreConfig(
+                'google/analyticsplus_universal/sitespeedsamplerate'
             );
         }
         if (Mage::getStoreConfig('google/analyticsplus_universal/allowlinker')) {
-            $params['allowLinker'] = boolval(Mage::getStoreConfig('google/analyticsplus_universal/allowlinker'));
+            $params['allowLinker'] = (bool)Mage::getStoreConfig('google/analyticsplus_universal/allowlinker');
         }
         if (count($params) == 0) {
             return "'auto'";
@@ -204,7 +204,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
      */
     public function getCustomerGroupDimension()
     {
-        return Mage::getStoreConfig('google/analyticsplus_universal_dimensions/customer_group');
+        return Mage::getStoreConfig('google/analyticsplus_universal/customer_group');
     }
 
     /**
@@ -234,9 +234,10 @@ class Fooman_GoogleAnalyticsPlus_Block_Universal extends Fooman_GoogleAnalyticsP
      */
     public function isGoogleOptimizeEnabled()
     {
+        $goOptConId = $this->getGoogleOptimizeContainerId();
         return (
             Mage::getStoreConfigFlag('google/analyticsplus_optimize/enabled')
-            && !empty($this->getGoogleOptimizeContainerId())
+            && !empty($goOptConId)
         );
     }
 

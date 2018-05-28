@@ -15,8 +15,11 @@ Magento Extension to add extra features to the default GoogleAnalytics module.
 
 To provide feedback please create an issue on Github.
 
-### Installation Instructions and User Manual
-To install and configure the extension, start [here](http://magento1-support.fooman.co.nz/category/969-install-set-up-user-manual).
+### User Manual
+The user manual can be downloaded from [here](http://store.fooman.co.nz/to/GoogleAnalyticsPlus/manual)
+
+### Installation Instructions
+To install the extension, follow the steps in [The Ultimate Guide to Installing Magento Extensions](http://cdn.fooman.co.nz/media/custom/upload/TheUltimateGuidetoInstallingMagentoExtensions.pdf).
 
 ### Installation Options
 

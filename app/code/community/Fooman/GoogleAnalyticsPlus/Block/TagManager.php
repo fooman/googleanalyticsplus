@@ -28,10 +28,9 @@ class Fooman_GoogleAnalyticsPlus_Block_TagManager extends Fooman_GoogleAnalytics
     public function shouldInclude()
     {
         if (parent::shouldInclude()) {
-            return $this->isTagManagerEnabled() && (bool)$this->getTagManagerSnippet() && (bool)$this->getTagManagerId();
-        } else {
-            return false;
+            return $this->isTagManagerEnabled() && ((bool)$this->getTagManagerSnippet() || (bool)$this->getTagManagerId());
         }
+        return false;
     }
 
     /**
