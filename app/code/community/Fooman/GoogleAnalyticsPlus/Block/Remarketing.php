@@ -106,31 +106,28 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
      */
     public function getPageValue()
     {
-        $values = array();
         switch ($this->getPageType()) {
             case self::GA_PAGETYPE_PRODUCT:
                 return $this->getEcommPValue();
                 break;
             case self::GA_PAGETYPE_CART:
+                $value = 0;
                 $quote = Mage::getSingleton('checkout/session')->getQuote();
                 if (count($quote->getAllVisibleItems())) {
                     foreach ($quote->getAllVisibleItems() as $basketItem) {
-                        $values[] = sprintf(
-                            '%01.2f', Mage::helper('googleanalyticsplus')->convert($basketItem, 'row_total')
-                        );
+                        $value += Mage::helper('googleanalyticsplus')->convert($basketItem, 'row_total_incl_tax');
                     }
                 }
-                return $this->getArrayReturnValue($values, '0.00');
+                return sprintf('%01.2f', $value);
                 break;
             case self::GA_PAGETYPE_PURCHASE:
+                $value = 0;
                 if ($this->_getOrder()) {
                     foreach ($this->_getOrder()->getAllVisibleItems() as $orderItem) {
-                        $values[] = sprintf(
-                            '%01.2f', Mage::helper('googleanalyticsplus')->convert($orderItem, 'row_total')
-                        );
+                        $value += Mage::helper('googleanalyticsplus')->convert($orderItem, 'row_total_incl_tax');
                     }
                 }
-                return $this->getArrayReturnValue($values, '0.00');
+                return sprintf('%01.2f', $value);
         }
         return false;
     }

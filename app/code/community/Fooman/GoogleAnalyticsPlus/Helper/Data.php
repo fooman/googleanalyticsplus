@@ -49,11 +49,11 @@ class Fooman_GoogleAnalyticsPlus_Helper_Data extends Mage_Core_Helper_Abstract
         }
 
         if (!Mage::getStoreConfig('google/analyticsplus/convertcurrencyenabled')) {
-            return $baseValue;
+            sprintf('%01.2f', $baseValue);
         }
 
         return sprintf(
-            "%01.4f", Mage::app()->getStore()->roundPrice(
+            "%01.2f", Mage::app()->getStore()->roundPrice(
                 $baseCur->convert(
                     $baseValue,
                     Mage::getStoreConfig('google/analyticsplus/convertcurrency')

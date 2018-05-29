@@ -14,9 +14,6 @@
         ecomm_prodid: <?php echo $prodId ?>,
         <?php endif;?>
         ecomm_pagetype: '<?php echo $pageType ?>',
-        <?php if($this->getEcommPValue()):?>
-        ecomm_pvalue: <?php echo $this->getEcommPValue() ?>,
-        <?php endif;?>
         <?php if($this->getEcommCategory()):?>
         ecomm_category: '<?php echo $this->jsQuoteEscape($this->getEcommCategory()) ?>',
         <?php endif;?>
