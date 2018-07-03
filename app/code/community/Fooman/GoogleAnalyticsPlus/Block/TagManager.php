@@ -21,27 +21,17 @@ class Fooman_GoogleAnalyticsPlus_Block_TagManager extends Fooman_GoogleAnalytics
     }
 
     /**
-     * should we include the tag manager snippet
+     * should we include the tag manager
      *
      * @return bool
      */
     public function shouldInclude()
     {
         if (parent::shouldInclude()) {
-            return $this->isTagManagerEnabled() && (bool)$this->getTagManagerSnippet() && (bool)$this->getTagManagerId();
+            return $this->isTagManagerEnabled() && (bool)$this->getTagManagerId();
         } else {
             return false;
         }
-    }
-
-    /**
-     * get tag manager snippet from settings
-     *
-     * @return string
-     */
-    public function getTagManagerSnippet()
-    {
-        return Mage::getStoreConfig('google/analyticsplus_tagmanager/snippet');
     }
 
 

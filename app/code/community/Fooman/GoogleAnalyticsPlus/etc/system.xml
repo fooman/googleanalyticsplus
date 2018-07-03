@@ -317,15 +317,6 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </tagmanagerid>
-                        <snippet translate='label'>
-                            <label>Container Snippet</label>
-                            <frontend_type>textarea</frontend_type>
-                            <sort_order>20</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                            <depends><enabled>1</enabled></depends>
-                        </snippet>
                     </fields>
                 </analyticsplus_tagmanager>
                 <analyticsplus_dynremarketing translate="label">
