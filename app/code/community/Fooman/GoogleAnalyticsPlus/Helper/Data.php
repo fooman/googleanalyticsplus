@@ -27,7 +27,8 @@ class Fooman_GoogleAnalyticsPlus_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function convert($object, $field, $currentCurrency = null)
     {
-        $baseCur = Mage::app()->getStore($object->getStoreId())->getBaseCurrency();
+        $baseCurCode = Mage::getStoreConfig('currency/options/base', $object->getStoreId());
+        $baseCur = Mage::getModel('directory/currency')->load($baseCurCode);
 
         //getPrice and getFinalPrice do not have base equivalents
         if ($field != 'price' && $field != 'final_price') {
@@ -41,15 +42,13 @@ class Fooman_GoogleAnalyticsPlus_Helper_Data extends Mage_Core_Helper_Abstract
             if ($currentCurrency == $baseCur->getCode()) {
                 $baseValue = $value;
             } else {
-                $rate = Mage::getModel('directory/currency')
-                    ->load($baseCur->getCode())
-                    ->getRate($currentCurrency);
+                $rate = $baseCur->getRate($currentCurrency);
                 $baseValue = Mage::app()->getStore()->roundPrice($value / $rate);
             }
         }
 
         if (!Mage::getStoreConfig('google/analyticsplus/convertcurrencyenabled')) {
-            sprintf('%01.2f', $baseValue);
+            return sprintf('%01.2f', $baseValue);
         }
 
         return sprintf(

@@ -163,7 +163,7 @@ class Fooman_GoogleAnalyticsPlus_Block_Remarketing extends Fooman_GoogleAnalytic
                 return $this->getArrayReturnValue($products, "''", true);
                 break;
         }
-        return "''";
+        return false;
     }
     
     /**

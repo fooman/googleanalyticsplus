@@ -21,13 +21,13 @@
             ga('<?php echo Fooman_GoogleAnalyticsPlus_Block_Universal::TRACKER_TWO_NAME?>.require', 'ecommerce', 'ecommerce.js');
         <?php endif;?>
 
-            <?php 
-            $shipping = Mage::helper('googleanalyticsplus')->convert($order, 'shipping_amount');
-            $tax = Mage::helper('googleanalyticsplus')->convert($order, 'tax_amount');
-            $revenue =  Mage::helper('googleanalyticsplus')->convert($order, 'grand_total');
+            <?php
+            $shipping = Mage::helper('googleanalyticsplus')->convert($order, 'shipping_amount', $order->getOrderCurrencyCode());
+            $tax = Mage::helper('googleanalyticsplus')->convert($order, 'tax_amount', $order->getOrderCurrencyCode());
+            $revenue =  Mage::helper('googleanalyticsplus')->convert($order, 'grand_total', $order->getOrderCurrencyCode());
             $revenue -= (($this->shouldExcludeShipping())? $shipping : 0);
             $revenue -= (($this->shouldExcludeTax())? $tax : 0);
-            
+
             $transactionDetails = "{
             'id': '". $this->jsQuoteEscape($order->getIncrementId()) ."',
             'affiliation': '". $this->jsQuoteEscape(Mage::app()->getStore()->getName()) ."',
